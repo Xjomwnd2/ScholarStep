@@ -1,1208 +1,2026 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ScholarStep — Complete Wireframe</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ScholarStep</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
 <style>
-:root {
-  --ink: #1a1a2e; --paper: #f5f0e8; --wire: #c8bfaa;
-  --accent: #2ecc6e; --accent-dim: #1a7a42;
-  --blue-glow: #5b8dee; --warm: #e8b84b; --red: #e05c5c;
-  --muted: #8a8278; --border: #d4cbbf; --card: #ffffff;
-  --shadow: 0 2px 12px rgba(26,26,46,0.08); --radius: 10px;
-  --font-display: 'DM Serif Display', serif;
-  --font-body: 'Sora', sans-serif;
-  --font-mono: 'DM Mono', monospace;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: #e0d9ce; font-family: var(--font-body); color: var(--ink); min-height: 100vh; }
+  :root {
+    --ink:       #1a1a2e;
+    --ink-light: #3d3d5c;
+    --cream:     #faf8f3;
+    --warm:      #f5f0e8;
+    --gold:      #c9a84c;
+    --gold-light:#f0d98a;
+    --teal:      #2a7f7f;
+    --teal-light:#3db3b3;
+    --rose:      #c0464a;
+    --rose-light:#e07a7d;
+    --surface:   #ffffff;
+    --border:    #e8e2d6;
+    --shadow:    0 4px 24px rgba(26,26,46,0.09);
+    --shadow-lg: 0 12px 48px rgba(26,26,46,0.15);
+    --radius:    14px;
+    --sidebar-w: 250px;
+  }
 
-/* ── COVER ── */
-.cover {
-  background: var(--ink); color: var(--paper);
-  padding: 52px 64px 44px; display: flex;
-  align-items: flex-start; justify-content: space-between;
-  gap: 32px; flex-wrap: wrap;
-}
-.cover-logo { display: flex; align-items: center; gap: 14px; }
-.logo-mark {
-  width: 48px; height: 48px; background: var(--accent);
-  border-radius: 14px; display: grid; place-items: center;
-  font-family: var(--font-display); font-size: 24px; color: var(--ink); font-weight: 700;
-}
-.logo-text { font-family: var(--font-display); font-size: 28px; letter-spacing: -0.5px; }
-.logo-sub { font-family: var(--font-mono); font-size: 10px; color: var(--wire); margin-top: 3px; letter-spacing: 2.5px; text-transform: uppercase; }
-.cover-meta { text-align: right; }
-.sprint-badge {
-  display: inline-block; background: rgba(46,204,110,0.15);
-  border: 1px solid var(--accent); color: var(--accent);
-  font-family: var(--font-mono); font-size: 10px;
-  padding: 5px 14px; border-radius: 20px; letter-spacing: 2px; margin-bottom: 10px;
-}
-.cover-meta p { font-size: 12px; color: var(--wire); margin-top: 5px; font-family: var(--font-mono); }
-.cover-title { font-family: var(--font-display); font-size: 52px; line-height: 1.1; letter-spacing: -1.5px; margin-top: 36px; flex: 0 0 100%; }
-.cover-title em { color: var(--accent); font-style: italic; }
-.cover-desc { flex: 0 0 100%; font-size: 14px; color: var(--wire); max-width: 700px; line-height: 1.75; margin-top: 14px; font-weight: 300; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Changelog table */
-.changelog-wrap { flex: 0 0 100%; margin-top: 32px; }
-.changelog-title { font-family: var(--font-mono); font-size: 10px; color: var(--wire); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
-.changelog-table { width: 100%; border-collapse: collapse; }
-.changelog-table th {
-  font-family: var(--font-mono); font-size: 9px; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--wire);
-  padding: 8px 16px; text-align: left;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.changelog-table td {
-  padding: 12px 16px; font-size: 12px; color: rgba(245,240,232,0.8);
-  border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: top;
-}
-.changelog-table tr:last-child td { border-bottom: none; }
-.cl-date { font-family: var(--font-mono); font-size: 11px; color: var(--accent); white-space: nowrap; }
-.cl-pbi { font-weight: 600; color: var(--paper); }
-.cl-badge {
-  display: inline-block; font-family: var(--font-mono); font-size: 9px;
-  padding: 2px 8px; border-radius: 10px; letter-spacing: 1px;
-  text-transform: uppercase; margin-right: 6px;
-}
-.cl-badge.new { background: rgba(46,204,110,0.2); color: var(--accent); }
-.cl-badge.upd { background: rgba(91,141,238,0.2); color: #7aabff; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-/* Nav pills */
-.screen-nav { flex: 0 0 100%; display: flex; gap: 10px; margin-top: 36px; flex-wrap: wrap; }
-.nav-pill {
-  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
-  color: var(--paper); font-family: var(--font-mono); font-size: 11px;
-  padding: 9px 18px; border-radius: 24px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px;
-}
-.nav-pill:hover, .nav-pill.active { background: var(--accent); color: var(--ink); border-color: var(--accent); }
+  /* ─── UTILITY ─────────────────────────────── */
+  .hidden { display: none !important; }
 
-/* ── SCREENS WRAP ── */
-.screens-wrap { padding: 52px 64px; display: flex; flex-direction: column; gap: 0; }
-.screen-section { display: none; }
-.screen-section.visible { display: block; }
+  /* ─── LOGIN PAGE ──────────────────────────── */
+  #login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+  }
 
-.screen-label { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-.screen-num {
-  font-family: var(--font-mono); font-size: 10px;
-  background: var(--ink); color: var(--paper);
-  padding: 4px 10px; border-radius: 4px; letter-spacing: 2px;
-}
-.screen-title { font-family: var(--font-display); font-size: 30px; letter-spacing: -0.5px; }
-.screen-date { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-left: auto; }
-.annotation-line {
-  font-size: 13px; color: var(--muted); margin-bottom: 22px;
-  font-style: italic; border-left: 3px solid var(--accent); padding-left: 14px;
-}
+  .login-art {
+    flex: 1;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+  }
 
-/* ── DEVICE FRAME ── */
-.device-frame {
-  background: var(--ink); border-radius: 18px; padding: 10px;
-  box-shadow: 0 24px 64px rgba(26,26,46,0.35), 0 4px 16px rgba(0,0,0,0.15);
-}
-.device-screen { background: var(--paper); border-radius: 10px; overflow: hidden; min-height: 620px; }
+  .login-art::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--gold) 0%, transparent 65%);
+    opacity: 0.12;
+    top: -150px; left: -150px;
+    border-radius: 50%;
+  }
 
-/* ── APP CHROME ── */
-.app-topbar {
-  background: var(--card); border-bottom: 1px solid var(--border);
-  padding: 0 24px; height: 56px; display: flex; align-items: center;
-  gap: 16px; position: sticky; top: 0; z-index: 10;
-}
-.app-logo-sm { display: flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 18px; color: var(--ink); }
-.app-logo-sm .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
-.topbar-spacer { flex: 1; }
-.topbar-icon {
-  width: 34px; height: 34px; border: 1.5px solid var(--border);
-  border-radius: 9px; background: var(--paper);
-  display: grid; place-items: center; font-size: 14px; color: var(--muted); cursor: pointer;
-}
-.topbar-avatar {
-  width: 34px; height: 34px;
-  background: linear-gradient(135deg, #5b8dee, #2ecc6e);
-  border-radius: 50%; display: grid; place-items: center;
-  font-size: 11px; font-weight: 600; color: white; font-family: var(--font-mono);
-}
+  .login-art::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--teal) 0%, transparent 65%);
+    opacity: 0.15;
+    bottom: -100px; right: -100px;
+    border-radius: 50%;
+  }
 
-.app-sidebar {
-  width: 204px; background: var(--card); border-right: 1px solid var(--border);
-  padding: 20px 12px; display: flex; flex-direction: column; gap: 3px;
-  height: calc(100% - 56px); float: left; min-height: 564px;
-}
-.sidebar-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 12px; border-radius: 8px; font-size: 13px;
-  color: var(--muted); cursor: pointer; font-weight: 500; transition: all 0.15s;
-}
-.sidebar-item:hover { background: var(--paper); color: var(--ink); }
-.sidebar-item.active { background: rgba(46,204,110,0.1); color: var(--accent-dim); font-weight: 600; }
-.sidebar-item .icon { font-size: 15px; width: 22px; text-align: center; }
-.sidebar-section {
-  font-family: var(--font-mono); font-size: 9px; color: var(--wire);
-  letter-spacing: 1.5px; text-transform: uppercase; padding: 14px 12px 4px; margin-top: 6px;
-}
-.app-main { margin-left: 204px; padding: 26px; background: var(--paper); min-height: 564px; }
+  .login-brand {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
 
-/* ── SCREEN 1: ONBOARDING ── */
-.onboarding-wrap { max-width: 560px; margin: 0 auto; padding: 36px 28px; }
-.progress-bar-wrap { margin-bottom: 30px; }
-.progress-track { height: 5px; background: var(--border); border-radius: 3px; }
-.progress-fill { height: 5px; background: var(--accent); border-radius: 3px; width: 66%; transition: width 0.4s; }
-.progress-label { font-family: var(--font-mono); font-size: 10px; color: var(--muted); margin-top: 7px; }
+  .login-brand .logo-icon {
+    width: 72px; height: 72px;
+    background: var(--gold);
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 32px;
+    transform: rotate(-6deg);
+    box-shadow: 0 8px 32px rgba(201,168,76,0.4);
+  }
 
-.step-row { display: flex; gap: 8px; align-items: center; margin-bottom: 36px; }
-.step-dot {
-  width: 30px; height: 30px; border-radius: 50%;
-  border: 1.5px solid var(--border); display: grid; place-items: center;
-  font-family: var(--font-mono); font-size: 11px; color: var(--muted); flex-shrink: 0;
-}
-.step-dot.done { background: var(--accent); border-color: var(--accent); color: var(--ink); font-weight: 700; }
-.step-dot.active { background: var(--ink); border-color: var(--ink); color: var(--paper); font-weight: 600; }
-.step-line { flex: 1; height: 1px; background: var(--border); }
-.step-label { font-family: var(--font-mono); font-size: 9px; color: var(--muted); text-align: center; margin-top: 5px; white-space: nowrap; }
-.step-col { display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .login-brand h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    color: #fff;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
 
-.onboard-h { font-family: var(--font-display); font-size: 28px; margin-bottom: 8px; }
-.onboard-sub { font-size: 13px; color: var(--muted); margin-bottom: 30px; line-height: 1.65; }
+  .login-brand h1 span { color: var(--gold); }
 
-.field-group { margin-bottom: 22px; }
-.field-label { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 7px; letter-spacing: 0.3px; }
-.field-input {
-  width: 100%; height: 42px; border: 1.5px solid var(--border); border-radius: 9px;
-  background: var(--paper); padding: 0 14px; font-size: 13px; color: var(--muted);
-  font-family: var(--font-body); display: flex; align-items: center;
-}
-.field-input.focused { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(46,204,110,0.12); color: var(--ink); }
-.field-hint { font-size: 11px; color: var(--muted); margin-top: 5px; font-style: italic; }
+  .login-brand p {
+    color: rgba(255,255,255,0.55);
+    margin-top: 14px;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 300px;
+  }
 
-.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-.chip {
-  padding: 7px 16px; border: 1.5px solid var(--border); border-radius: 22px;
-  font-size: 12px; font-weight: 500; color: var(--muted); cursor: pointer;
-  background: var(--paper); transition: all 0.15s; user-select: none;
-}
-.chip.selected { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.chip:hover:not(.selected) { border-color: var(--accent); color: var(--accent-dim); }
+  .login-steps {
+    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: relative;
+    z-index: 1;
+  }
 
-.time-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-top: 8px; }
-.time-block {
-  border: 1.5px solid var(--border); border-radius: 9px; padding: 10px 6px;
-  text-align: center; font-family: var(--font-mono); font-size: 10px; color: var(--muted);
-  cursor: pointer; background: var(--paper); transition: all 0.15s; user-select: none;
-}
-.time-block.on { background: var(--accent); border-color: var(--accent); color: var(--ink); font-weight: 600; }
-.time-block:hover:not(.on) { border-color: var(--accent); }
+  .login-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+  }
 
-.btn-row { display: flex; gap: 12px; margin-top: 32px; }
-.btn-primary {
-  flex: 1; height: 44px; background: var(--ink); color: var(--paper);
-  border: none; border-radius: 11px; font-family: var(--font-body); font-size: 14px;
-  font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
-  transition: opacity 0.15s;
-}
-.btn-primary:hover { opacity: 0.85; }
-.btn-secondary {
-  height: 44px; padding: 0 22px; background: transparent; color: var(--muted);
-  border: 1.5px solid var(--border); border-radius: 11px; font-family: var(--font-body);
-  font-size: 13px; cursor: pointer; display: flex; align-items: center; transition: all 0.15s;
-}
-.btn-secondary:hover { border-color: var(--muted); color: var(--ink); }
+  .login-step .step-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
 
-/* ── SCREEN 2: CAMPUS MAP ── */
-.map-layout { display: grid; grid-template-columns: 1fr 284px; gap: 16px; height: 564px; }
-.map-canvas {
-  background: #ddeaf5; border-radius: var(--radius);
-  border: 1px solid var(--border); position: relative; overflow: hidden;
-}
-.map-bg-grid {
-  position: absolute; inset: 0;
-  background-image: linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px);
-  background-size: 36px 36px;
-}
-.campus-building {
-  position: absolute; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono); font-size: 9px; font-weight: 500;
-  text-align: center; padding: 8px 5px; cursor: pointer; transition: all 0.15s;
-  flex-direction: column; line-height: 1.4;
-}
-.campus-building:hover { transform: scale(1.04); z-index: 5; }
-.bld-lecture { background: rgba(91,141,238,0.2); border: 1.5px solid rgba(91,141,238,0.65); color: #3a5daa; }
-.bld-library { background: rgba(46,204,110,0.18); border: 1.5px solid rgba(46,204,110,0.65); color: var(--accent-dim); }
-.bld-heat-high { background: rgba(224,92,92,0.2); border: 1.5px solid rgba(224,92,92,0.6); color: #9a1c1c; }
-.bld-heat-med { background: rgba(232,184,75,0.22); border: 1.5px solid rgba(232,184,75,0.65); color: #6a4c08; }
-.bld-heat-low { background: rgba(46,204,110,0.12); border: 1.5px solid rgba(46,204,110,0.45); color: var(--accent-dim); }
-.bld-emoji { font-size: 16px; margin-bottom: 3px; }
+  .login-form-wrap {
+    width: 480px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 48px;
+    background: var(--surface);
+  }
 
-.map-path { position: absolute; background: rgba(255,255,255,0.6); border: 1px dashed rgba(180,165,145,0.7); }
-.map-pin {
-  position: absolute; width: 20px; height: 20px; border-radius: 50%;
-  border: 2.5px solid white; transform: translate(-50%,-50%);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.22); cursor: pointer; z-index: 3;
-  transition: transform 0.15s;
-}
-.map-pin:hover { transform: translate(-50%,-50%) scale(1.2); }
-.map-pin.lecture { background: #5b8dee; }
-.map-pin.lib { background: var(--accent); }
-.map-pin.lab { background: var(--warm); }
+  .login-form {
+    width: 100%;
+    animation: slideUp 0.5s ease;
+  }
 
-.map-controls { position: absolute; top: 14px; right: 14px; display: flex; flex-direction: column; gap: 6px; }
-.map-btn {
-  width: 34px; height: 34px; background: white; border: 1px solid var(--border);
-  border-radius: 9px; display: grid; place-items: center; font-size: 15px; color: var(--muted);
-  cursor: pointer; box-shadow: var(--shadow); transition: all 0.15s;
-}
-.map-btn:hover { background: var(--paper); color: var(--ink); }
-.map-search {
-  position: absolute; top: 14px; left: 14px; right: 58px; height: 38px;
-  background: white; border: 1px solid var(--border); border-radius: 9px;
-  display: flex; align-items: center; padding: 0 14px; gap: 8px;
-  font-size: 12px; color: var(--muted); box-shadow: var(--shadow);
-}
-.map-legend {
-  position: absolute; bottom: 14px; left: 14px;
-  background: rgba(255,255,255,0.95); border: 1px solid var(--border);
-  border-radius: 9px; padding: 12px 14px; display: flex; flex-direction: column; gap: 7px;
-}
-.legend-item { display: flex; align-items: center; gap: 9px; font-size: 11px; color: var(--ink); }
-.legend-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
-.legend-title { font-family: var(--font-mono); font-size: 9px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px; }
+  @keyframes slideUp {
+    from { opacity:0; transform: translateY(20px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
 
-.map-sidebar { display: flex; flex-direction: column; gap: 11px; overflow-y: auto; }
-.map-panel-h { font-family: var(--font-display); font-size: 17px; margin-bottom: 6px; }
-.map-filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
-.filter-tag {
-  font-size: 10px; padding: 5px 11px; border: 1px solid var(--border);
-  border-radius: 16px; color: var(--muted); font-family: var(--font-mono);
-  cursor: pointer; background: var(--paper); transition: all 0.15s;
-}
-.filter-tag.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.filter-tag:hover:not(.on) { border-color: var(--accent); }
+  .login-form h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
 
-.location-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 9px; padding: 13px; cursor: pointer; transition: all 0.15s;
-}
-.location-card:hover { border-color: var(--accent); box-shadow: 0 2px 10px rgba(46,204,110,0.1); }
-.lcard-name { font-weight: 600; font-size: 13px; margin-bottom: 3px; }
-.lcard-type { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-.lcard-type.lecture { color: #5b8dee; } .lcard-type.library { color: var(--accent-dim); } .lcard-type.lab { color: #c87a10; }
-.lcard-meta { font-size: 11px; color: var(--muted); }
-.occ-bar { height: 5px; border-radius: 3px; background: var(--border); margin-top: 8px; }
-.occ-fill { height: 5px; border-radius: 3px; }
-.occ-label { font-family: var(--font-mono); font-size: 9px; color: var(--muted); margin-top: 4px; }
+  .login-form .sub {
+    color: var(--ink-light);
+    font-size: 0.9rem;
+    margin-bottom: 40px;
+  }
 
-/* ── SCREEN 3: DASHBOARD ── */
-.dash-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 16px; }
-.dash-stat {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 18px 20px;
-}
-.stat-label { font-size: 11px; color: var(--muted); font-weight: 500; margin-bottom: 8px; letter-spacing: 0.2px; }
-.stat-value { font-family: var(--font-display); font-size: 36px; line-height: 1; }
-.stat-badge {
-  display: inline-flex; align-items: center; font-family: var(--font-mono);
-  font-size: 9px; padding: 3px 9px; border-radius: 10px; margin-top: 7px;
-}
-.stat-badge.up { background: rgba(46,204,110,0.12); color: var(--accent-dim); }
-.stat-badge.warn { background: rgba(232,184,75,0.18); color: #6a4c08; }
-.stat-badge.red { background: rgba(224,92,92,0.12); color: var(--red); }
+  .form-group {
+    margin-bottom: 22px;
+  }
 
-.theme-panel {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
-  border-left: 3px solid var(--accent);
-}
-.theme-options { display: flex; gap: 12px; margin-top: 14px; }
-.theme-option {
-  flex: 1; border: 1.5px solid var(--border); border-radius: 12px;
-  padding: 14px 10px; cursor: pointer; text-align: center;
-  transition: all 0.2s; position: relative; user-select: none;
-}
-.theme-option:hover { border-color: var(--accent); transform: translateY(-1px); }
-.theme-option.selected { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(46,204,110,0.12); }
-.theme-icon { font-size: 24px; margin-bottom: 8px; }
-.theme-name { font-size: 12px; font-weight: 600; }
-.theme-desc { font-size: 10px; color: var(--muted); margin-top: 3px; }
-.theme-check {
-  position: absolute; top: 8px; right: 8px; width: 18px; height: 18px;
-  background: var(--accent); border-radius: 50%; display: none;
-  align-items: center; justify-content: center; font-size: 9px; color: var(--ink);
-}
-.theme-option.selected .theme-check { display: flex; }
-.t-light { background: #fffdf9; }
-.t-dark { background: #1a1a2e; color: var(--paper); }
-.t-dark .theme-desc { color: var(--wire); }
-.t-dark .theme-check { background: var(--accent); }
-.t-blue { background: linear-gradient(135deg, #0a1628, #1a2a4a); color: var(--paper); }
-.t-blue .theme-desc { color: var(--wire); }
+  .form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 8px;
+  }
 
-.dash-row2 { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; }
-.dash-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
-.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
-.card-title { font-weight: 600; font-size: 14px; }
-.card-action { font-family: var(--font-mono); font-size: 10px; color: var(--muted); cursor: pointer; transition: color 0.15s; }
-.card-action:hover { color: var(--accent-dim); }
+  .form-group input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--cream);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
 
-.tl-wrap { margin-left: 8px; }
-.timeline-item {
-  display: flex; gap: 12px; align-items: flex-start;
-  padding-bottom: 16px; border-left: 1.5px solid var(--border);
-  padding-left: 16px; position: relative;
-}
-.timeline-item::before {
-  content: ''; position: absolute; left: -5px; top: 5px;
-  width: 9px; height: 9px; border-radius: 50%;
-  background: var(--border); border: 2px solid var(--paper);
-}
-.timeline-item:last-child { padding-bottom: 0; border-left-color: transparent; }
-.timeline-item.urgent::before { background: var(--red); }
-.timeline-item.soon::before { background: var(--warm); }
-.timeline-item.ok::before { background: var(--accent); }
-.tl-name { font-size: 13px; font-weight: 500; margin-bottom: 3px; }
-.tl-sub { font-size: 11px; color: var(--muted); }
-.tl-badge { margin-left: auto; flex-shrink: 0; font-family: var(--font-mono); font-size: 9px; padding: 4px 9px; border-radius: 10px; }
-.tl-badge.r { background: rgba(224,92,92,0.12); color: var(--red); }
-.tl-badge.y { background: rgba(232,184,75,0.15); color: #6a4c08; }
-.tl-badge.g { background: rgba(46,204,110,0.12); color: var(--accent-dim); }
+  .form-group input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+    background: #fff;
+  }
 
-.quick-item {
-  background: var(--paper); border-radius: 9px; padding: 11px 14px;
-  font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 10px;
-  transition: all 0.15s; margin-bottom: 8px; border: 1px solid transparent;
-}
-.quick-item:hover { border-color: var(--accent); }
-.quick-item:last-child { margin-bottom: 0; }
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    font-size: 0.85rem;
+  }
 
-/* ── SCREEN 4: PROFILE ── */
-.profile-layout { display: grid; grid-template-columns: 286px 1fr; gap: 20px; }
-.profile-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px 22px;
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center; position: relative; overflow: hidden;
-}
-.profile-avatar {
-  width: 84px; height: 84px; border-radius: 50%;
-  background: linear-gradient(135deg, #5b8dee 0%, #2ecc6e 100%);
-  display: grid; place-items: center; font-family: var(--font-display);
-  font-size: 34px; color: white; margin-bottom: 16px;
-  box-shadow: 0 4px 16px rgba(46,204,110,0.3);
-}
-.profile-name { font-family: var(--font-display); font-size: 24px; margin-bottom: 4px; }
-.profile-role {
-  font-family: var(--font-mono); font-size: 10px; color: var(--muted);
-  letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px;
-}
-.profile-tag {
-  font-size: 11px; padding: 5px 14px;
-  background: rgba(46,204,110,0.12); color: var(--accent-dim);
-  border-radius: 14px; font-weight: 600; margin-bottom: 22px; letter-spacing: 0.2px;
-}
-.profile-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 22px; }
-.p-stat { background: var(--paper); border-radius: 9px; padding: 12px 8px; text-align: center; }
-.p-stat-val { font-family: var(--font-display); font-size: 22px; }
-.p-stat-label { font-size: 10px; color: var(--muted); margin-top: 3px; line-height: 1.3; }
+  .form-row label { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--ink-light); }
+  .form-row a { color: var(--teal); text-decoration: none; }
+  .form-row a:hover { text-decoration: underline; }
 
-/* ★★★ THE PERSISTENT GREEN EDIT BUTTON ★★★ */
-.edit-pref-btn {
-  position: sticky; bottom: 0;
-  width: calc(100% + 44px); margin: auto -22px 0;
-  padding: 15px 22px; background: var(--accent); color: var(--ink);
-  font-family: var(--font-body); font-size: 13px; font-weight: 700;
-  border: none; border-radius: 0 0 var(--radius) var(--radius);
-  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-  letter-spacing: 0.3px; transition: background 0.2s; position: relative;
-}
-.edit-pref-btn:hover { background: #22b85a; }
-.edit-pref-btn .new-tag {
-  font-family: var(--font-mono); font-size: 8px; letter-spacing: 1.5px;
-  background: rgba(26,26,46,0.2); padding: 2px 8px; border-radius: 8px; text-transform: uppercase;
-}
+  .btn-primary {
+    width: 100%;
+    padding: 15px;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  }
 
-.profile-sections { display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
-.pref-section { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
-.pref-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 0; border-bottom: 1px solid var(--border);
-}
-.pref-row:last-child { border-bottom: none; padding-bottom: 0; }
-.pref-key { font-size: 13px; font-weight: 500; }
-.pref-val-wrap { display: flex; align-items: center; gap: 8px; }
-.pref-val { font-size: 13px; color: var(--muted); }
-.pref-edit {
-  width: 28px; height: 28px; border: 1.5px solid var(--border); border-radius: 7px;
-  display: grid; place-items: center; font-size: 12px; color: var(--muted);
-  cursor: pointer; transition: all 0.15s;
-}
-.pref-edit:hover { border-color: var(--accent); color: var(--accent-dim); }
+  .btn-primary:hover {
+    background: var(--teal);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+  }
 
-.avail-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 5px; margin-top: 10px; }
-.avail-col { text-align: center; }
-.avail-day-name { font-family: var(--font-mono); font-size: 9px; color: var(--muted); margin-bottom: 5px; }
-.avail-slot { width: 100%; height: 8px; border-radius: 3px; background: var(--border); margin-bottom: 3px; transition: background 0.15s; }
-.avail-slot.on { background: var(--accent); }
-.avail-slot.part { background: var(--warm); }
+  .btn-primary:active { transform: translateY(0); }
 
-.avail-legend { display: flex; gap: 14px; margin-top: 12px; font-size: 10px; align-items: center; }
-.avail-legend-item { display: flex; align-items: center; gap: 6px; }
-.avail-legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+  .login-divider {
+    text-align: center;
+    margin: 24px 0;
+    position: relative;
+    color: var(--ink-light);
+    font-size: 0.8rem;
+  }
 
-.notif-toggle {
-  font-family: var(--font-mono); font-size: 9px; padding: 4px 12px;
-  border-radius: 12px; font-weight: 600; letter-spacing: 0.5px;
-}
-.notif-toggle.on { background: var(--accent); color: var(--ink); }
-.notif-toggle.off { background: var(--border); color: var(--muted); }
+  .login-divider::before, .login-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 42%;
+    height: 1px;
+    background: var(--border);
+  }
 
-/* ── ANNOTATIONS ── */
-.annotation-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-.ann-bubble {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: rgba(26,26,46,0.07); border: 1px dashed var(--wire);
-  border-radius: 7px; padding: 7px 13px; font-family: var(--font-mono);
-  font-size: 10px; color: var(--muted);
-}
-.ann-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .login-divider::before { left: 0; }
+  .login-divider::after  { right: 0; }
 
-/* ── FOOTER ── */
-.wf-footer {
-  background: var(--ink); color: var(--paper);
-  padding: 32px 64px; display: flex; align-items: center;
-  justify-content: space-between; flex-wrap: wrap; gap: 20px;
-  margin-top: 0;
-}
-.footer-brand { font-family: var(--font-display); font-size: 20px; }
-.footer-sub { font-family: var(--font-mono); font-size: 10px; color: var(--wire); margin-top: 5px; }
-.footer-info { font-family: var(--font-mono); font-size: 11px; color: var(--wire); text-align: right; line-height: 1.8; }
-.footer-tags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-.footer-tag {
-  font-family: var(--font-mono); font-size: 9px; letter-spacing: 1px;
-  padding: 4px 12px; border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px; color: var(--wire);
-}
+  .login-demo {
+    display: flex;
+    gap: 10px;
+  }
 
-@media (max-width: 900px) {
-  .cover, .screens-wrap, .wf-footer { padding-left: 20px; padding-right: 20px; }
-  .dash-grid { grid-template-columns: 1fr 1fr; }
-  .dash-row2, .map-layout, .profile-layout { grid-template-columns: 1fr; }
-  .app-sidebar { display: none; }
-  .app-main { margin-left: 0; }
-  .cover-title { font-size: 36px; }
-}
+  .btn-demo {
+    flex: 1;
+    padding: 12px;
+    background: var(--warm);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .btn-demo:hover { background: var(--gold-light); border-color: var(--gold); }
+
+  .error-msg {
+    color: var(--rose);
+    font-size: 0.82rem;
+    margin-top: 12px;
+    text-align: center;
+    min-height: 18px;
+  }
+
+  /* ─── APP SHELL ───────────────────────────── */
+  #app-shell {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ─── SIDEBAR ─────────────────────────────── */
+  .sidebar {
+    width: var(--sidebar-w);
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    z-index: 100;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar-header {
+    padding: 28px 22px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sidebar-logo {
+    width: 38px; height: 38px;
+    background: var(--gold);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    transform: rotate(-4deg);
+  }
+
+  .sidebar-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .sidebar-title span { color: var(--gold); }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 20px 12px;
+    overflow-y: auto;
+  }
+
+  .nav-section-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    padding: 0 10px;
+    margin: 18px 0 8px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+    margin-bottom: 3px;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    position: relative;
+  }
+
+  .nav-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
+
+  .nav-item.active {
+    background: rgba(201,168,76,0.18);
+    color: var(--gold-light);
+  }
+
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 20%; height: 60%;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--gold);
+  }
+
+  .nav-icon { font-size: 17px; flex-shrink: 0; width: 20px; text-align: center; }
+
+  .nav-badge {
+    margin-left: auto;
+    background: var(--rose);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+  }
+
+  .sidebar-user {
+    padding: 16px 18px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .user-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .user-info { flex: 1; min-width: 0; }
+  .user-name { font-size: 0.85rem; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .user-role { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+
+  .logout-btn {
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.3);
+    font-size: 16px;
+    transition: color 0.2s;
+    padding: 4px;
+  }
+  .logout-btn:hover { color: var(--rose-light); }
+
+  /* ─── MAIN CONTENT ────────────────────────── */
+  .main-content {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .topbar {
+    height: 64px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .topbar-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--ink);
+    flex: 1;
+  }
+
+  .topbar-actions { display: flex; align-items: center; gap: 12px; }
+
+  .topbar-btn {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--warm);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    transition: background 0.2s, border-color 0.2s;
+    position: relative;
+  }
+
+  .topbar-btn:hover { background: var(--gold-light); border-color: var(--gold); }
+
+  .topbar-notif::after {
+    content: '';
+    position: absolute;
+    top: 6px; right: 6px;
+    width: 8px; height: 8px;
+    background: var(--rose);
+    border-radius: 50%;
+    border: 2px solid var(--surface);
+  }
+
+  .page-content {
+    flex: 1;
+    padding: 32px;
+  }
+
+  /* ─── PAGES ───────────────────────────────── */
+  .page { display: none; animation: fadeIn 0.3s ease; }
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity:0; transform: translateY(8px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  /* ─── DASHBOARD ───────────────────────────── */
+  .welcome-banner {
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a4a 100%);
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .welcome-banner::before {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+    opacity: 0.1;
+    right: -60px; top: -80px;
+    border-radius: 50%;
+  }
+
+  .welcome-text h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .welcome-text p { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+
+  .welcome-date {
+    text-align: right;
+    position: relative;
+    z-index: 1;
+  }
+
+  .welcome-date .big-date {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .welcome-date .month { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 4px; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+
+  .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+  }
+
+  .stat-card.gold::after  { background: var(--gold); }
+  .stat-card.teal::after  { background: var(--teal); }
+  .stat-card.rose::after  { background: var(--rose); }
+  .stat-card.ink::after   { background: var(--ink); }
+
+  .stat-icon { font-size: 24px; margin-bottom: 14px; }
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--ink); line-height: 1; }
+  .stat-label { font-size: 0.8rem; color: var(--ink-light); margin-top: 4px; }
+  .stat-change { font-size: 0.75rem; margin-top: 8px; color: var(--teal); font-weight: 500; }
+  .stat-change.neg { color: var(--rose); }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 22px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .card-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+
+  .card-action {
+    font-size: 0.8rem;
+    color: var(--teal);
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .card-body { padding: 20px 24px; }
+
+  /* ─── SUBJECT PROGRESS ────────────────────── */
+  .subject-list { display: flex; flex-direction: column; gap: 16px; }
+
+  .subject-item {}
+
+  .subject-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .subject-name { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+  .subject-pct  { font-size: 0.8rem; color: var(--ink-light); font-weight: 600; }
+
+  .progress-bar {
+    height: 7px;
+    background: var(--warm);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 20px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ─── MINI ASSIGNMENT LIST ────────────────── */
+  .mini-assign-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .mini-assign {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: var(--warm);
+    border: 1px solid var(--border);
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  .mini-assign:hover { background: var(--gold-light); border-color: var(--gold); }
+
+  .mini-assign-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .mini-assign-info { flex: 1; min-width: 0; }
+  .mini-assign-name { font-size: 0.85rem; font-weight: 500; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mini-assign-sub  { font-size: 0.73rem; color: var(--ink-light); margin-top: 2px; }
+
+  .mini-assign-due {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  .due-urgent { background: rgba(192,70,74,0.12); color: var(--rose); }
+  .due-soon   { background: rgba(201,168,76,0.15); color: #9a7a22; }
+  .due-later  { background: rgba(42,127,127,0.12); color: var(--teal); }
+
+  /* ─── ANNOUNCEMENTS ───────────────────────── */
+  .announcement-list { display: flex; flex-direction: column; gap: 14px; }
+
+  .announcement {
+    padding: 14px 16px;
+    border-radius: 10px;
+    border-left: 3px solid var(--gold);
+    background: var(--warm);
+  }
+
+  .announce-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .announce-title { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+  .announce-time  { font-size: 0.72rem; color: var(--ink-light); }
+  .announce-body  { font-size: 0.82rem; color: var(--ink-light); line-height: 1.5; }
+
+  /* ─── ASSIGNMENTS PAGE ────────────────────── */
+  .assign-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 10px 14px 10px 38px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+    background: var(--surface);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .search-box input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+  }
+
+  .search-box::before {
+    content: '🔍';
+    position: absolute;
+    left: 12px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    pointer-events: none;
+  }
+
+  .filter-btn {
+    padding: 10px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+
+  .add-btn {
+    padding: 10px 20px;
+    background: var(--gold);
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
+    white-space: nowrap;
+  }
+
+  .add-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .assign-kanban {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .kanban-col {
+    background: var(--warm);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .kanban-col-header {
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .kanban-col-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+    flex: 1;
+  }
+
+  .kanban-count {
+    font-size: 0.75rem;
+    font-weight: 700;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .kanban-col-body { padding: 14px; display: flex; flex-direction: column; gap: 12px; min-height: 200px; }
+
+  .assign-card {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(26,26,46,0.06);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  }
+
+  .assign-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: var(--gold);
+  }
+
+  .assign-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+  .assign-card-name { font-size: 0.88rem; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .assign-card-priority {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  .priority-high   { background: rgba(192,70,74,0.12); color: var(--rose); }
+  .priority-medium { background: rgba(201,168,76,0.15); color: #9a7a22; }
+  .priority-low    { background: rgba(42,127,127,0.12); color: var(--teal); }
+
+  .assign-card-subject {
+    font-size: 0.78rem;
+    color: var(--ink-light);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .assign-card-footer { display: flex; align-items: center; justify-content: space-between; }
+
+  .assign-card-due {
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .assign-card-due.overdue { color: var(--rose); font-weight: 600; }
+  .assign-card-due.today   { color: #9a7a22; font-weight: 600; }
+
+  .assign-progress-mini {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .assign-progress-bar-mini {
+    width: 50px; height: 4px;
+    background: var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .assign-progress-fill-mini {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 20px;
+  }
+
+  .assign-pct-mini { font-size: 0.72rem; color: var(--ink-light); }
+
+  /* ─── GRADES PAGE ─────────────────────────── */
+  .grades-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  .grade-summary-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+
+  .gpa-big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3.5rem;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .gpa-big span { font-size: 1.5rem; color: var(--ink-light); }
+  .gpa-label { font-size: 0.8rem; color: var(--ink-light); margin-top: 8px; }
+  .gpa-trend { font-size: 0.78rem; color: var(--teal); margin-top: 6px; font-weight: 500; }
+
+  .grade-table-wrap { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
+
+  .grade-table { width: 100%; border-collapse: collapse; }
+
+  .grade-table th {
+    background: var(--warm);
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .grade-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+    color: var(--ink);
+  }
+
+  .grade-table tr:last-child td { border-bottom: none; }
+  .grade-table tr:hover td { background: var(--warm); }
+
+  .grade-badge {
+    display: inline-block;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+
+  .grade-A { background: rgba(42,127,127,0.12); color: var(--teal); }
+  .grade-B { background: rgba(201,168,76,0.15); color: #9a7a22; }
+  .grade-C { background: rgba(192,70,74,0.12); color: var(--rose); }
+
+  /* ─── SCHEDULE PAGE ───────────────────────── */
+  .schedule-grid-wrap {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .schedule-days {
+    display: grid;
+    grid-template-columns: 80px repeat(5, 1fr);
+    border-bottom: 1px solid var(--border);
+    background: var(--warm);
+  }
+
+  .schedule-day-header {
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-light);
+  }
+
+  .schedule-day-header.today { color: var(--gold); }
+
+  .schedule-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 80px repeat(5, 1fr);
+    border-bottom: 1px solid var(--border);
+    min-height: 56px;
+  }
+
+  .schedule-row:last-child { border-bottom: none; }
+
+  .schedule-time {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+  }
+
+  .schedule-slot {
+    padding: 6px;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+
+  .schedule-slot:last-child { border-right: none; }
+
+  .schedule-class {
+    border-radius: 8px;
+    padding: 8px 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .schedule-class-name { font-size: 0.78rem; font-weight: 600; color: inherit; line-height: 1.2; }
+  .schedule-class-room { font-size: 0.68rem; margin-top: 2px; opacity: 0.75; }
+
+  /* ─── SETTINGS PAGE ───────────────────────── */
+  .settings-grid { display: grid; grid-template-columns: 220px 1fr; gap: 24px; }
+
+  .settings-sidebar {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 12px;
+    box-shadow: var(--shadow);
+    height: fit-content;
+  }
+
+  .settings-nav-item {
+    padding: 11px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink-light);
+    margin-bottom: 3px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+
+  .settings-nav-item:hover { background: var(--warm); color: var(--ink); }
+  .settings-nav-item.active { background: var(--warm); color: var(--ink); font-weight: 600; }
+
+  .settings-content {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 28px;
+  }
+
+  .settings-section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 20px;
+    color: var(--ink);
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .settings-row:last-child { border-bottom: none; }
+
+  .settings-label { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+  .settings-desc  { font-size: 0.78rem; color: var(--ink-light); margin-top: 2px; }
+
+  .toggle {
+    position: relative;
+    width: 44px; height: 24px;
+    flex-shrink: 0;
+  }
+
+  .toggle input { opacity: 0; width: 0; height: 0; }
+
+  .toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: var(--border);
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 18px; height: 18px;
+    left: 3px; top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+
+  .toggle input:checked + .toggle-slider { background: var(--teal); }
+  .toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+  /* ─── MODAL ───────────────────────────────── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,46,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .modal {
+    background: var(--surface);
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 480px;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s ease;
+    overflow: hidden;
+  }
+
+  .modal-header {
+    padding: 22px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .modal-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); }
+
+  .modal-close {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--warm);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+
+  .modal-close:hover { background: var(--rose-light); color: #fff; border-color: var(--rose); }
+
+  .modal-body { padding: 24px; }
+  .modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; }
+
+  .btn-sec {
+    padding: 10px 20px;
+    background: var(--warm);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-sec:hover { background: var(--border); }
+
+  .btn-submit {
+    padding: 10px 24px;
+    background: var(--ink);
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-submit:hover { background: var(--teal); }
+
+  .modal-form-group { margin-bottom: 18px; }
+  .modal-form-group label { display: block; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-light); margin-bottom: 7px; }
+  .modal-form-group input,
+  .modal-form-group select,
+  .modal-form-group textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: none;
+  }
+  .modal-form-group input:focus,
+  .modal-form-group select:focus,
+  .modal-form-group textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+  }
+
+  .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  /* ─── NOTIFICATIONS ───────────────────────── */
+  .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 300; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+
+  .toast {
+    background: var(--ink);
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 260px;
+    animation: toastIn 0.3s ease;
+    pointer-events: auto;
+    border-left: 4px solid var(--gold);
+  }
+
+  @keyframes toastIn {
+    from { opacity:0; transform: translateX(20px); }
+    to   { opacity:1; transform: translateX(0); }
+  }
+
+  .toast.success { border-color: var(--teal); }
+  .toast.error   { border-color: var(--rose); }
+
+  /* ─── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 1100px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .assign-kanban { grid-template-columns: 1fr 1fr; }
+    .grades-summary { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    :root { --sidebar-w: 0px; }
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); width: 260px; }
+    .main-content { margin-left: 0; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .assign-kanban { grid-template-columns: 1fr; }
+    .settings-grid { grid-template-columns: 1fr; }
+    .login-art { display: none; }
+    .login-form-wrap { width: 100%; }
+  }
+
+  /* ─── SCROLL ──────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 </style>
 </head>
 <body>
 
-<!-- ══════════ COVER ══════════ -->
-<div class="cover">
-  <div class="cover-logo">
-    <div class="logo-mark">S</div>
-    <div>
-      <div class="logo-text">ScholarStep</div>
-      <div class="logo-sub">Academic Co-Pilot</div>
+<!-- ─── LOGIN ─────────────────────────────────────── -->
+<div id="login-page">
+  <div class="login-art">
+    <div class="login-brand">
+      <div class="logo-icon">🎓</div>
+      <h1>Scholar<span>Step</span></h1>
+      <p>Your guided academic companion. Track progress, manage assignments, and reach your goals.</p>
+    </div>
+    <div class="login-steps">
+      <div class="login-step"><div class="step-dot">📚</div>Track assignments and deadlines in real-time</div>
+      <div class="login-step"><div class="step-dot">📊</div>Monitor your grades and academic progress</div>
+      <div class="login-step"><div class="step-dot">🗓️</div>Stay organized with your class schedule</div>
+      <div class="login-step"><div class="step-dot">🔔</div>Get notified about important announcements</div>
     </div>
   </div>
-  <div class="cover-meta">
-    <div class="sprint-badge">SPRINT REVIEW #2</div>
-    <p>Team: NextGen Developers</p>
-    <p>Date: May 22, 2026</p>
-    <p>Version: v0.2.0</p>
-  </div>
-
-  <div class="cover-title">Wireframe <em>Prototype</em></div>
-  <div class="cover-desc">Complete interactive wireframes for all four Product Backlog Items delivered in Sprint #2 — onboarding personalization, interactive campus mapping, adaptive dashboard display preferences, and persistent profile management editing.</div>
-
-  <!-- Changelog -->
-  <div class="changelog-wrap">
-    <div class="changelog-title">Updated Changelog</div>
-    <table class="changelog-table">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>PBI</th>
-          <th>Status</th>
-          <th>Changes Made</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="cl-date">May 19, 2026</td>
-          <td class="cl-pbi">Student Profile &amp; Onboarding</td>
-          <td><span class="cl-badge new">New</span></td>
-          <td>Created user preferences wireframe for majors, learning styles, and focus hours.</td>
-        </tr>
-        <tr>
-          <td class="cl-date">May 20, 2026</td>
-          <td class="cl-pbi">Interactive Campus Map</td>
-          <td><span class="cl-badge new">New</span></td>
-          <td>Designed map interface highlighting lecture halls, libraries, and open seating heatmaps.</td>
-        </tr>
-        <tr>
-          <td class="cl-date">May 21, 2026</td>
-          <td class="cl-pbi">Student Dashboard</td>
-          <td><span class="cl-badge upd">Updated</span></td>
-          <td>Updated dashboard layout to incorporate adaptive Dark Mode / Blue Light Filter UI toggle.</td>
-        </tr>
-        <tr>
-          <td class="cl-date">May 22, 2026</td>
-          <td class="cl-pbi">Profile Management</td>
-          <td><span class="cl-badge upd">Updated</span></td>
-          <td>Added quick-access, persistent green edit preference button for instant availability updates.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Screen Navigation -->
-  <div class="screen-nav">
-    <button class="nav-pill active" onclick="showScreen('onboarding',this)">① Onboarding &amp; Preferences</button>
-    <button class="nav-pill" onclick="showScreen('map',this)">② Interactive Campus Map</button>
-    <button class="nav-pill" onclick="showScreen('dashboard',this)">③ Student Dashboard</button>
-    <button class="nav-pill" onclick="showScreen('profile',this)">④ Profile Management</button>
-  </div>
-</div>
-
-<!-- ══════════ SCREENS ══════════ -->
-<div class="screens-wrap">
-
-<!-- ──── SCREEN 1: ONBOARDING ──── -->
-<div class="screen-section visible" id="screen-onboarding">
-  <div class="screen-label">
-    <span class="screen-num">PBI 01</span>
-    <span class="screen-title">Student Profile &amp; Onboarding</span>
-    <span class="screen-date">May 19, 2026</span>
-  </div>
-  <div class="annotation-line">New wireframe — user preferences flow for entering majors, learning styles, and focus hours.</div>
-
-  <div class="device-frame">
-    <div class="device-screen">
-      <div class="app-topbar">
-        <div class="app-logo-sm"><div class="dot"></div>ScholarStep</div>
-        <div class="topbar-spacer"></div>
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);">Setting up your profile</div>
+  <div class="login-form-wrap">
+    <div class="login-form">
+      <h2>Welcome back</h2>
+      <p class="sub">Sign in to your ScholarStep account</p>
+      <div class="form-group">
+        <label>Username or Email</label>
+        <input type="text" id="username-input" placeholder="e.g. joel.mwaura@university.edu" />
       </div>
-
-      <div class="onboarding-wrap">
-        <!-- Progress -->
-        <div class="progress-bar-wrap">
-          <div class="progress-track"><div class="progress-fill"></div></div>
-          <div class="progress-label">Step 2 of 3 — Academic Profile · 66% complete</div>
-        </div>
-
-        <!-- Step indicators -->
-        <div class="step-row">
-          <div class="step-col">
-            <div class="step-dot done">✓</div>
-            <div class="step-label">Account</div>
-          </div>
-          <div class="step-line"></div>
-          <div class="step-col">
-            <div class="step-dot active">2</div>
-            <div class="step-label">Academic</div>
-          </div>
-          <div class="step-line"></div>
-          <div class="step-col">
-            <div class="step-dot">3</div>
-            <div class="step-label">Schedule</div>
-          </div>
-        </div>
-
-        <div class="onboard-h">Set up your academic profile</div>
-        <div class="onboard-sub">Tell us about your studies and how you prefer to learn — we'll use this to build your personalized academic roadmap.</div>
-
-        <div class="field-group">
-          <div class="field-label">Primary Major</div>
-          <div class="field-input focused">Computer Science — B.S.</div>
-          <div class="field-hint">Start typing to search all available programs</div>
-        </div>
-
-        <div class="field-group">
-          <div class="field-label">Minor / Second Major <span style="font-weight:400;color:var(--muted)">(optional)</span></div>
-          <div class="field-input">Search minors&hellip;</div>
-        </div>
-
-        <div class="field-group">
-          <div class="field-label">How do you learn best? <span style="font-weight:400;color:var(--muted)">(select all that apply)</span></div>
-          <div class="chip-row">
-            <div class="chip selected">Visual</div>
-            <div class="chip">Reading / Writing</div>
-            <div class="chip selected">Hands-on</div>
-            <div class="chip">Auditory</div>
-            <div class="chip">Discussion</div>
-          </div>
-        </div>
-
-        <div class="field-group">
-          <div class="field-label">Preferred focus hours</div>
-          <div class="time-grid">
-            <div class="time-block">6–8 AM</div>
-            <div class="time-block">8–10 AM</div>
-            <div class="time-block on">10–12 PM</div>
-            <div class="time-block on">12–2 PM</div>
-            <div class="time-block">2–4 PM</div>
-            <div class="time-block on">4–6 PM</div>
-            <div class="time-block">6–8 PM</div>
-            <div class="time-block">8–10 PM</div>
-          </div>
-          <div class="field-hint">3 time blocks selected — tap to toggle on/off</div>
-        </div>
-
-        <div class="field-group">
-          <div class="field-label">Academic goal this semester</div>
-          <div class="chip-row">
-            <div class="chip">Dean's List</div>
-            <div class="chip selected">Stay on track</div>
-            <div class="chip">Grad school prep</div>
-            <div class="chip">Explore courses</div>
-          </div>
-        </div>
-
-        <div class="btn-row">
-          <button class="btn-secondary">← Back</button>
-          <button class="btn-primary">Continue to Schedule →</button>
-        </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password-input" placeholder="Enter your password" />
+      </div>
+      <div class="form-row">
+        <label><input type="checkbox" /> Remember me</label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button class="btn-primary" onclick="doLogin()">Sign In to ScholarStep</button>
+      <div class="error-msg" id="login-error"></div>
+      <div class="login-divider">or try a demo account</div>
+      <div class="login-demo">
+        <button class="btn-demo" onclick="quickLogin('student')">👩‍🎓 Student Demo</button>
+        <button class="btn-demo" onclick="quickLogin('guest')">👁️ Guest View</button>
       </div>
     </div>
   </div>
-
-  <div class="annotation-row">
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--accent)"></span>Progress bar — 3-step linear onboarding</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:#5b8dee"></span>Active field: green focus outline</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--warm)"></span>Multi-select chip selectors</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--red)"></span>Time block grid — toggle focus hours</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--ink)"></span>Back / Continue navigation flow</span>
-  </div>
 </div>
 
-<!-- ──── SCREEN 2: CAMPUS MAP ──── -->
-<div class="screen-section" id="screen-map">
-  <div class="screen-label">
-    <span class="screen-num">PBI 02</span>
-    <span class="screen-title">Interactive Campus Map</span>
-    <span class="screen-date">May 20, 2026</span>
-  </div>
-  <div class="annotation-line">New map interface — lecture halls, libraries, and open seating heatmaps with real-time occupancy data.</div>
+<!-- ─── APP SHELL ──────────────────────────────────── -->
+<div id="app-shell" class="hidden">
 
-  <div class="device-frame">
-    <div class="device-screen">
-      <div class="app-topbar">
-        <div class="app-logo-sm"><div class="dot"></div>ScholarStep</div>
-        <div class="topbar-spacer"></div>
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);">Mon, May 22 · 1:34 PM</div>
-        <div class="topbar-icon">🔔</div>
-        <div class="topbar-avatar">JS</div>
-      </div>
-      <div style="display:flex;height:564px;">
-        <div class="app-sidebar">
-          <div class="sidebar-item"><span class="icon">⌂</span>Dashboard</div>
-          <div class="sidebar-item active"><span class="icon">⬡</span>Campus Map</div>
-          <div class="sidebar-item"><span class="icon">◷</span>Schedule</div>
-          <div class="sidebar-item"><span class="icon">✓</span>Assignments</div>
-          <div class="sidebar-section">Settings</div>
-          <div class="sidebar-item"><span class="icon">◎</span>Profile</div>
-          <div class="sidebar-item"><span class="icon">☾</span>Preferences</div>
-        </div>
-        <div class="app-main" style="padding:16px;">
-          <div class="map-layout">
-
-            <!-- Map Canvas -->
-            <div class="map-canvas">
-              <div class="map-bg-grid"></div>
-
-              <!-- Paths/walkways -->
-              <div class="map-path" style="left:104px;top:185px;width:4px;height:130px;"></div>
-              <div class="map-path" style="left:104px;top:185px;width:185px;height:4px;"></div>
-              <div class="map-path" style="left:285px;top:75px;width:4px;height:250px;"></div>
-              <div class="map-path" style="left:75px;top:310px;width:290px;height:4px;"></div>
-              <div class="map-path" style="left:75px;top:180px;width:4px;height:135px;"></div>
-
-              <!-- Buildings -->
-              <div class="campus-building bld-lecture" style="left:36px;top:52px;width:148px;height:88px;">
-                <div class="bld-emoji">📚</div>Whitmore Hall<br/>Lecture Hall A
-              </div>
-              <div class="campus-building bld-lecture" style="left:306px;top:44px;width:128px;height:80px;">
-                <div class="bld-emoji">📚</div>Barker Center<br/>Lecture Hall B
-              </div>
-              <div class="campus-building bld-library" style="left:148px;top:196px;width:112px;height:96px;">
-                <div class="bld-emoji">📖</div>Central Library<br/>Main Branch
-              </div>
-              <div class="campus-building bld-heat-high" style="left:36px;top:322px;width:94px;height:76px;">
-                <div class="bld-emoji">🔥</div>Student Union<br/>High Activity
-              </div>
-              <div class="campus-building bld-heat-med" style="left:154px;top:328px;width:106px;height:72px;">
-                <div class="bld-emoji">☕</div>Café Lounge<br/>Med Activity
-              </div>
-              <div class="campus-building bld-heat-low" style="left:306px;top:200px;width:106px;height:96px;">
-                <div class="bld-emoji">🌿</div>Quiet Garden<br/>Low Activity
-              </div>
-              <div class="campus-building bld-lecture" style="left:306px;top:328px;width:116px;height:72px;">
-                <div class="bld-emoji">🔬</div>STEM Lab 1<br/>Open Now
-              </div>
-
-              <!-- Map pins -->
-              <div class="map-pin lecture" style="left:110px;top:96px;" title="Whitmore Hall A"></div>
-              <div class="map-pin lib" style="left:204px;top:244px;" title="Central Library"></div>
-              <div class="map-pin lecture" style="left:370px;top:84px;" title="Barker Center B"></div>
-              <div class="map-pin lab" style="left:364px;top:260px;" title="Quiet Garden"></div>
-
-              <!-- Search -->
-              <div class="map-search">🔍 Search buildings, rooms, or services…</div>
-
-              <!-- Controls -->
-              <div class="map-controls">
-                <div class="map-btn">＋</div>
-                <div class="map-btn">－</div>
-                <div class="map-btn">◎</div>
-                <div class="map-btn">⟳</div>
-              </div>
-
-              <!-- Legend -->
-              <div class="map-legend">
-                <div class="legend-title">Legend</div>
-                <div class="legend-item"><div class="legend-dot" style="background:#5b8dee;"></div>Lecture Halls</div>
-                <div class="legend-item"><div class="legend-dot" style="background:var(--accent);"></div>Libraries</div>
-                <div class="legend-item"><div class="legend-dot" style="background:var(--red);"></div>High Occupancy</div>
-                <div class="legend-item"><div class="legend-dot" style="background:var(--warm);"></div>Med Occupancy</div>
-                <div class="legend-item"><div class="legend-dot" style="background:var(--accent);opacity:0.45;"></div>Low Occupancy</div>
-              </div>
-            </div>
-
-            <!-- Sidebar panel -->
-            <div class="map-sidebar">
-              <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;">
-                <div class="map-panel-h">Nearby Spaces</div>
-                <div class="map-filter-row">
-                  <div class="filter-tag on">All</div>
-                  <div class="filter-tag">Lecture</div>
-                  <div class="filter-tag">Library</div>
-                  <div class="filter-tag">Seating</div>
-                </div>
-              </div>
-
-              <div class="location-card">
-                <div class="lcard-name">Whitmore Hall</div>
-                <div class="lcard-type lecture">Lecture Hall · Room 204</div>
-                <div class="lcard-meta">CS 101 at 2:00 PM · 8 min walk</div>
-                <div class="occ-bar"><div class="occ-fill" style="width:30%;background:#5b8dee;"></div></div>
-                <div class="occ-label">30% occupied · 84 seats free</div>
-              </div>
-
-              <div class="location-card" style="border-color:var(--accent);">
-                <div class="lcard-name">Central Library</div>
-                <div class="lcard-type library">Library · Open 24/7</div>
-                <div class="lcard-meta">14 seats available · Wi-Fi ✓</div>
-                <div class="occ-bar"><div class="occ-fill" style="width:55%;background:var(--warm);"></div></div>
-                <div class="occ-label">55% occupied — moderate</div>
-              </div>
-
-              <div class="location-card">
-                <div class="lcard-name">Quiet Garden</div>
-                <div class="lcard-type" style="color:var(--accent-dim);font-family:var(--font-mono);font-size:9px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Open Seating</div>
-                <div class="lcard-meta">Outdoor · Low noise · Wi-Fi ✓</div>
-                <div class="occ-bar"><div class="occ-fill" style="width:15%;background:var(--accent);"></div></div>
-                <div class="occ-label">15% occupied — recommended ⭐</div>
-              </div>
-
-              <div class="location-card">
-                <div class="lcard-name">Student Union</div>
-                <div class="lcard-type" style="color:var(--red);font-family:var(--font-mono);font-size:9px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Heatmap — High</div>
-                <div class="lcard-meta">50+ people nearby · Loud</div>
-                <div class="occ-bar"><div class="occ-fill" style="width:88%;background:var(--red);"></div></div>
-                <div class="occ-label">88% occupied</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">🎓</div>
+      <div class="sidebar-title">Scholar<span>Step</span></div>
     </div>
-  </div>
-
-  <div class="annotation-row">
-    <span class="ann-bubble"><span class="ann-dot" style="background:#5b8dee"></span>Color-coded building types (lecture / library / heatmap)</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--red)"></span>Heatmap overlay by occupancy level</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--accent)"></span>Sidebar cards with live seating data</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--warm)"></span>Filter tags to toggle map layers</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--ink)"></span>Zoom / locate / reset controls</span>
-  </div>
-</div>
-
-<!-- ──── SCREEN 3: DASHBOARD ──── -->
-<div class="screen-section" id="screen-dashboard">
-  <div class="screen-label">
-    <span class="screen-num">PBI 03</span>
-    <span class="screen-title">Student Dashboard — Adaptive Display</span>
-    <span class="screen-date">May 21, 2026</span>
-  </div>
-  <div class="annotation-line">Updated dashboard — adaptive Dark Mode / Blue Light Filter UI toggle incorporated into display preferences panel.</div>
-
-  <div class="device-frame">
-    <div class="device-screen">
-      <div class="app-topbar">
-        <div class="app-logo-sm"><div class="dot"></div>ScholarStep</div>
-        <div class="topbar-spacer"></div>
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);">Mon, May 22</div>
-        <div class="topbar-icon">🔔</div>
-        <div class="topbar-avatar">JS</div>
+    <div class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <button class="nav-item active" onclick="navigate('dashboard', this)">
+        <span class="nav-icon">🏠</span> Dashboard
+      </button>
+      <button class="nav-item" onclick="navigate('assignments', this)">
+        <span class="nav-icon">📋</span> Assignments
+        <span class="nav-badge" id="pending-badge">5</span>
+      </button>
+      <button class="nav-item" onclick="navigate('grades', this)">
+        <span class="nav-icon">📊</span> Grades
+      </button>
+      <button class="nav-item" onclick="navigate('schedule', this)">
+        <span class="nav-icon">🗓️</span> Schedule
+      </button>
+      <div class="nav-section-label">Other</div>
+      <button class="nav-item" onclick="navigate('settings', this)">
+        <span class="nav-icon">⚙️</span> Settings
+      </button>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar">JM</div>
+      <div class="user-info">
+        <div class="user-name" id="user-name-display">Joel Mwaura</div>
+        <div class="user-role">Computer Science • Year 2</div>
       </div>
-      <div style="display:flex;height:564px;">
-        <div class="app-sidebar">
-          <div class="sidebar-item active"><span class="icon">⌂</span>Dashboard</div>
-          <div class="sidebar-item"><span class="icon">⬡</span>Campus Map</div>
-          <div class="sidebar-item"><span class="icon">◷</span>Schedule</div>
-          <div class="sidebar-item"><span class="icon">✓</span>Assignments</div>
-          <div class="sidebar-section">Settings</div>
-          <div class="sidebar-item"><span class="icon">◎</span>Profile</div>
-          <div class="sidebar-item"><span class="icon">☾</span>Preferences</div>
+      <button class="logout-btn" title="Logout" onclick="doLogout()">⏻</button>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <div class="main-content">
+    <header class="topbar">
+      <div class="topbar-title" id="page-title">Dashboard</div>
+      <div class="topbar-actions">
+        <button class="topbar-btn topbar-notif" title="Notifications" onclick="showToast('You have 3 new announcements', 'success')">🔔</button>
+        <button class="topbar-btn" title="Messages" onclick="showToast('Messaging coming soon!', '')">💬</button>
+        <button class="topbar-btn" title="Help" onclick="showToast('Help center opening...', '')">❓</button>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- ── DASHBOARD ── -->
+      <div class="page active" id="page-dashboard">
+        <div class="welcome-banner">
+          <div class="welcome-text">
+            <h2>Good afternoon, <span id="first-name">Joel</span> 👋</h2>
+            <p>You have 3 assignments due this week. Keep pushing forward!</p>
+          </div>
+          <div class="welcome-date">
+            <div class="big-date" id="day-num">16</div>
+            <div class="month" id="month-str">May 2026 · Friday</div>
+          </div>
         </div>
-        <div class="app-main" style="overflow-y:auto;">
-          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;">
-            <div>
-              <div style="font-family:var(--font-display);font-size:24px;">Good afternoon, Jamie 👋</div>
-              <div style="font-size:12px;color:var(--muted);margin-top:5px;">3 assignments due this week · Week 11 of 15</div>
-            </div>
-            <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);">Last updated 1:34 PM</div>
-          </div>
 
-          <!-- Stat cards -->
-          <div class="dash-grid">
-            <div class="dash-stat">
-              <div class="stat-label">Assignments Due</div>
-              <div class="stat-value" style="color:var(--red);">3</div>
-              <div class="stat-badge warn">⚠ 1 overdue</div>
-            </div>
-            <div class="dash-stat">
-              <div class="stat-label">Completed This Week</div>
-              <div class="stat-value">7</div>
-              <div class="stat-badge up">↑ +2 vs last week</div>
-            </div>
-            <div class="dash-stat">
-              <div class="stat-label">Focus Hours Today</div>
-              <div class="stat-value">4.5<span style="font-size:20px;color:var(--muted);">h</span></div>
-              <div class="stat-badge up">Goal: 5h · 90%</div>
-            </div>
+        <div class="stats-grid">
+          <div class="stat-card gold">
+            <div class="stat-icon">📚</div>
+            <div class="stat-value">12</div>
+            <div class="stat-label">Active Assignments</div>
+            <div class="stat-change">↑ 3 added this week</div>
           </div>
+          <div class="stat-card teal">
+            <div class="stat-icon">✅</div>
+            <div class="stat-value">8</div>
+            <div class="stat-label">Completed</div>
+            <div class="stat-change">↑ 2 this week</div>
+          </div>
+          <div class="stat-card rose">
+            <div class="stat-icon">⏰</div>
+            <div class="stat-value">3</div>
+            <div class="stat-label">Due Soon</div>
+            <div class="stat-change neg">⚠ 1 overdue</div>
+          </div>
+          <div class="stat-card ink">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-value">3.7</div>
+            <div class="stat-label">Current GPA</div>
+            <div class="stat-change">↑ +0.2 this semester</div>
+          </div>
+        </div>
 
-          <!-- ★ DISPLAY PREFERENCES — Sprint #2 Feature ★ -->
-          <div class="theme-panel">
+        <div class="dashboard-grid">
+          <!-- Subject Progress -->
+          <div class="card">
             <div class="card-header">
-              <div class="card-title">🎨 Display Preferences</div>
-              <div class="card-action" style="color:var(--accent);font-weight:600;">✦ New — Sprint #2</div>
+              <div class="card-title">Course Progress</div>
+              <a class="card-action" onclick="navigate('grades', document.querySelector('.nav-item:nth-child(4)'))">View Grades →</a>
             </div>
-            <div style="font-size:12px;color:var(--muted);margin-bottom:2px;">Choose an adaptive display mode for comfortable viewing at any hour of the day.</div>
-            <div class="theme-options">
-              <div class="theme-option t-light selected" onclick="selectTheme(this)">
-                <div class="theme-check">✓</div>
-                <div class="theme-icon">☀️</div>
-                <div class="theme-name">Light</div>
-                <div class="theme-desc">Default daytime</div>
-              </div>
-              <div class="theme-option t-dark" onclick="selectTheme(this)">
-                <div class="theme-check">✓</div>
-                <div class="theme-icon">🌙</div>
-                <div class="theme-name">Dark Mode</div>
-                <div class="theme-desc">Low-light sessions</div>
-              </div>
-              <div class="theme-option t-blue" onclick="selectTheme(this)">
-                <div class="theme-check">✓</div>
-                <div class="theme-icon">💙</div>
-                <div class="theme-name">Blue Filter</div>
-                <div class="theme-desc">Eye comfort / night</div>
-              </div>
+            <div class="card-body">
+              <div class="subject-list" id="subject-progress-list"></div>
             </div>
           </div>
 
-          <!-- Row 2 -->
-          <div class="dash-row2">
-            <div class="dash-card">
+          <!-- Right column -->
+          <div style="display:flex;flex-direction:column;gap:22px;">
+            <!-- Upcoming Assignments -->
+            <div class="card">
               <div class="card-header">
-                <div class="card-title">Upcoming Deadlines</div>
-                <div class="card-action">View all →</div>
+                <div class="card-title">Due Soon</div>
+                <a class="card-action" onclick="navigate('assignments', document.querySelector('.nav-item:nth-child(3)'))">All →</a>
               </div>
-              <div class="tl-wrap">
-                <div class="timeline-item urgent">
-                  <div style="flex:1;">
-                    <div class="tl-name">CS 301 — Algorithm Analysis</div>
-                    <div class="tl-sub">Problem Set 4 · Prof. Kim</div>
-                  </div>
-                  <div class="tl-badge r">TODAY</div>
-                </div>
-                <div class="timeline-item soon">
-                  <div style="flex:1;">
-                    <div class="tl-name">ENGL 210 — Essay Draft</div>
-                    <div class="tl-sub">Peer Review · 2,000 words</div>
-                  </div>
-                  <div class="tl-badge y">2 days</div>
-                </div>
-                <div class="timeline-item ok">
-                  <div style="flex:1;">
-                    <div class="tl-name">BIO 150 — Lab Report</div>
-                    <div class="tl-sub">Section 4B · Lab 7</div>
-                  </div>
-                  <div class="tl-badge g">5 days</div>
-                </div>
-              </div>
-            </div>
-            <div class="dash-card">
-              <div class="card-header"><div class="card-title">Quick Access</div></div>
-              <div class="quick-item"><span>📅</span>Today's Schedule</div>
-              <div class="quick-item"><span>⬡</span>Find Open Seat</div>
-              <div class="quick-item"><span>⏱</span>Start Focus Timer</div>
-              <div class="quick-item"><span>◎</span>Edit Profile</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="annotation-row">
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--accent)"></span>3-mode display toggle: Light / Dark / Blue Filter</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:#5b8dee"></span>Blue Light Filter — eye comfort for evening use</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--red)"></span>Deadline urgency color-coding on timeline</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--warm)"></span>Stat cards with trend badges</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--ink)"></span>Interactive theme tiles — click to switch</span>
-  </div>
-</div>
-
-<!-- ──── SCREEN 4: PROFILE MANAGEMENT ──── -->
-<div class="screen-section" id="screen-profile">
-  <div class="screen-label">
-    <span class="screen-num">PBI 04</span>
-    <span class="screen-title">Profile Management</span>
-    <span class="screen-date">May 22, 2026</span>
-  </div>
-  <div class="annotation-line">Added quick-access, persistent green edit preference button for instant availability updates.</div>
-
-  <div class="device-frame">
-    <div class="device-screen">
-      <div class="app-topbar">
-        <div class="app-logo-sm"><div class="dot"></div>ScholarStep</div>
-        <div class="topbar-spacer"></div>
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);">My Profile</div>
-        <div class="topbar-icon">🔔</div>
-        <div class="topbar-avatar">JS</div>
-      </div>
-      <div style="display:flex;height:564px;">
-        <div class="app-sidebar">
-          <div class="sidebar-item"><span class="icon">⌂</span>Dashboard</div>
-          <div class="sidebar-item"><span class="icon">⬡</span>Campus Map</div>
-          <div class="sidebar-item"><span class="icon">◷</span>Schedule</div>
-          <div class="sidebar-item"><span class="icon">✓</span>Assignments</div>
-          <div class="sidebar-section">Settings</div>
-          <div class="sidebar-item active"><span class="icon">◎</span>Profile</div>
-          <div class="sidebar-item"><span class="icon">☾</span>Preferences</div>
-        </div>
-        <div class="app-main" style="overflow-y:auto;">
-          <div style="font-family:var(--font-display);font-size:24px;margin-bottom:22px;">My Profile</div>
-          <div class="profile-layout">
-
-            <!-- LEFT: Profile Card with sticky edit button -->
-            <div>
-              <div class="profile-card">
-                <div class="profile-avatar">J</div>
-                <div class="profile-name">Jamie Solis</div>
-                <div class="profile-role">Computer Science · Junior · Year 3</div>
-                <div class="profile-tag">🎯 On Track — Goal Met</div>
-
-                <div class="profile-stats">
-                  <div class="p-stat">
-                    <div class="p-stat-val">4.2</div>
-                    <div class="p-stat-label">Current GPA</div>
-                  </div>
-                  <div class="p-stat">
-                    <div class="p-stat-val">18</div>
-                    <div class="p-stat-label">Credits This Sem.</div>
-                  </div>
-                  <div class="p-stat">
-                    <div class="p-stat-val">7</div>
-                    <div class="p-stat-label">Completed Tasks</div>
-                  </div>
-                  <div class="p-stat">
-                    <div class="p-stat-val">3</div>
-                    <div class="p-stat-label">Open Assignments</div>
-                  </div>
-                </div>
-
-                <!-- ★★★ PERSISTENT GREEN EDIT PREFERENCES BUTTON ★★★ -->
-                <button class="edit-pref-btn">
-                  ✏ Edit Preferences
-                  <span class="new-tag">Sprint #2</span>
-                </button>
+              <div class="card-body">
+                <div class="mini-assign-list" id="mini-assign-list"></div>
               </div>
             </div>
 
-            <!-- RIGHT: Preference Sections -->
-            <div class="profile-sections">
-              <!-- Academic Info -->
-              <div class="pref-section">
-                <div class="card-header">
-                  <div class="card-title">Academic Information</div>
-                  <div class="card-action">Edit section →</div>
-                </div>
-                <div class="pref-row">
-                  <div class="pref-key">Major</div>
-                  <div class="pref-val-wrap"><div class="pref-val">Computer Science — B.S.</div><div class="pref-edit">✎</div></div>
-                </div>
-                <div class="pref-row">
-                  <div class="pref-key">Minor</div>
-                  <div class="pref-val-wrap"><div class="pref-val">Statistics</div><div class="pref-edit">✎</div></div>
-                </div>
-                <div class="pref-row">
-                  <div class="pref-key">Learning Style</div>
-                  <div class="pref-val-wrap"><div class="pref-val">Visual, Hands-on</div><div class="pref-edit">✎</div></div>
-                </div>
-                <div class="pref-row">
-                  <div class="pref-key">Academic Goal</div>
-                  <div class="pref-val-wrap"><div class="pref-val">Stay on track</div><div class="pref-edit">✎</div></div>
-                </div>
+            <!-- Announcements -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Announcements</div>
               </div>
-
-              <!-- Availability Grid -->
-              <div class="pref-section">
-                <div class="card-header">
-                  <div class="card-title">Weekly Availability</div>
-                  <div class="card-action" style="color:var(--accent);font-weight:600;">⚡ Quick Update</div>
-                </div>
-                <div class="avail-grid">
-                  <div class="avail-col">
-                    <div class="avail-day-name">MON</div>
-                    <div class="avail-slot on"></div>
-                    <div class="avail-slot on"></div>
-                    <div class="avail-slot part"></div>
+              <div class="card-body">
+                <div class="announcement-list">
+                  <div class="announcement">
+                    <div class="announce-header">
+                      <div class="announce-title">Mid-semester break</div>
+                      <div class="announce-time">Today</div>
+                    </div>
+                    <div class="announce-body">Campus will be closed May 20–22. Online submissions still accepted.</div>
                   </div>
-                  <div class="avail-col">
-                    <div class="avail-day-name">TUE</div>
-                    <div class="avail-slot on"></div>
-                    <div class="avail-slot"></div>
-                    <div class="avail-slot"></div>
+                  <div class="announcement" style="border-color:var(--teal);">
+                    <div class="announce-header">
+                      <div class="announce-title">Library extended hours</div>
+                      <div class="announce-time">Yesterday</div>
+                    </div>
+                    <div class="announce-body">Library open until midnight through finals week.</div>
                   </div>
-                  <div class="avail-col">
-                    <div class="avail-day-name">WED</div>
-                    <div class="avail-slot on"></div>
-                    <div class="avail-slot on"></div>
-                    <div class="avail-slot on"></div>
-                  </div>
-                  <div class="avail-col">
-                    <div class="avail-day-name">THU</div>
-                    <div class="avail-slot part"></div>
-                    <div class="avail-slot on"></div>
-                    <div class="avail-slot"></div>
-                  </div>
-                  <div class="avail-col">
-                    <div class="avail-day-name">FRI</div>
-                    <div class="avail-slot on"></div>
-                    <div class="avail-slot on"></div>
-                    <div class="avail-slot part"></div>
-                  </div>
-                  <div class="avail-col">
-                    <div class="avail-day-name">SAT</div>
-                    <div class="avail-slot"></div>
-                    <div class="avail-slot part"></div>
-                    <div class="avail-slot"></div>
-                  </div>
-                  <div class="avail-col">
-                    <div class="avail-day-name">SUN</div>
-                    <div class="avail-slot"></div>
-                    <div class="avail-slot"></div>
-                    <div class="avail-slot part"></div>
-                  </div>
-                </div>
-                <div class="avail-legend">
-                  <div class="avail-legend-item"><div class="avail-legend-dot" style="background:var(--accent);"></div>Available</div>
-                  <div class="avail-legend-item"><div class="avail-legend-dot" style="background:var(--warm);"></div>Partial</div>
-                  <div class="avail-legend-item"><div class="avail-legend-dot" style="background:var(--border);"></div>Busy</div>
-                </div>
-              </div>
-
-              <!-- Notifications -->
-              <div class="pref-section">
-                <div class="card-header">
-                  <div class="card-title">Notification Preferences</div>
-                  <div class="card-action">Edit →</div>
-                </div>
-                <div class="pref-row">
-                  <div class="pref-key">Deadline reminders</div>
-                  <div class="notif-toggle on">ON</div>
-                </div>
-                <div class="pref-row">
-                  <div class="pref-key">Focus session nudges</div>
-                  <div class="notif-toggle on">ON</div>
-                </div>
-                <div class="pref-row">
-                  <div class="pref-key">Campus event alerts</div>
-                  <div class="notif-toggle off">OFF</div>
-                </div>
-                <div class="pref-row">
-                  <div class="pref-key">Weekly summary email</div>
-                  <div class="notif-toggle on">ON</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="annotation-row">
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--accent)"></span>Persistent green "Edit Preferences" — sticky to profile card bottom</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:#5b8dee"></span>Weekly availability grid — color-coded time slots</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--warm)"></span>Inline ✎ edit icons per preference field</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--red)"></span>ON/OFF notification toggles</span>
-    <span class="ann-bubble"><span class="ann-dot" style="background:var(--ink)"></span>⚡ Quick Update shortcut in availability panel</span>
+      <!-- ── ASSIGNMENTS ── -->
+      <div class="page" id="page-assignments">
+        <div class="assign-toolbar">
+          <div class="search-box">
+            <input type="text" placeholder="Search assignments..." id="assign-search" oninput="filterAssignments()" />
+          </div>
+          <button class="filter-btn active" id="filter-all" onclick="setFilter('all', this)">All</button>
+          <button class="filter-btn" id="filter-todo" onclick="setFilter('todo', this)">To Do</button>
+          <button class="filter-btn" id="filter-inprogress" onclick="setFilter('in-progress', this)">In Progress</button>
+          <button class="filter-btn" id="filter-done" onclick="setFilter('done', this)">Done</button>
+          <button class="add-btn" onclick="openAddModal()">＋ Add Assignment</button>
+        </div>
+        <div class="assign-kanban" id="assign-kanban"></div>
+      </div>
+
+      <!-- ── GRADES ── -->
+      <div class="page" id="page-grades">
+        <div class="grades-summary">
+          <div class="grade-summary-card">
+            <div class="gpa-big">3.7<span>/4.0</span></div>
+            <div class="gpa-label">Cumulative GPA</div>
+            <div class="gpa-trend">↑ +0.2 from last semester</div>
+          </div>
+          <div class="grade-summary-card">
+            <div class="gpa-big">87<span>%</span></div>
+            <div class="gpa-label">Average Grade</div>
+            <div class="gpa-trend">↑ Strong performance</div>
+          </div>
+          <div class="grade-summary-card">
+            <div class="gpa-big">5<span>/6</span></div>
+            <div class="gpa-label">Courses on Track</div>
+            <div class="gpa-trend" style="color:var(--rose)">⚠ 1 needs attention</div>
+          </div>
+        </div>
+
+        <div class="grade-table-wrap">
+          <table class="grade-table">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Assignments</th>
+                <th>Midterm</th>
+                <th>Attendance</th>
+                <th>Current Grade</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="grades-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── SCHEDULE ── -->
+      <div class="page" id="page-schedule">
+        <div class="schedule-grid-wrap">
+          <div class="schedule-days">
+            <div class="schedule-day-header"></div>
+            <div class="schedule-day-header">Mon</div>
+            <div class="schedule-day-header">Tue</div>
+            <div class="schedule-day-header today">Wed <span style="font-size:0.65rem;display:block;color:var(--gold)">Today</span></div>
+            <div class="schedule-day-header">Thu</div>
+            <div class="schedule-day-header">Fri</div>
+          </div>
+          <div class="schedule-body" id="schedule-body"></div>
+        </div>
+      </div>
+
+      <!-- ── SETTINGS ── -->
+      <div class="page" id="page-settings">
+        <div class="settings-grid">
+          <div class="settings-sidebar">
+            <button class="settings-nav-item active" onclick="settingsTab('profile', this)">👤 Profile</button>
+            <button class="settings-nav-item" onclick="settingsTab('notifications', this)">🔔 Notifications</button>
+            <button class="settings-nav-item" onclick="settingsTab('appearance', this)">🎨 Appearance</button>
+            <button class="settings-nav-item" onclick="settingsTab('privacy', this)">🔒 Privacy</button>
+          </div>
+          <div class="settings-content">
+            <div id="settings-profile">
+              <div class="settings-section-title">Profile Settings</div>
+              <div class="settings-row">
+                <div><div class="settings-label">Full Name</div><div class="settings-desc">Joel Ndiba Mwaura</div></div>
+                <button class="btn-sec" onclick="showToast('Edit profile coming soon', '')">Edit</button>
+              </div>
+              <div class="settings-row">
+                <div><div class="settings-label">Email</div><div class="settings-desc">joel.mwaura@university.edu</div></div>
+                <button class="btn-sec" onclick="showToast('Email change coming soon', '')">Change</button>
+              </div>
+              <div class="settings-row">
+                <div><div class="settings-label">Program</div><div class="settings-desc">Computer Science — Year 2</div></div>
+                <button class="btn-sec">View</button>
+              </div>
+              <div class="settings-row">
+                <div><div class="settings-label">Password</div><div class="settings-desc">Last changed 30 days ago</div></div>
+                <button class="btn-sec" onclick="showToast('Password reset email sent!', 'success')">Reset</button>
+              </div>
+            </div>
+            <div id="settings-notifications" class="hidden">
+              <div class="settings-section-title">Notification Preferences</div>
+              <div class="settings-row">
+                <div><div class="settings-label">Assignment Due Reminders</div><div class="settings-desc">Notify 24 hours before deadline</div></div>
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+              <div class="settings-row">
+                <div><div class="settings-label">Grade Posted</div><div class="settings-desc">When instructor posts a grade</div></div>
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+              <div class="settings-row">
+                <div><div class="settings-label">Announcements</div><div class="settings-desc">Course and campus announcements</div></div>
+                <label class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></label>
+              </div>
+              <div class="settings-row">
+                <div><div class="settings-label">Weekly Summary</div><div class="settings-desc">Email digest every Monday</div></div>
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+            <div id="settings-appearance" class="hidden">
+              <div class="settings-section-title">Appearance</div>
+              <div class="settings-row">
+                <div><div class="settings-label">Compact Mode</div><div class="settings-desc">Reduce spacing for more content</div></div>
+                <label class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></label>
+              </div>
+              <div class="settings-row">
+                <div><div class="settings-label">Show Avatars</div><div class="settings-desc">Display profile pictures</div></div>
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+            <div id="settings-privacy" class="hidden">
+              <div class="settings-section-title">Privacy</div>
+              <div class="settings-row">
+                <div><div class="settings-label">Profile Visibility</div><div class="settings-desc">Allow classmates to view profile</div></div>
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+              <div class="settings-row">
+                <div><div class="settings-label">Analytics</div><div class="settings-desc">Help improve ScholarStep</div></div>
+                <label class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-content -->
+  </div><!-- /main-content -->
+</div><!-- /app-shell -->
+
+<!-- ─── MODAL ────────────────────────────────── -->
+<div class="modal-overlay hidden" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title">Add Assignment</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-form-group">
+        <label>Assignment Title</label>
+        <input type="text" id="modal-title" placeholder="e.g. Research Paper Draft" />
+      </div>
+      <div class="form-row-2">
+        <div class="modal-form-group">
+          <label>Subject</label>
+          <select id="modal-subject">
+            <option>Data Structures</option>
+            <option>Algorithms</option>
+            <option>Database Systems</option>
+            <option>Web Development</option>
+            <option>Discrete Math</option>
+            <option>Networks</option>
+          </select>
+        </div>
+        <div class="modal-form-group">
+          <label>Priority</label>
+          <select id="modal-priority">
+            <option value="high">High</option>
+            <option value="medium" selected>Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="modal-form-group">
+          <label>Due Date</label>
+          <input type="date" id="modal-due" />
+        </div>
+        <div class="modal-form-group">
+          <label>Status</label>
+          <select id="modal-status">
+            <option value="todo">To Do</option>
+            <option value="in-progress">In Progress</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-form-group">
+        <label>Notes (optional)</label>
+        <textarea id="modal-notes" rows="3" placeholder="Any additional notes..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sec" onclick="closeModal()">Cancel</button>
+      <button class="btn-submit" onclick="addAssignment()">Add Assignment</button>
+    </div>
   </div>
 </div>
 
-</div><!-- .screens-wrap -->
-
-<!-- ══════════ FOOTER ══════════ -->
-<div class="wf-footer">
-  <div>
-    <div class="footer-brand">ScholarStep</div>
-    <div class="footer-sub">Sprint #2 Wireframe Deliverable · v0.2.0</div>
-    <div class="footer-tags">
-      <span class="footer-tag">4 PBIs</span>
-      <span class="footer-tag">May 19–22, 2026</span>
-      <span class="footer-tag">NextGen Developers</span>
-      <span class="footer-tag">Cumulative Milestone</span>
-    </div>
-  </div>
-  <div class="footer-info">
-    <div>Sprint Review #2</div>
-    <div>May 22, 2026</div>
-    <div style="margin-top:6px;color:rgba(200,191,170,0.6);font-size:10px;">Product Goal: Academic Co-Pilot for Students</div>
-  </div>
-</div>
+<!-- ─── TOASTS ───────────────────────────────── -->
+<div class="toast-container" id="toast-container"></div>
 
 <script>
-function showScreen(key, el) {
-  document.querySelectorAll('.screen-section').forEach(s => s.classList.remove('visible'));
-  document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
-  document.getElementById('screen-' + key).classList.add('visible');
-  el.classList.add('active');
-  document.querySelector('.screens-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+// ─── DATA ────────────────────────────────────────────
+const USERS = {
+  'student': { pass: 'demo', name: 'Joel Ndiba Mwaura', initials: 'JM' },
+  'happiness': { pass: '123', name: 'Happiness Godwin', initials: 'HG' },
+  'ethan': { pass: '123', name: 'Ethan Bray', initials: 'EB' },
+  'guest': { pass: 'guest', name: 'Guest User', initials: 'GU' },
+};
+
+const subjects = [
+  { name: 'Data Structures',  pct: 82, color: '#c9a84c' },
+  { name: 'Algorithms',       pct: 74, color: '#2a7f7f' },
+  { name: 'Database Systems', pct: 90, color: '#c0464a' },
+  { name: 'Web Development',  pct: 68, color: '#5b8def' },
+  { name: 'Discrete Math',    pct: 55, color: '#9c6ef0' },
+];
+
+const gradeData = [
+  { course: 'Data Structures',  assigns: '8/10', midterm: '84%', attend: '92%', grade: 'B+', letter: 'B' },
+  { course: 'Algorithms',       assigns: '7/10', midterm: '78%', attend: '88%', grade: 'B',  letter: 'B' },
+  { course: 'Database Systems', assigns: '9/10', midterm: '91%', attend: '95%', grade: 'A-', letter: 'A' },
+  { course: 'Web Development',  assigns: '6/10', midterm: '70%', attend: '80%', grade: 'C+', letter: 'C' },
+  { course: 'Discrete Math',    assigns: '5/10', midterm: '62%', attend: '75%', grade: 'C',  letter: 'C' },
+  { course: 'Networks',         assigns: '10/10','midterm': '95%', attend: '98%', grade: 'A', letter: 'A' },
+];
+
+let assignments = [
+  { id:1, title:'Binary Search Tree Implementation', subject:'Data Structures', priority:'high',   status:'todo',        due:'2026-05-17', progress:0 },
+  { id:2, title:'Sorting Algorithms Analysis',       subject:'Algorithms',       priority:'high',   status:'todo',        due:'2026-05-18', progress:0 },
+  { id:3, title:'ER Diagram Design',                 subject:'Database Systems', priority:'medium', status:'todo',        due:'2026-05-20', progress:0 },
+  { id:4, title:'REST API Documentation',            subject:'Web Development',  priority:'medium', status:'in-progress', due:'2026-05-22', progress:40 },
+  { id:5, title:'Graph Theory Problem Set',          subject:'Discrete Math',    priority:'low',    status:'in-progress', due:'2026-05-25', progress:25 },
+  { id:6, title:'Network Topology Lab Report',       subject:'Networks',         priority:'medium', status:'in-progress', due:'2026-05-24', progress:70 },
+  { id:7, title:'SQL Query Optimization',            subject:'Database Systems', priority:'low',    status:'done',        due:'2026-05-12', progress:100 },
+  { id:8, title:'HTML/CSS Portfolio Page',           subject:'Web Development',  priority:'medium', status:'done',        due:'2026-05-10', progress:100 },
+  { id:9, title:'Stack & Queue Exercises',           subject:'Data Structures',  priority:'high',   status:'done',        due:'2026-05-09', progress:100 },
+];
+
+let currentFilter = 'all';
+let nextId = 10;
+
+const scheduleData = {
+  '08:00': { mon: null, tue: {n:'Data Structures',c:'CS201',r:'Room 3A',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'}, wed: null, thu: {n:'Data Structures',c:'CS201',r:'Room 3A',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'}, fri: null },
+  '09:00': { mon: null, tue: null, wed: {n:'Algorithms',c:'CS301',r:'Room 1B',bg:'rgba(42,127,127,0.15)',col:'var(--teal)'}, thu: null, fri: {n:'Algorithms',c:'CS301',r:'Room 1B',bg:'rgba(42,127,127,0.15)',col:'var(--teal)'} },
+  '10:00': { mon: {n:'Database Systems',c:'CS305',r:'Lab 2',bg:'rgba(192,70,74,0.12)',col:'var(--rose)'}, tue: null, wed: {n:'Database Systems',c:'CS305',r:'Lab 2',bg:'rgba(192,70,74,0.12)',col:'var(--rose)'}, thu: null, fri: null },
+  '11:00': { mon: null, tue: {n:'Web Development',c:'CS401',r:'Room 5C',bg:'rgba(91,141,239,0.15)',col:'#3a6fe0'}, wed: null, thu: {n:'Web Development',c:'CS401',r:'Room 5C',bg:'rgba(91,141,239,0.15)',col:'#3a6fe0'}, fri: null },
+  '12:00': { mon: null, tue: null, wed: null, thu: null, fri: null },
+  '13:00': { mon: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'}, tue: null, wed: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'}, thu: null, fri: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'} },
+  '14:00': { mon: null, tue: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, wed: null, thu: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, fri: null },
+  '15:00': { mon: null, tue: null, wed: null, thu: null, fri: {n:'Lab Session',c:'CS-LAB',r:'Lab 1',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'} },
+};
+
+// ─── AUTH ────────────────────────────────────────────
+function doLogin() {
+  const u = document.getElementById('username-input').value.trim().toLowerCase().replace('@university.edu','').replace(/\..*$/,'');
+  const p = document.getElementById('password-input').value;
+  const errEl = document.getElementById('login-error');
+
+  const match = Object.entries(USERS).find(([key,val]) => (key === u || u.startsWith(key.split('.')[0])) && val.pass === p);
+  if (match || (u && p === 'scholar2026')) {
+    const user = match ? match[1] : { name: 'Student User', initials: 'SU' };
+    loginSuccess(user);
+  } else {
+    errEl.textContent = 'Invalid credentials. Try "student" / "demo"';
+    document.getElementById('password-input').style.borderColor = 'var(--rose)';
+    setTimeout(() => { errEl.textContent=''; document.getElementById('password-input').style.borderColor=''; }, 3000);
+  }
 }
-function selectTheme(el) {
-  document.querySelectorAll('.theme-option').forEach(o => o.classList.remove('selected'));
-  el.classList.add('selected');
+
+function quickLogin(type) {
+  const u = USERS[type] || USERS.student;
+  loginSuccess(u);
 }
-// Chip & time block toggles
-document.querySelectorAll('.chip').forEach(c => {
-  c.addEventListener('click', () => c.classList.toggle('selected'));
-});
-document.querySelectorAll('.time-block').forEach(t => {
-  t.addEventListener('click', () => t.classList.toggle('on'));
-});
-// Filter tag toggles
-document.querySelectorAll('.filter-tag').forEach(f => {
-  f.addEventListener('click', () => {
-    document.querySelectorAll('.filter-tag').forEach(x => x.classList.remove('on'));
-    f.classList.add('on');
+
+function loginSuccess(user) {
+  document.getElementById('login-page').classList.add('hidden');
+  document.getElementById('app-shell').classList.remove('hidden');
+  document.getElementById('user-name-display').textContent = user.name;
+  document.getElementById('user-avatar').textContent = user.initials;
+  const first = user.name.split(' ')[0];
+  document.getElementById('first-name').textContent = first;
+  initDate();
+  renderAll();
+  showToast(`Welcome back, ${first}! 👋`, 'success');
+}
+
+function doLogout() {
+  document.getElementById('app-shell').classList.add('hidden');
+  document.getElementById('login-page').classList.remove('hidden');
+  document.getElementById('username-input').value = '';
+  document.getElementById('password-input').value = '';
+}
+
+document.getElementById('password-input').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+document.getElementById('username-input').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('password-input').focus(); });
+
+// ─── NAVIGATION ──────────────────────────────────────
+function navigate(page, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  if (btn) btn.classList.add('active');
+  const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades & Reports', schedule:'Class Schedule', settings:'Settings' };
+  document.getElementById('page-title').textContent = titles[page] || page;
+}
+
+// ─── DATE ────────────────────────────────────────────
+function initDate() {
+  const now = new Date();
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('day-num').textContent = now.getDate();
+  document.getElementById('month-str').textContent = `${months[now.getMonth()]} ${now.getFullYear()} · ${days[now.getDay()]}`;
+}
+
+// ─── RENDER ──────────────────────────────────────────
+function renderAll() {
+  renderSubjectProgress();
+  renderMiniAssignments();
+  renderKanban();
+  renderGrades();
+  renderSchedule();
+}
+
+function renderSubjectProgress() {
+  const el = document.getElementById('subject-progress-list');
+  el.innerHTML = subjects.map(s => `
+    <div class="subject-item">
+      <div class="subject-meta">
+        <span class="subject-name">${s.name}</span>
+        <span class="subject-pct">${s.pct}%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:0%;background:${s.color};" data-target="${s.pct}"></div>
+      </div>
+    </div>
+  `).join('');
+  setTimeout(() => {
+    document.querySelectorAll('.progress-fill[data-target]').forEach(el => {
+      el.style.width = el.dataset.target + '%';
+    });
+  }, 100);
+}
+
+function duePillClass(due) {
+  const d = new Date(due), now = new Date();
+  const diff = Math.ceil((d - now) / 86400000);
+  if (diff < 0)  return ['due-urgent', '⚠ Overdue'];
+  if (diff === 0) return ['due-urgent', 'Today'];
+  if (diff === 1) return ['due-soon', 'Tomorrow'];
+  if (diff <= 3) return ['due-soon', `${diff}d`];
+  return ['due-later', `${diff}d`];
+}
+
+function renderMiniAssignments() {
+  const pending = assignments.filter(a => a.status !== 'done').sort((a,b) => new Date(a.due)-new Date(b.due)).slice(0,4);
+  const el = document.getElementById('mini-assign-list');
+  const colors = { high:'#c0464a', medium:'#c9a84c', low:'#2a7f7f' };
+  el.innerHTML = pending.map(a => {
+    const [cls, label] = duePillClass(a.due);
+    return `
+      <div class="mini-assign" onclick="navigate('assignments', document.querySelectorAll('.nav-item')[1])">
+        <div class="mini-assign-dot" style="background:${colors[a.priority]}"></div>
+        <div class="mini-assign-info">
+          <div class="mini-assign-name">${a.title}</div>
+          <div class="mini-assign-sub">${a.subject}</div>
+        </div>
+        <span class="mini-assign-due ${cls}">${label}</span>
+      </div>
+    `;
+  }).join('');
+  const pendingCount = assignments.filter(a=>a.status==='todo').length;
+  document.getElementById('pending-badge').textContent = pendingCount;
+}
+
+function renderKanban() {
+  const cols = [
+    { key:'todo',        label:'To Do',      color:'var(--rose)',   bg:'rgba(192,70,74,0.1)' },
+    { key:'in-progress', label:'In Progress', color:'var(--gold)',   bg:'rgba(201,168,76,0.12)' },
+    { key:'done',        label:'Done',        color:'var(--teal)',   bg:'rgba(42,127,127,0.1)' },
+  ];
+  const search = (document.getElementById('assign-search')?.value || '').toLowerCase();
+  const el = document.getElementById('assign-kanban');
+  el.innerHTML = cols.map(col => {
+    let items = assignments.filter(a => {
+      const matchStatus = currentFilter === 'all' || a.status === currentFilter;
+      const matchSearch = !search || a.title.toLowerCase().includes(search) || a.subject.toLowerCase().includes(search);
+      return a.status === col.key && matchStatus && matchSearch;
+    });
+    const cards = items.map(a => {
+      const [dcls, dlabel] = duePillClass(a.due);
+      const overdue = dcls==='due-urgent' && new Date(a.due)<new Date() ? 'overdue' : (dcls==='due-urgent'?'today':'');
+      return `
+        <div class="assign-card" onclick="toggleDone(${a.id})">
+          <div class="assign-card-top">
+            <div class="assign-card-name">${a.title}</div>
+            <span class="assign-card-priority priority-${a.priority}">${a.priority}</span>
+          </div>
+          <div class="assign-card-subject">📚 ${a.subject}</div>
+          <div class="assign-card-footer">
+            <div class="assign-card-due ${overdue}">📅 ${a.due}</div>
+            <div class="assign-progress-mini">
+              <div class="assign-progress-bar-mini"><div class="assign-progress-fill-mini" style="width:${a.progress}%"></div></div>
+              <span class="assign-pct-mini">${a.progress}%</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('') || `<div style="text-align:center;color:var(--ink-light);font-size:0.82rem;padding:30px 10px;">No items here</div>`;
+
+    return `
+      <div class="kanban-col">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title">${col.label}</div>
+          <span class="kanban-count" style="background:${col.bg};color:${col.color}">${items.length}</span>
+        </div>
+        <div class="kanban-col-body">${cards}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleDone(id) {
+  const a = assignments.find(x=>x.id===id);
+  if (!a) return;
+  if (a.status === 'todo') { a.status = 'in-progress'; a.progress = 10; }
+  else if (a.status === 'in-progress') { a.status = 'done'; a.progress = 100; }
+  else { a.status = 'todo'; a.progress = 0; }
+  renderKanban();
+  renderMiniAssignments();
+  showToast(`"${a.title}" moved to ${a.status.replace('-',' ')}`, 'success');
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderKanban();
+}
+
+function filterAssignments() { renderKanban(); }
+
+function renderGrades() {
+  const tbody = document.getElementById('grades-tbody');
+  tbody.innerHTML = gradeData.map(g => `
+    <tr>
+      <td><strong>${g.course}</strong></td>
+      <td>${g.assigns}</td>
+      <td>${g.midterm}</td>
+      <td>${g.attend}</td>
+      <td><div class="grade-badge grade-${g.letter}">${g.grade}</div></td>
+      <td><span style="font-size:0.78rem;color:${g.letter==='C'?'var(--rose)':'var(--teal)'};font-weight:600;">${g.letter==='C'?'⚠ Needs attention':'✓ On track'}</span></td>
+    </tr>
+  `).join('');
+}
+
+function renderSchedule() {
+  const days = ['mon','tue','wed','thu','fri'];
+  const body = document.getElementById('schedule-body');
+  body.innerHTML = Object.entries(scheduleData).map(([time, row]) => `
+    <div class="schedule-row">
+      <div class="schedule-time">${time}</div>
+      ${days.map(d => {
+        const cls = row[d];
+        return `<div class="schedule-slot">${cls ? `
+          <div class="schedule-class" style="background:${cls.bg};color:${cls.col};">
+            <div class="schedule-class-name">${cls.n}</div>
+            <div class="schedule-class-room">${cls.r}</div>
+          </div>` : ''}</div>`;
+      }).join('')}
+    </div>
+  `).join('');
+}
+
+// ─── MODAL ───────────────────────────────────────────
+function openAddModal() {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('modal-due').value = today;
+  document.getElementById('modal-title').value = '';
+  document.getElementById('modal-notes').value = '';
+  document.getElementById('modal-overlay').classList.remove('hidden');
+  setTimeout(()=>document.getElementById('modal-title').focus(), 100);
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modal-overlay')) {
+    document.getElementById('modal-overlay').classList.add('hidden');
+  }
+}
+
+function addAssignment() {
+  const title = document.getElementById('modal-title').value.trim();
+  if (!title) { showToast('Please enter a title', 'error'); return; }
+  const a = {
+    id: nextId++,
+    title,
+    subject:  document.getElementById('modal-subject').value,
+    priority: document.getElementById('modal-priority').value,
+    status:   document.getElementById('modal-status').value,
+    due:      document.getElementById('modal-due').value || new Date().toISOString().split('T')[0],
+    progress: document.getElementById('modal-status').value === 'in-progress' ? 10 : 0,
+  };
+  assignments.unshift(a);
+  closeModal();
+  renderKanban();
+  renderMiniAssignments();
+  showToast(`"${title}" added!`, 'success');
+}
+
+// ─── SETTINGS ────────────────────────────────────────
+function settingsTab(tab, btn) {
+  ['profile','notifications','appearance','privacy'].forEach(t => {
+    const el = document.getElementById('settings-' + t);
+    if (el) el.classList.toggle('hidden', t !== tab);
   });
+  document.querySelectorAll('.settings-nav-item').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ─── TOAST ───────────────────────────────────────────
+function showToast(msg, type) {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = 'toast ' + (type||'');
+  const icons = { success:'✅', error:'❌', '':'ℹ️' };
+  toast.innerHTML = `<span>${icons[type]||'ℹ️'}</span> ${msg}`;
+  container.appendChild(toast);
+  setTimeout(() => { toast.style.opacity='0'; toast.style.transform='translateX(20px)'; toast.style.transition='all 0.3s'; setTimeout(()=>toast.remove(), 300); }, 3000);
+}
+
+// ─── KEYBOARD ────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
 });
 </script>
 </body>
