@@ -1,4 +1,3 @@
-cat > routes/courses.js << 'EOF'
 const express = require('express');
 const router = express.Router();
 
@@ -7,4 +6,3 @@ router.get('/', (req, res) => {
 });
 
 module.exports = router;
-EOF
