@@ -35,7 +35,6 @@
     overflow-x: hidden;
   }
 
-  /* ─── UTILITY ─────────────────────────────── */
   .hidden { display: none !important; }
 
   /* ─── LOGIN PAGE ──────────────────────────── */
@@ -172,9 +171,7 @@
     margin-bottom: 40px;
   }
 
-  .form-group {
-    margin-bottom: 22px;
-  }
+  .form-group { margin-bottom: 22px; }
 
   .form-group label {
     display: block;
@@ -260,10 +257,7 @@
   .login-divider::before { left: 0; }
   .login-divider::after  { right: 0; }
 
-  .login-demo {
-    display: flex;
-    gap: 10px;
-  }
+  .login-demo { display: flex; gap: 10px; }
 
   .btn-demo {
     flex: 1;
@@ -290,10 +284,7 @@
   }
 
   /* ─── APP SHELL ───────────────────────────── */
-  #app-shell {
-    display: flex;
-    min-height: 100vh;
-  }
+  #app-shell { display: flex; min-height: 100vh; }
 
   /* ─── SIDEBAR ─────────────────────────────── */
   .sidebar {
@@ -415,20 +406,135 @@
     font-weight: 700;
     color: #fff;
     flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
   }
 
-  .user-info { flex: 1; min-width: 0; }
-  .user-name { font-size: 0.85rem; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .user-role { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
-
-  .logout-btn {
-    background: none; border: none; cursor: pointer;
-    color: rgba(255,255,255,0.3);
-    font-size: 16px;
-    transition: color 0.2s;
-    padding: 4px;
+  /* ── USER DROPDOWN ─────────────────────────── */
+  .user-dropdown {
+    position: absolute;
+    bottom: 64px;
+    left: 14px;
+    width: calc(var(--sidebar-w) - 28px);
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    z-index: 200;
+    animation: slideUp 0.2s ease;
+    display: none;
   }
-  .logout-btn:hover { color: var(--rose-light); }
+
+  .user-dropdown.open { display: block; }
+
+  .dropdown-header {
+    padding: 16px 18px;
+    background: var(--warm);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .dropdown-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .dropdown-user-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dropdown-user-role {
+    font-size: 0.72rem;
+    color: var(--ink-light);
+    margin-top: 2px;
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 18px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-light);
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .dropdown-item:hover { background: var(--warm); color: var(--ink); }
+
+  .dropdown-item.danger { color: var(--rose); }
+  .dropdown-item.danger:hover { background: rgba(192,70,74,0.08); color: var(--rose); }
+
+  .dropdown-divider { height: 1px; background: var(--border); margin: 4px 0; }
+
+  /* ── TOPBAR AVATAR ────────────────────────── */
+  .topbar-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .topbar-avatar:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+  }
+
+  .topbar-avatar .online-dot {
+    position: absolute;
+    bottom: 1px; right: 1px;
+    width: 9px; height: 9px;
+    background: #22c55e;
+    border-radius: 50%;
+    border: 2px solid var(--surface);
+  }
+
+  /* ── TOPBAR PROFILE DROPDOWN ─────────────── */
+  .topbar-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 240px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    z-index: 300;
+    animation: slideUp 0.2s ease;
+    display: none;
+  }
+
+  .topbar-dropdown.open { display: block; }
+
+  .topbar-avatar-wrap { position: relative; }
 
   /* ─── MAIN CONTENT ────────────────────────── */
   .main-content {
@@ -485,10 +591,35 @@
     border: 2px solid var(--surface);
   }
 
-  .page-content {
-    flex: 1;
-    padding: 32px;
+  /* ── MOBILE TOPBAR HAMBURGER ─────────────── */
+  .topbar-hamburger {
+    display: none;
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--warm);
+    cursor: pointer;
+    align-items: center; justify-content: center;
+    font-size: 18px;
+    transition: background 0.2s;
+    flex-shrink: 0;
   }
+
+  .topbar-hamburger:hover { background: var(--gold-light); border-color: var(--gold); }
+
+  /* ── MOBILE SIDEBAR OVERLAY ──────────────── */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,46,0.4);
+    z-index: 99;
+    backdrop-filter: blur(2px);
+  }
+
+  .sidebar-overlay.open { display: block; }
+
+  .page-content { flex: 1; padding: 32px; }
 
   /* ─── PAGES ───────────────────────────────── */
   .page { display: none; animation: fadeIn 0.3s ease; }
@@ -532,11 +663,7 @@
 
   .welcome-text p { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
 
-  .welcome-date {
-    text-align: right;
-    position: relative;
-    z-index: 1;
-  }
+  .welcome-date { text-align: right; position: relative; z-index: 1; }
 
   .welcome-date .big-date {
     font-family: 'DM Serif Display', serif;
@@ -586,11 +713,7 @@
   .stat-change { font-size: 0.75rem; margin-top: 8px; color: var(--teal); font-weight: 500; }
   .stat-change.neg { color: var(--rose); }
 
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 22px;
-  }
+  .dashboard-grid { display: grid; grid-template-columns: 1fr 340px; gap: 22px; }
 
   .card {
     background: var(--surface);
@@ -608,33 +731,15 @@
     justify-content: space-between;
   }
 
-  .card-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.05rem;
-    color: var(--ink);
-  }
+  .card-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--ink); }
 
-  .card-action {
-    font-size: 0.8rem;
-    color: var(--teal);
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: 500;
-  }
+  .card-action { font-size: 0.8rem; color: var(--teal); cursor: pointer; text-decoration: none; font-weight: 500; }
 
   .card-body { padding: 20px 24px; }
 
-  /* ─── SUBJECT PROGRESS ────────────────────── */
   .subject-list { display: flex; flex-direction: column; gap: 16px; }
 
-  .subject-item {}
-
-  .subject-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
+  .subject-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 
   .subject-name { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
   .subject-pct  { font-size: 0.8rem; color: var(--ink-light); font-weight: 600; }
@@ -647,13 +752,8 @@
     border: 1px solid var(--border);
   }
 
-  .progress-fill {
-    height: 100%;
-    border-radius: 20px;
-    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  .progress-fill { height: 100%; border-radius: 20px; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
 
-  /* ─── MINI ASSIGNMENT LIST ────────────────── */
   .mini-assign-list { display: flex; flex-direction: column; gap: 12px; }
 
   .mini-assign {
@@ -670,29 +770,16 @@
 
   .mini-assign:hover { background: var(--gold-light); border-color: var(--gold); }
 
-  .mini-assign-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
+  .mini-assign-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
   .mini-assign-info { flex: 1; min-width: 0; }
   .mini-assign-name { font-size: 0.85rem; font-weight: 500; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mini-assign-sub  { font-size: 0.73rem; color: var(--ink-light); margin-top: 2px; }
 
-  .mini-assign-due {
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 20px;
-    flex-shrink: 0;
-  }
-
+  .mini-assign-due { font-size: 0.72rem; font-weight: 600; padding: 3px 8px; border-radius: 20px; flex-shrink: 0; }
   .due-urgent { background: rgba(192,70,74,0.12); color: var(--rose); }
   .due-soon   { background: rgba(201,168,76,0.15); color: #9a7a22; }
   .due-later  { background: rgba(42,127,127,0.12); color: var(--teal); }
 
-  /* ─── ANNOUNCEMENTS ───────────────────────── */
   .announcement-list { display: flex; flex-direction: column; gap: 14px; }
 
   .announcement {
@@ -707,20 +794,10 @@
   .announce-time  { font-size: 0.72rem; color: var(--ink-light); }
   .announce-body  { font-size: 0.82rem; color: var(--ink-light); line-height: 1.5; }
 
-  /* ─── ASSIGNMENTS PAGE ────────────────────── */
-  .assign-toolbar {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 22px;
-    flex-wrap: wrap;
-  }
+  /* ─── ASSIGNMENTS ─────────────────────────── */
+  .assign-toolbar { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
 
-  .search-box {
-    flex: 1;
-    min-width: 200px;
-    position: relative;
-  }
+  .search-box { flex: 1; min-width: 200px; position: relative; }
 
   .search-box input {
     width: 100%;
@@ -735,10 +812,7 @@
     transition: border-color 0.2s, box-shadow 0.2s;
   }
 
-  .search-box input:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
-  }
+  .search-box input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
 
   .search-box::before {
     content: '🔍';
@@ -763,11 +837,7 @@
     white-space: nowrap;
   }
 
-  .filter-btn:hover, .filter-btn.active {
-    background: var(--ink);
-    color: #fff;
-    border-color: var(--ink);
-  }
+  .filter-btn:hover, .filter-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
 
   .add-btn {
     padding: 10px 20px;
@@ -786,18 +856,9 @@
 
   .add-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
 
-  .assign-kanban {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
+  .assign-kanban { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
-  .kanban-col {
-    background: var(--warm);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    overflow: hidden;
-  }
+  .kanban-col { background: var(--warm); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
 
   .kanban-col-header {
     padding: 14px 18px;
@@ -808,20 +869,9 @@
     background: var(--surface);
   }
 
-  .kanban-col-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--ink);
-    flex: 1;
-  }
+  .kanban-col-title { font-size: 0.85rem; font-weight: 600; color: var(--ink); flex: 1; }
 
-  .kanban-count {
-    font-size: 0.75rem;
-    font-weight: 700;
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-  }
+  .kanban-count { font-size: 0.75rem; font-weight: 700; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
   .kanban-col-body { padding: 14px; display: flex; flex-direction: column; gap: 12px; min-height: 200px; }
 
@@ -835,95 +885,36 @@
     transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
   }
 
-  .assign-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-    border-color: var(--gold);
-  }
+  .assign-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--gold); }
 
   .assign-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
   .assign-card-name { font-size: 0.88rem; font-weight: 600; color: var(--ink); line-height: 1.3; }
-  .assign-card-priority {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 20px;
-    flex-shrink: 0;
-  }
+
+  .assign-card-priority { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; flex-shrink: 0; }
 
   .priority-high   { background: rgba(192,70,74,0.12); color: var(--rose); }
   .priority-medium { background: rgba(201,168,76,0.15); color: #9a7a22; }
   .priority-low    { background: rgba(42,127,127,0.12); color: var(--teal); }
 
-  .assign-card-subject {
-    font-size: 0.78rem;
-    color: var(--ink-light);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
+  .assign-card-subject { font-size: 0.78rem; color: var(--ink-light); margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
 
   .assign-card-footer { display: flex; align-items: center; justify-content: space-between; }
 
-  .assign-card-due {
-    font-size: 0.75rem;
-    color: var(--ink-light);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
+  .assign-card-due { font-size: 0.75rem; color: var(--ink-light); display: flex; align-items: center; gap: 4px; }
   .assign-card-due.overdue { color: var(--rose); font-weight: 600; }
   .assign-card-due.today   { color: #9a7a22; font-weight: 600; }
 
-  .assign-progress-mini {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .assign-progress-bar-mini {
-    width: 50px; height: 4px;
-    background: var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-  }
-
-  .assign-progress-fill-mini {
-    height: 100%;
-    background: var(--teal);
-    border-radius: 20px;
-  }
-
+  .assign-progress-mini { display: flex; align-items: center; gap: 6px; }
+  .assign-progress-bar-mini { width: 50px; height: 4px; background: var(--border); border-radius: 20px; overflow: hidden; }
+  .assign-progress-fill-mini { height: 100%; background: var(--teal); border-radius: 20px; }
   .assign-pct-mini { font-size: 0.72rem; color: var(--ink-light); }
 
-  /* ─── GRADES PAGE ─────────────────────────── */
-  .grades-summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-bottom: 24px;
-  }
+  /* ─── GRADES ──────────────────────────────── */
+  .grades-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 24px; }
 
-  .grade-summary-card {
-    background: var(--surface);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    padding: 24px;
-    text-align: center;
-    box-shadow: var(--shadow);
-  }
+  .grade-summary-card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 24px; text-align: center; box-shadow: var(--shadow); }
 
-  .gpa-big {
-    font-family: 'DM Serif Display', serif;
-    font-size: 3.5rem;
-    color: var(--ink);
-    line-height: 1;
-  }
-
+  .gpa-big { font-family: 'DM Serif Display', serif; font-size: 3.5rem; color: var(--ink); line-height: 1; }
   .gpa-big span { font-size: 1.5rem; color: var(--ink-light); }
   .gpa-label { font-size: 0.8rem; color: var(--ink-light); margin-top: 8px; }
   .gpa-trend { font-size: 0.78rem; color: var(--teal); margin-top: 6px; font-weight: 500; }
@@ -932,332 +923,104 @@
 
   .grade-table { width: 100%; border-collapse: collapse; }
 
-  .grade-table th {
-    background: var(--warm);
-    padding: 14px 20px;
-    text-align: left;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    border-bottom: 1px solid var(--border);
-  }
+  .grade-table th { background: var(--warm); padding: 14px 20px; text-align: left; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-light); border-bottom: 1px solid var(--border); }
 
-  .grade-table td {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.88rem;
-    color: var(--ink);
-  }
+  .grade-table td { padding: 16px 20px; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--ink); }
 
   .grade-table tr:last-child td { border-bottom: none; }
   .grade-table tr:hover td { background: var(--warm); }
 
-  .grade-badge {
-    display: inline-block;
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem;
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
-  }
+  .grade-badge { display: inline-flex; font-family: 'DM Serif Display', serif; font-size: 1.1rem; width: 40px; height: 40px; border-radius: 10px; align-items: center; justify-content: center; font-weight: 700; }
 
   .grade-A { background: rgba(42,127,127,0.12); color: var(--teal); }
   .grade-B { background: rgba(201,168,76,0.15); color: #9a7a22; }
   .grade-C { background: rgba(192,70,74,0.12); color: var(--rose); }
 
-  /* ─── SCHEDULE PAGE ───────────────────────── */
-  .schedule-grid-wrap {
-    background: var(--surface);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-  }
+  /* ─── SCHEDULE ────────────────────────────── */
+  .schedule-grid-wrap { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
 
-  .schedule-days {
-    display: grid;
-    grid-template-columns: 80px repeat(5, 1fr);
-    border-bottom: 1px solid var(--border);
-    background: var(--warm);
-  }
+  .schedule-days { display: grid; grid-template-columns: 80px repeat(5, 1fr); border-bottom: 1px solid var(--border); background: var(--warm); }
 
-  .schedule-day-header {
-    padding: 14px 10px;
-    text-align: center;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--ink-light);
-  }
-
+  .schedule-day-header { padding: 14px 10px; text-align: center; font-size: 0.8rem; font-weight: 600; color: var(--ink-light); }
   .schedule-day-header.today { color: var(--gold); }
 
-  .schedule-body {
-    display: flex;
-    flex-direction: column;
-  }
+  .schedule-body { display: flex; flex-direction: column; }
 
-  .schedule-row {
-    display: grid;
-    grid-template-columns: 80px repeat(5, 1fr);
-    border-bottom: 1px solid var(--border);
-    min-height: 56px;
-  }
-
+  .schedule-row { display: grid; grid-template-columns: 80px repeat(5, 1fr); border-bottom: 1px solid var(--border); min-height: 56px; }
   .schedule-row:last-child { border-bottom: none; }
 
-  .schedule-time {
-    padding: 8px 12px;
-    font-size: 0.75rem;
-    color: var(--ink-light);
-    border-right: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-  }
+  .schedule-time { padding: 8px 12px; font-size: 0.75rem; color: var(--ink-light); border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-weight: 500; }
 
-  .schedule-slot {
-    padding: 6px;
-    border-right: 1px solid var(--border);
-    position: relative;
-  }
-
+  .schedule-slot { padding: 6px; border-right: 1px solid var(--border); position: relative; }
   .schedule-slot:last-child { border-right: none; }
 
-  .schedule-class {
-    border-radius: 8px;
-    padding: 8px 10px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
+  .schedule-class { border-radius: 8px; padding: 8px 10px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
   .schedule-class-name { font-size: 0.78rem; font-weight: 600; color: inherit; line-height: 1.2; }
   .schedule-class-room { font-size: 0.68rem; margin-top: 2px; opacity: 0.75; }
 
-  /* ─── SETTINGS PAGE ───────────────────────── */
+  /* ─── SETTINGS ────────────────────────────── */
   .settings-grid { display: grid; grid-template-columns: 220px 1fr; gap: 24px; }
 
-  .settings-sidebar {
-    background: var(--surface);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    padding: 12px;
-    box-shadow: var(--shadow);
-    height: fit-content;
-  }
+  .settings-sidebar { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 12px; box-shadow: var(--shadow); height: fit-content; }
 
-  .settings-nav-item {
-    padding: 11px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--ink-light);
-    margin-bottom: 3px;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border: none;
-    background: none;
-    width: 100%;
-    text-align: left;
-  }
+  .settings-nav-item { padding: 11px 14px; border-radius: 10px; cursor: pointer; font-size: 0.88rem; font-weight: 500; color: var(--ink-light); margin-bottom: 3px; transition: all 0.15s; display: flex; align-items: center; gap: 10px; border: none; background: none; width: 100%; text-align: left; }
 
   .settings-nav-item:hover { background: var(--warm); color: var(--ink); }
   .settings-nav-item.active { background: var(--warm); color: var(--ink); font-weight: 600; }
 
-  .settings-content {
-    background: var(--surface);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    padding: 28px;
-  }
+  .settings-content { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); padding: 28px; }
 
-  .settings-section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.15rem;
-    margin-bottom: 20px;
-    color: var(--ink);
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--border);
-  }
+  .settings-section-title { font-family: 'DM Serif Display', serif; font-size: 1.15rem; margin-bottom: 20px; color: var(--ink); padding-bottom: 14px; border-bottom: 1px solid var(--border); }
 
-  .settings-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
+  .settings-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); }
   .settings-row:last-child { border-bottom: none; }
 
   .settings-label { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
   .settings-desc  { font-size: 0.78rem; color: var(--ink-light); margin-top: 2px; }
 
-  .toggle {
-    position: relative;
-    width: 44px; height: 24px;
-    flex-shrink: 0;
-  }
-
+  .toggle { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
   .toggle input { opacity: 0; width: 0; height: 0; }
-
-  .toggle-slider {
-    position: absolute;
-    inset: 0;
-    background: var(--border);
-    border-radius: 24px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .toggle-slider::before {
-    content: '';
-    position: absolute;
-    width: 18px; height: 18px;
-    left: 3px; top: 3px;
-    background: #fff;
-    border-radius: 50%;
-    transition: transform 0.2s;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-  }
-
+  .toggle-slider { position: absolute; inset: 0; background: var(--border); border-radius: 24px; cursor: pointer; transition: background 0.2s; }
+  .toggle-slider::before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
   .toggle input:checked + .toggle-slider { background: var(--teal); }
   .toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
 
   /* ─── MODAL ───────────────────────────────── */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(26,26,46,0.5);
-    backdrop-filter: blur(4px);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    animation: fadeIn 0.2s ease;
-  }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(26,26,46,0.5); backdrop-filter: blur(4px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.2s ease; }
 
-  .modal {
-    background: var(--surface);
-    border-radius: var(--radius);
-    width: 100%;
-    max-width: 480px;
-    box-shadow: var(--shadow-lg);
-    animation: slideUp 0.3s ease;
-    overflow: hidden;
-  }
+  .modal { background: var(--surface); border-radius: var(--radius); width: 100%; max-width: 480px; box-shadow: var(--shadow-lg); animation: slideUp 0.3s ease; overflow: hidden; }
 
-  .modal-header {
-    padding: 22px 24px 18px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  .modal-header { padding: 22px 24px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
 
   .modal-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); }
 
-  .modal-close {
-    width: 30px; height: 30px;
-    border-radius: 8px;
-    border: 1.5px solid var(--border);
-    background: var(--warm);
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-    transition: background 0.2s;
-  }
-
+  .modal-close { width: 30px; height: 30px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--warm); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: background 0.2s; }
   .modal-close:hover { background: var(--rose-light); color: #fff; border-color: var(--rose); }
 
   .modal-body { padding: 24px; }
   .modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; }
 
-  .btn-sec {
-    padding: 10px 20px;
-    background: var(--warm);
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--ink);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
+  .btn-sec { padding: 10px 20px; background: var(--warm); border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; color: var(--ink); cursor: pointer; transition: all 0.2s; }
   .btn-sec:hover { background: var(--border); }
 
-  .btn-submit {
-    padding: 10px 24px;
-    background: var(--ink);
-    border: none;
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
+  .btn-submit { padding: 10px 24px; background: var(--ink); border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600; color: #fff; cursor: pointer; transition: all 0.2s; }
   .btn-submit:hover { background: var(--teal); }
 
   .modal-form-group { margin-bottom: 18px; }
   .modal-form-group label { display: block; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-light); margin-bottom: 7px; }
   .modal-form-group input,
   .modal-form-group select,
-  .modal-form-group textarea {
-    width: 100%;
-    padding: 11px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    color: var(--ink);
-    background: var(--cream);
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    resize: none;
-  }
+  .modal-form-group textarea { width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--ink); background: var(--cream); outline: none; transition: border-color 0.2s, box-shadow 0.2s; resize: none; }
   .modal-form-group input:focus,
   .modal-form-group select:focus,
-  .modal-form-group textarea:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
-  }
+  .modal-form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
 
   .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-  /* ─── NOTIFICATIONS ───────────────────────── */
+  /* ─── TOASTS ──────────────────────────────── */
   .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 300; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
 
-  .toast {
-    background: var(--ink);
-    color: #fff;
-    padding: 14px 18px;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    box-shadow: var(--shadow-lg);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 260px;
-    animation: toastIn 0.3s ease;
-    pointer-events: auto;
-    border-left: 4px solid var(--gold);
-  }
+  .toast { background: var(--ink); color: #fff; padding: 14px 18px; border-radius: 12px; font-size: 0.85rem; font-weight: 500; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 10px; min-width: 260px; animation: toastIn 0.3s ease; pointer-events: auto; border-left: 4px solid var(--gold); }
 
   @keyframes toastIn {
     from { opacity:0; transform: translateX(20px); }
@@ -1277,17 +1040,21 @@
 
   @media (max-width: 768px) {
     :root { --sidebar-w: 0px; }
-    .sidebar { transform: translateX(-100%); }
-    .sidebar.open { transform: translateX(0); width: 260px; }
+    .sidebar { transform: translateX(-260px); width: 260px; }
+    .sidebar.open { transform: translateX(0); }
     .main-content { margin-left: 0; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .assign-kanban { grid-template-columns: 1fr; }
     .settings-grid { grid-template-columns: 1fr; }
     .login-art { display: none; }
     .login-form-wrap { width: 100%; }
+    .topbar-hamburger { display: flex; }
+    .page-content { padding: 20px 16px; }
+    .welcome-banner { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px; }
+    .welcome-date { text-align: left; }
+    .user-dropdown { width: calc(260px - 28px); }
   }
 
-  /* ─── SCROLL ──────────────────────────────── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -1340,6 +1107,9 @@
 <!-- ─── APP SHELL ──────────────────────────────────── -->
 <div id="app-shell" class="hidden">
 
+  <!-- Sidebar overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
   <!-- Sidebar -->
   <nav class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -1366,8 +1136,34 @@
         <span class="nav-icon">⚙️</span> Settings
       </button>
     </div>
-    <div class="sidebar-user">
-      <div class="user-avatar" id="user-avatar">JM</div>
+
+    <!-- Sidebar user section with dropdown -->
+    <div class="sidebar-user" style="position:relative;">
+      <!-- User dropdown -->
+      <div class="user-dropdown" id="sidebar-dropdown">
+        <div class="dropdown-header">
+          <div class="dropdown-avatar" id="dropdown-avatar">JM</div>
+          <div>
+            <div class="dropdown-user-name" id="dropdown-name">Joel Ndiba Mwaura</div>
+            <div class="dropdown-user-role">Computer Science · Year 2</div>
+          </div>
+        </div>
+        <button class="dropdown-item" onclick="navigate('settings', document.querySelectorAll('.nav-item')[4]); closeSidebarDropdown()">
+          ⚙️ Settings
+        </button>
+        <button class="dropdown-item" onclick="showToast('Edit profile coming soon', ''); closeSidebarDropdown()">
+          ✏️ Edit Profile
+        </button>
+        <button class="dropdown-item" onclick="showToast('Help center opening...', ''); closeSidebarDropdown()">
+          ❓ Help & Support
+        </button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item danger" onclick="doLogout()">
+          ⏻ Sign Out
+        </button>
+      </div>
+
+      <div class="user-avatar" id="user-avatar" onclick="toggleSidebarDropdown()" title="Account menu">JM</div>
       <div class="user-info">
         <div class="user-name" id="user-name-display">Joel Mwaura</div>
         <div class="user-role">Computer Science • Year 2</div>
@@ -1379,11 +1175,44 @@
   <!-- Main -->
   <div class="main-content">
     <header class="topbar">
+      <!-- Hamburger (mobile only) -->
+      <button class="topbar-hamburger" id="topbar-hamburger" onclick="openSidebar()" aria-label="Open menu">☰</button>
+
       <div class="topbar-title" id="page-title">Dashboard</div>
+
       <div class="topbar-actions">
         <button class="topbar-btn topbar-notif" title="Notifications" onclick="showToast('You have 3 new announcements', 'success')">🔔</button>
         <button class="topbar-btn" title="Messages" onclick="showToast('Messaging coming soon!', '')">💬</button>
-        <button class="topbar-btn" title="Help" onclick="showToast('Help center opening...', '')">❓</button>
+
+        <!-- Topbar avatar with dropdown -->
+        <div class="topbar-avatar-wrap">
+          <div class="topbar-avatar" id="topbar-avatar" onclick="toggleTopbarDropdown()" title="Account menu">
+            <span id="topbar-avatar-initials">JM</span>
+            <span class="online-dot"></span>
+          </div>
+          <div class="topbar-dropdown" id="topbar-dropdown">
+            <div class="dropdown-header">
+              <div class="dropdown-avatar" id="topbar-dropdown-avatar">JM</div>
+              <div>
+                <div class="dropdown-user-name" id="topbar-dropdown-name">Joel Ndiba Mwaura</div>
+                <div class="dropdown-user-role" id="topbar-dropdown-email">joel.mwaura@university.edu</div>
+              </div>
+            </div>
+            <button class="dropdown-item" onclick="navigate('settings', document.querySelectorAll('.nav-item')[4]); closeTopbarDropdown()">
+              ⚙️ Settings
+            </button>
+            <button class="dropdown-item" onclick="showToast('Edit profile coming soon', ''); closeTopbarDropdown()">
+              ✏️ Edit Profile
+            </button>
+            <button class="dropdown-item" onclick="showToast('Help center opening...', ''); closeTopbarDropdown()">
+              ❓ Help & Support
+            </button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item danger" onclick="doLogout()">
+              ⏻ Sign Out
+            </button>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -1430,7 +1259,6 @@
         </div>
 
         <div class="dashboard-grid">
-          <!-- Subject Progress -->
           <div class="card">
             <div class="card-header">
               <div class="card-title">Course Progress</div>
@@ -1441,9 +1269,7 @@
             </div>
           </div>
 
-          <!-- Right column -->
           <div style="display:flex;flex-direction:column;gap:22px;">
-            <!-- Upcoming Assignments -->
             <div class="card">
               <div class="card-header">
                 <div class="card-title">Due Soon</div>
@@ -1453,8 +1279,6 @@
                 <div class="mini-assign-list" id="mini-assign-list"></div>
               </div>
             </div>
-
-            <!-- Announcements -->
             <div class="card">
               <div class="card-header">
                 <div class="card-title">Announcements</div>
@@ -1516,7 +1340,6 @@
             <div class="gpa-trend" style="color:var(--rose)">⚠ 1 needs attention</div>
           </div>
         </div>
-
         <div class="grade-table-wrap">
           <table class="grade-table">
             <thead>
@@ -1562,11 +1385,11 @@
             <div id="settings-profile">
               <div class="settings-section-title">Profile Settings</div>
               <div class="settings-row">
-                <div><div class="settings-label">Full Name</div><div class="settings-desc">Joel Ndiba Mwaura</div></div>
+                <div><div class="settings-label">Full Name</div><div class="settings-desc" id="settings-full-name">Joel Ndiba Mwaura</div></div>
                 <button class="btn-sec" onclick="showToast('Edit profile coming soon', '')">Edit</button>
               </div>
               <div class="settings-row">
-                <div><div class="settings-label">Email</div><div class="settings-desc">joel.mwaura@university.edu</div></div>
+                <div><div class="settings-label">Email</div><div class="settings-desc" id="settings-email">joel.mwaura@university.edu</div></div>
                 <button class="btn-sec" onclick="showToast('Email change coming soon', '')">Change</button>
               </div>
               <div class="settings-row">
@@ -1623,9 +1446,9 @@
         </div>
       </div>
 
-    </div><!-- /page-content -->
-  </div><!-- /main-content -->
-</div><!-- /app-shell -->
+    </div>
+  </div>
+</div>
 
 <!-- ─── MODAL ────────────────────────────────── -->
 <div class="modal-overlay hidden" id="modal-overlay" onclick="closeModal(event)">
@@ -1689,12 +1512,12 @@
 <div class="toast-container" id="toast-container"></div>
 
 <script>
-// ─── DATA ────────────────────────────────────────────
+// ─── DATA ───────────────────────────────────────────
 const USERS = {
-  'student': { pass: 'demo', name: 'Joel Ndiba Mwaura', initials: 'JM' },
-  'happiness': { pass: '123', name: 'Happiness Godwin', initials: 'HG' },
-  'ethan': { pass: '123', name: 'Ethan Bray', initials: 'EB' },
-  'guest': { pass: 'guest', name: 'Guest User', initials: 'GU' },
+  'student':   { pass: 'demo',   name: 'Joel Ndiba Mwaura',  initials: 'JM', email: 'joel.mwaura@university.edu' },
+  'happiness': { pass: '123',    name: 'Happiness Godwin',   initials: 'HG', email: 'happiness.godwin@university.edu' },
+  'ethan':     { pass: '123',    name: 'Ethan Bray',         initials: 'EB', email: 'ethan.bray@university.edu' },
+  'guest':     { pass: 'guest',  name: 'Guest User',         initials: 'GU', email: 'guest@university.edu' },
 };
 
 const subjects = [
@@ -1706,21 +1529,21 @@ const subjects = [
 ];
 
 const gradeData = [
-  { course: 'Data Structures',  assigns: '8/10', midterm: '84%', attend: '92%', grade: 'B+', letter: 'B' },
-  { course: 'Algorithms',       assigns: '7/10', midterm: '78%', attend: '88%', grade: 'B',  letter: 'B' },
-  { course: 'Database Systems', assigns: '9/10', midterm: '91%', attend: '95%', grade: 'A-', letter: 'A' },
-  { course: 'Web Development',  assigns: '6/10', midterm: '70%', attend: '80%', grade: 'C+', letter: 'C' },
-  { course: 'Discrete Math',    assigns: '5/10', midterm: '62%', attend: '75%', grade: 'C',  letter: 'C' },
-  { course: 'Networks',         assigns: '10/10','midterm': '95%', attend: '98%', grade: 'A', letter: 'A' },
+  { course: 'Data Structures',  assigns: '8/10',  midterm: '84%', attend: '92%', grade: 'B+', letter: 'B' },
+  { course: 'Algorithms',       assigns: '7/10',  midterm: '78%', attend: '88%', grade: 'B',  letter: 'B' },
+  { course: 'Database Systems', assigns: '9/10',  midterm: '91%', attend: '95%', grade: 'A-', letter: 'A' },
+  { course: 'Web Development',  assigns: '6/10',  midterm: '70%', attend: '80%', grade: 'C+', letter: 'C' },
+  { course: 'Discrete Math',    assigns: '5/10',  midterm: '62%', attend: '75%', grade: 'C',  letter: 'C' },
+  { course: 'Networks',         assigns: '10/10', midterm: '95%', attend: '98%', grade: 'A',  letter: 'A' },
 ];
 
 let assignments = [
-  { id:1, title:'Binary Search Tree Implementation', subject:'Data Structures', priority:'high',   status:'todo',        due:'2026-05-17', progress:0 },
-  { id:2, title:'Sorting Algorithms Analysis',       subject:'Algorithms',       priority:'high',   status:'todo',        due:'2026-05-18', progress:0 },
-  { id:3, title:'ER Diagram Design',                 subject:'Database Systems', priority:'medium', status:'todo',        due:'2026-05-20', progress:0 },
-  { id:4, title:'REST API Documentation',            subject:'Web Development',  priority:'medium', status:'in-progress', due:'2026-05-22', progress:40 },
-  { id:5, title:'Graph Theory Problem Set',          subject:'Discrete Math',    priority:'low',    status:'in-progress', due:'2026-05-25', progress:25 },
-  { id:6, title:'Network Topology Lab Report',       subject:'Networks',         priority:'medium', status:'in-progress', due:'2026-05-24', progress:70 },
+  { id:1, title:'Binary Search Tree Implementation', subject:'Data Structures', priority:'high',   status:'todo',        due:'2026-05-17', progress:0   },
+  { id:2, title:'Sorting Algorithms Analysis',       subject:'Algorithms',       priority:'high',   status:'todo',        due:'2026-05-18', progress:0   },
+  { id:3, title:'ER Diagram Design',                 subject:'Database Systems', priority:'medium', status:'todo',        due:'2026-05-20', progress:0   },
+  { id:4, title:'REST API Documentation',            subject:'Web Development',  priority:'medium', status:'in-progress', due:'2026-05-22', progress:40  },
+  { id:5, title:'Graph Theory Problem Set',          subject:'Discrete Math',    priority:'low',    status:'in-progress', due:'2026-05-25', progress:25  },
+  { id:6, title:'Network Topology Lab Report',       subject:'Networks',         priority:'medium', status:'in-progress', due:'2026-05-24', progress:70  },
   { id:7, title:'SQL Query Optimization',            subject:'Database Systems', priority:'low',    status:'done',        due:'2026-05-12', progress:100 },
   { id:8, title:'HTML/CSS Portfolio Page',           subject:'Web Development',  priority:'medium', status:'done',        due:'2026-05-10', progress:100 },
   { id:9, title:'Stack & Queue Exercises',           subject:'Data Structures',  priority:'high',   status:'done',        due:'2026-05-09', progress:100 },
@@ -1730,55 +1553,80 @@ let currentFilter = 'all';
 let nextId = 10;
 
 const scheduleData = {
-  '08:00': { mon: null, tue: {n:'Data Structures',c:'CS201',r:'Room 3A',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'}, wed: null, thu: {n:'Data Structures',c:'CS201',r:'Room 3A',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'}, fri: null },
-  '09:00': { mon: null, tue: null, wed: {n:'Algorithms',c:'CS301',r:'Room 1B',bg:'rgba(42,127,127,0.15)',col:'var(--teal)'}, thu: null, fri: {n:'Algorithms',c:'CS301',r:'Room 1B',bg:'rgba(42,127,127,0.15)',col:'var(--teal)'} },
-  '10:00': { mon: {n:'Database Systems',c:'CS305',r:'Lab 2',bg:'rgba(192,70,74,0.12)',col:'var(--rose)'}, tue: null, wed: {n:'Database Systems',c:'CS305',r:'Lab 2',bg:'rgba(192,70,74,0.12)',col:'var(--rose)'}, thu: null, fri: null },
-  '11:00': { mon: null, tue: {n:'Web Development',c:'CS401',r:'Room 5C',bg:'rgba(91,141,239,0.15)',col:'#3a6fe0'}, wed: null, thu: {n:'Web Development',c:'CS401',r:'Room 5C',bg:'rgba(91,141,239,0.15)',col:'#3a6fe0'}, fri: null },
-  '12:00': { mon: null, tue: null, wed: null, thu: null, fri: null },
-  '13:00': { mon: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'}, tue: null, wed: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'}, thu: null, fri: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'} },
-  '14:00': { mon: null, tue: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, wed: null, thu: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, fri: null },
-  '15:00': { mon: null, tue: null, wed: null, thu: null, fri: {n:'Lab Session',c:'CS-LAB',r:'Lab 1',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'} },
+  '08:00': { mon:null, tue:{n:'Data Structures',c:'CS201',r:'Room 3A',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'}, wed:null, thu:{n:'Data Structures',c:'CS201',r:'Room 3A',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'}, fri:null },
+  '09:00': { mon:null, tue:null, wed:{n:'Algorithms',c:'CS301',r:'Room 1B',bg:'rgba(42,127,127,0.15)',col:'var(--teal)'}, thu:null, fri:{n:'Algorithms',c:'CS301',r:'Room 1B',bg:'rgba(42,127,127,0.15)',col:'var(--teal)'} },
+  '10:00': { mon:{n:'Database Systems',c:'CS305',r:'Lab 2',bg:'rgba(192,70,74,0.12)',col:'var(--rose)'}, tue:null, wed:{n:'Database Systems',c:'CS305',r:'Lab 2',bg:'rgba(192,70,74,0.12)',col:'var(--rose)'}, thu:null, fri:null },
+  '11:00': { mon:null, tue:{n:'Web Development',c:'CS401',r:'Room 5C',bg:'rgba(91,141,239,0.15)',col:'#3a6fe0'}, wed:null, thu:{n:'Web Development',c:'CS401',r:'Room 5C',bg:'rgba(91,141,239,0.15)',col:'#3a6fe0'}, fri:null },
+  '12:00': { mon:null, tue:null, wed:null, thu:null, fri:null },
+  '13:00': { mon:{n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'}, tue:null, wed:{n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'}, thu:null, fri:{n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'} },
+  '14:00': { mon:null, tue:{n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, wed:null, thu:{n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, fri:null },
+  '15:00': { mon:null, tue:null, wed:null, thu:null, fri:{n:'Lab Session',c:'CS-LAB',r:'Lab 1',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'} },
 };
 
 // ─── AUTH ────────────────────────────────────────────
+let currentUser = null;
+
 function doLogin() {
-  const u = document.getElementById('username-input').value.trim().toLowerCase().replace('@university.edu','').replace(/\..*$/,'');
+  const u = document.getElementById('username-input').value.trim().toLowerCase()
+    .replace('@university.edu','').replace(/\..*$/,'');
   const p = document.getElementById('password-input').value;
   const errEl = document.getElementById('login-error');
 
-  const match = Object.entries(USERS).find(([key,val]) => (key === u || u.startsWith(key.split('.')[0])) && val.pass === p);
+  const match = Object.entries(USERS).find(([key, val]) =>
+    (key === u || u.startsWith(key.split('.')[0])) && val.pass === p
+  );
+
   if (match || (u && p === 'scholar2026')) {
-    const user = match ? match[1] : { name: 'Student User', initials: 'SU' };
+    const user = match ? match[1] : { name: 'Student User', initials: 'SU', email: 'student@university.edu' };
     loginSuccess(user);
   } else {
     errEl.textContent = 'Invalid credentials. Try "student" / "demo"';
     document.getElementById('password-input').style.borderColor = 'var(--rose)';
-    setTimeout(() => { errEl.textContent=''; document.getElementById('password-input').style.borderColor=''; }, 3000);
+    setTimeout(() => { errEl.textContent = ''; document.getElementById('password-input').style.borderColor = ''; }, 3000);
   }
 }
 
 function quickLogin(type) {
-  const u = USERS[type] || USERS.student;
-  loginSuccess(u);
+  loginSuccess(USERS[type] || USERS.student);
 }
 
 function loginSuccess(user) {
+  currentUser = user;
   document.getElementById('login-page').classList.add('hidden');
   document.getElementById('app-shell').classList.remove('hidden');
-  document.getElementById('user-name-display').textContent = user.name;
+
+  // Sidebar user info
+  document.getElementById('user-name-display').textContent = user.name.split(' ').slice(0,2).join(' ');
   document.getElementById('user-avatar').textContent = user.initials;
-  const first = user.name.split(' ')[0];
-  document.getElementById('first-name').textContent = first;
+
+  // Sidebar dropdown
+  document.getElementById('dropdown-avatar').textContent = user.initials;
+  document.getElementById('dropdown-name').textContent = user.name;
+
+  // Topbar avatar
+  document.getElementById('topbar-avatar-initials').textContent = user.initials;
+  document.getElementById('topbar-dropdown-avatar').textContent = user.initials;
+  document.getElementById('topbar-dropdown-name').textContent = user.name;
+  document.getElementById('topbar-dropdown-email').textContent = user.email;
+
+  // Welcome + settings
+  document.getElementById('first-name').textContent = user.name.split(' ')[0];
+  document.getElementById('settings-full-name').textContent = user.name;
+  document.getElementById('settings-email').textContent = user.email;
+
   initDate();
   renderAll();
-  showToast(`Welcome back, ${first}! 👋`, 'success');
+  showToast(`Welcome back, ${user.name.split(' ')[0]}! 👋`, 'success');
 }
 
 function doLogout() {
+  currentUser = null;
   document.getElementById('app-shell').classList.add('hidden');
   document.getElementById('login-page').classList.remove('hidden');
   document.getElementById('username-input').value = '';
   document.getElementById('password-input').value = '';
+  closeSidebarDropdown();
+  closeTopbarDropdown();
 }
 
 document.getElementById('password-input').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
@@ -1792,9 +1640,53 @@ function navigate(page, btn) {
   if (btn) btn.classList.add('active');
   const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades & Reports', schedule:'Class Schedule', settings:'Settings' };
   document.getElementById('page-title').textContent = titles[page] || page;
+  closeSidebar();
 }
 
-// ─── DATE ────────────────────────────────────────────
+// ─── MOBILE SIDEBAR ───────────────────────────────────
+function openSidebar() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebar-overlay').classList.add('open');
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('open');
+}
+
+// ─── DROPDOWNS ────────────────────────────────────────
+function toggleSidebarDropdown() {
+  document.getElementById('sidebar-dropdown').classList.toggle('open');
+}
+
+function closeSidebarDropdown() {
+  document.getElementById('sidebar-dropdown').classList.remove('open');
+}
+
+function toggleTopbarDropdown() {
+  document.getElementById('topbar-dropdown').classList.toggle('open');
+}
+
+function closeTopbarDropdown() {
+  document.getElementById('topbar-dropdown').classList.remove('open');
+}
+
+// Close dropdowns on outside click
+document.addEventListener('click', (e) => {
+  const sidebarDrop = document.getElementById('sidebar-dropdown');
+  const userAvatar  = document.getElementById('user-avatar');
+  if (sidebarDrop && !sidebarDrop.contains(e.target) && !userAvatar.contains(e.target)) {
+    closeSidebarDropdown();
+  }
+
+  const topbarDrop  = document.getElementById('topbar-dropdown');
+  const topbarAvatar = document.getElementById('topbar-avatar');
+  if (topbarDrop && !topbarDrop.contains(e.target) && !topbarAvatar.contains(e.target)) {
+    closeTopbarDropdown();
+  }
+});
+
+// ─── DATE ─────────────────────────────────────────────
 function initDate() {
   const now = new Date();
   const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -1803,7 +1695,7 @@ function initDate() {
   document.getElementById('month-str').textContent = `${months[now.getMonth()]} ${now.getFullYear()} · ${days[now.getDay()]}`;
 }
 
-// ─── RENDER ──────────────────────────────────────────
+// ─── RENDER ───────────────────────────────────────────
 function renderAll() {
   renderSubjectProgress();
   renderMiniAssignments();
@@ -1835,10 +1727,10 @@ function renderSubjectProgress() {
 function duePillClass(due) {
   const d = new Date(due), now = new Date();
   const diff = Math.ceil((d - now) / 86400000);
-  if (diff < 0)  return ['due-urgent', '⚠ Overdue'];
+  if (diff < 0)   return ['due-urgent', '⚠ Overdue'];
   if (diff === 0) return ['due-urgent', 'Today'];
   if (diff === 1) return ['due-soon', 'Tomorrow'];
-  if (diff <= 3) return ['due-soon', `${diff}d`];
+  if (diff <= 3)  return ['due-soon', `${diff}d`];
   return ['due-later', `${diff}d`];
 }
 
@@ -1859,15 +1751,14 @@ function renderMiniAssignments() {
       </div>
     `;
   }).join('');
-  const pendingCount = assignments.filter(a=>a.status==='todo').length;
-  document.getElementById('pending-badge').textContent = pendingCount;
+  document.getElementById('pending-badge').textContent = assignments.filter(a => a.status==='todo').length;
 }
 
 function renderKanban() {
   const cols = [
-    { key:'todo',        label:'To Do',      color:'var(--rose)',   bg:'rgba(192,70,74,0.1)' },
-    { key:'in-progress', label:'In Progress', color:'var(--gold)',   bg:'rgba(201,168,76,0.12)' },
-    { key:'done',        label:'Done',        color:'var(--teal)',   bg:'rgba(42,127,127,0.1)' },
+    { key:'todo',        label:'To Do',       color:'var(--rose)', bg:'rgba(192,70,74,0.1)'   },
+    { key:'in-progress', label:'In Progress',  color:'var(--gold)', bg:'rgba(201,168,76,0.12)' },
+    { key:'done',        label:'Done',         color:'var(--teal)', bg:'rgba(42,127,127,0.1)'  },
   ];
   const search = (document.getElementById('assign-search')?.value || '').toLowerCase();
   const el = document.getElementById('assign-kanban');
@@ -1923,7 +1814,7 @@ function toggleDone(id) {
 
 function setFilter(f, btn) {
   currentFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderKanban();
 }
@@ -1931,8 +1822,7 @@ function setFilter(f, btn) {
 function filterAssignments() { renderKanban(); }
 
 function renderGrades() {
-  const tbody = document.getElementById('grades-tbody');
-  tbody.innerHTML = gradeData.map(g => `
+  document.getElementById('grades-tbody').innerHTML = gradeData.map(g => `
     <tr>
       <td><strong>${g.course}</strong></td>
       <td>${g.assigns}</td>
@@ -1946,8 +1836,7 @@ function renderGrades() {
 
 function renderSchedule() {
   const days = ['mon','tue','wed','thu','fri'];
-  const body = document.getElementById('schedule-body');
-  body.innerHTML = Object.entries(scheduleData).map(([time, row]) => `
+  document.getElementById('schedule-body').innerHTML = Object.entries(scheduleData).map(([time, row]) => `
     <div class="schedule-row">
       <div class="schedule-time">${time}</div>
       ${days.map(d => {
@@ -1962,14 +1851,13 @@ function renderSchedule() {
   `).join('');
 }
 
-// ─── MODAL ───────────────────────────────────────────
+// ─── MODAL ────────────────────────────────────────────
 function openAddModal() {
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('modal-due').value = today;
+  document.getElementById('modal-due').value = new Date().toISOString().split('T')[0];
   document.getElementById('modal-title').value = '';
   document.getElementById('modal-notes').value = '';
   document.getElementById('modal-overlay').classList.remove('hidden');
-  setTimeout(()=>document.getElementById('modal-title').focus(), 100);
+  setTimeout(() => document.getElementById('modal-title').focus(), 100);
 }
 
 function closeModal(e) {
@@ -1997,30 +1885,35 @@ function addAssignment() {
   showToast(`"${title}" added!`, 'success');
 }
 
-// ─── SETTINGS ────────────────────────────────────────
+// ─── SETTINGS ─────────────────────────────────────────
 function settingsTab(tab, btn) {
   ['profile','notifications','appearance','privacy'].forEach(t => {
     const el = document.getElementById('settings-' + t);
     if (el) el.classList.toggle('hidden', t !== tab);
   });
-  document.querySelectorAll('.settings-nav-item').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.settings-nav-item').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
 
-// ─── TOAST ───────────────────────────────────────────
+// ─── TOAST ────────────────────────────────────────────
 function showToast(msg, type) {
   const container = document.getElementById('toast-container');
   const toast = document.createElement('div');
-  toast.className = 'toast ' + (type||'');
+  toast.className = 'toast ' + (type || '');
   const icons = { success:'✅', error:'❌', '':'ℹ️' };
   toast.innerHTML = `<span>${icons[type]||'ℹ️'}</span> ${msg}`;
   container.appendChild(toast);
-  setTimeout(() => { toast.style.opacity='0'; toast.style.transform='translateX(20px)'; toast.style.transition='all 0.3s'; setTimeout(()=>toast.remove(), 300); }, 3000);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(20px)';
+    toast.style.transition = 'all 0.3s';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
 }
 
-// ─── KEYBOARD ────────────────────────────────────────
+// ─── KEYBOARD ─────────────────────────────────────────
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Escape') { closeModal(); closeSidebarDropdown(); closeTopbarDropdown(); }
 });
 </script>
 </body>
