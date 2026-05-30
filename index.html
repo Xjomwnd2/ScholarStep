@@ -35,7 +35,6 @@
     overflow-x: hidden;
   }
 
-  /* ─── UTILITY ─────────────────────────────── */
   .hidden { display: none !important; }
 
   /* ─── LOGIN PAGE ──────────────────────────── */
@@ -172,9 +171,7 @@
     margin-bottom: 40px;
   }
 
-  .form-group {
-    margin-bottom: 22px;
-  }
+  .form-group { margin-bottom: 22px; }
 
   .form-group label {
     display: block;
@@ -260,10 +257,7 @@
   .login-divider::before { left: 0; }
   .login-divider::after  { right: 0; }
 
-  .login-demo {
-    display: flex;
-    gap: 10px;
-  }
+  .login-demo { display: flex; gap: 10px; }
 
   .btn-demo {
     flex: 1;
@@ -290,10 +284,7 @@
   }
 
   /* ─── APP SHELL ───────────────────────────── */
-  #app-shell {
-    display: flex;
-    min-height: 100vh;
-  }
+  #app-shell { display: flex; min-height: 100vh; }
 
   /* ─── SIDEBAR ─────────────────────────────── */
   .sidebar {
@@ -485,10 +476,7 @@
     border: 2px solid var(--surface);
   }
 
-  .page-content {
-    flex: 1;
-    padding: 32px;
-  }
+  .page-content { flex: 1; padding: 32px; }
 
   /* ─── PAGES ───────────────────────────────── */
   .page { display: none; animation: fadeIn 0.3s ease; }
@@ -547,12 +535,162 @@
 
   .welcome-date .month { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 4px; }
 
+  /* ─── DASHBOARD CUSTOMIZATION TOOLBAR ────── */
+  .dashboard-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .dashboard-toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .customize-btn {
+    padding: 8px 16px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .customize-btn:hover { background: var(--gold-light); border-color: var(--gold); color: var(--ink); }
+  .customize-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  .widget-toggle-btn {
+    padding: 7px 13px;
+    background: var(--warm);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .widget-toggle-btn:hover { background: var(--gold-light); border-color: var(--gold); }
+  .widget-toggle-btn.hidden-widget { opacity: 0.5; text-decoration: line-through; }
+
+  /* ─── CUSTOMIZE PANEL ─────────────────────── */
+  .customize-panel {
+    background: var(--surface);
+    border: 1.5px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 22px;
+    animation: fadeIn 0.2s ease;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.12);
+  }
+
+  .customize-panel-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .customize-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .customize-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background: var(--warm);
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    transition: border-color 0.2s;
+  }
+
+  .customize-option:hover { border-color: var(--gold); }
+
+  .customize-option-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .customize-option-label span { font-size: 16px; }
+
+  /* ─── LAYOUT SELECTOR ────────────────────── */
+  .layout-selector {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .layout-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-light);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+
+  .layout-btn {
+    padding: 7px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--warm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .layout-btn:hover { background: var(--gold-light); border-color: var(--gold); color: var(--ink); }
+  .layout-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* ─── DASHBOARD GRID LAYOUTS ─────────────── */
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 18px;
     margin-bottom: 28px;
+    transition: all 0.3s ease;
   }
+
+  .stats-grid.layout-compact { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .stats-grid.layout-2col    { grid-template-columns: repeat(2, 1fr); }
 
   .stat-card {
     background: var(--surface);
@@ -562,7 +700,7 @@
     box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
     cursor: default;
   }
 
@@ -580,6 +718,8 @@
   .stat-card.rose::after  { background: var(--rose); }
   .stat-card.ink::after   { background: var(--ink); }
 
+  .stat-card.widget-hidden { display: none; }
+
   .stat-icon { font-size: 24px; margin-bottom: 14px; }
   .stat-value { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--ink); line-height: 1; }
   .stat-label { font-size: 0.8rem; color: var(--ink-light); margin-top: 4px; }
@@ -590,7 +730,11 @@
     display: grid;
     grid-template-columns: 1fr 340px;
     gap: 22px;
+    transition: all 0.3s;
   }
+
+  .dashboard-grid.layout-wide { grid-template-columns: 1fr; }
+  .dashboard-grid.layout-equal { grid-template-columns: 1fr 1fr; }
 
   .card {
     background: var(--surface);
@@ -598,7 +742,10 @@
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
     overflow: hidden;
+    transition: opacity 0.3s, transform 0.3s;
   }
+
+  .card.widget-hidden { display: none; }
 
   .card-header {
     padding: 20px 24px 16px;
@@ -626,8 +773,6 @@
 
   /* ─── SUBJECT PROGRESS ────────────────────── */
   .subject-list { display: flex; flex-direction: column; gap: 16px; }
-
-  .subject-item {}
 
   .subject-meta {
     display: flex;
@@ -670,12 +815,7 @@
 
   .mini-assign:hover { background: var(--gold-light); border-color: var(--gold); }
 
-  .mini-assign-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
+  .mini-assign-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
   .mini-assign-info { flex: 1; min-width: 0; }
   .mini-assign-name { font-size: 0.85rem; font-weight: 500; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mini-assign-sub  { font-size: 0.73rem; color: var(--ink-light); margin-top: 2px; }
@@ -716,11 +856,7 @@
     flex-wrap: wrap;
   }
 
-  .search-box {
-    flex: 1;
-    min-width: 200px;
-    position: relative;
-  }
+  .search-box { flex: 1; min-width: 200px; position: relative; }
 
   .search-box input {
     width: 100%;
@@ -786,6 +922,102 @@
 
   .add-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
 
+  /* ─── USER TESTING BANNER ─────────────────── */
+  .testing-banner {
+    background: linear-gradient(135deg, #0f2a3d 0%, #1a3a52 100%);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border: 1.5px solid rgba(61,179,179,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testing-banner::before {
+    content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, var(--teal) 0%, transparent 70%);
+    opacity: 0.08;
+    right: -40px; bottom: -60px;
+    border-radius: 50%;
+  }
+
+  .testing-banner-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .testing-icon {
+    width: 44px; height: 44px;
+    background: rgba(42,127,127,0.25);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    border: 1.5px solid rgba(42,127,127,0.4);
+  }
+
+  .testing-text h4 {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 3px;
+  }
+
+  .testing-text p {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.4;
+  }
+
+  .testing-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-test-primary {
+    padding: 9px 18px;
+    background: var(--teal);
+    border: none;
+    border-radius: 9px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-test-primary:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+  .btn-test-dismiss {
+    padding: 9px 14px;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    border-radius: 9px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-test-dismiss:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
   .assign-kanban {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -808,12 +1040,7 @@
     background: var(--surface);
   }
 
-  .kanban-col-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--ink);
-    flex: 1;
-  }
+  .kanban-col-title { font-size: 0.85rem; font-weight: 600; color: var(--ink); flex: 1; }
 
   .kanban-count {
     font-size: 0.75rem;
@@ -879,11 +1106,7 @@
   .assign-card-due.overdue { color: var(--rose); font-weight: 600; }
   .assign-card-due.today   { color: #9a7a22; font-weight: 600; }
 
-  .assign-progress-mini {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+  .assign-progress-mini { display: flex; align-items: center; gap: 6px; }
 
   .assign-progress-bar-mini {
     width: 50px; height: 4px;
@@ -899,6 +1122,27 @@
   }
 
   .assign-pct-mini { font-size: 0.72rem; color: var(--ink-light); }
+
+  /* ─── FEEDBACK RATING STARS ───────────────── */
+  .star-rating {
+    display: flex;
+    gap: 4px;
+  }
+
+  .star-rating .star {
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--border);
+    transition: color 0.15s, transform 0.15s;
+    line-height: 1;
+  }
+
+  .star-rating .star:hover,
+  .star-rating .star.selected,
+  .star-rating .star.highlighted {
+    color: var(--gold);
+    transform: scale(1.15);
+  }
 
   /* ─── GRADES PAGE ─────────────────────────── */
   .grades-summary {
@@ -955,12 +1199,12 @@
   .grade-table tr:hover td { background: var(--warm); }
 
   .grade-badge {
-    display: inline-block;
+    display: inline-flex;
     font-family: 'DM Serif Display', serif;
     font-size: 1.1rem;
     width: 40px; height: 40px;
     border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
+    align-items: center; justify-content: center;
     font-weight: 700;
   }
 
@@ -994,10 +1238,7 @@
 
   .schedule-day-header.today { color: var(--gold); }
 
-  .schedule-body {
-    display: flex;
-    flex-direction: column;
-  }
+  .schedule-body { display: flex; flex-direction: column; }
 
   .schedule-row {
     display: grid;
@@ -1133,7 +1374,7 @@
   .toggle input:checked + .toggle-slider { background: var(--teal); }
   .toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
 
-  /* ─── MODAL ───────────────────────────────── */
+  /* ─── USER TESTING MODAL ──────────────────── */
   .modal-overlay {
     position: fixed;
     inset: 0;
@@ -1151,11 +1392,13 @@
     background: var(--surface);
     border-radius: var(--radius);
     width: 100%;
-    max-width: 480px;
+    max-width: 520px;
     box-shadow: var(--shadow-lg);
     animation: slideUp 0.3s ease;
     overflow: hidden;
   }
+
+  .modal.modal-wide { max-width: 620px; }
 
   .modal-header {
     padding: 22px 24px 18px;
@@ -1166,6 +1409,7 @@
   }
 
   .modal-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); }
+  .modal-subtitle { font-size: 0.78rem; color: var(--ink-light); margin-top: 3px; }
 
   .modal-close {
     width: 30px; height: 30px;
@@ -1239,7 +1483,113 @@
 
   .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-  /* ─── NOTIFICATIONS ───────────────────────── */
+  /* ─── USER TESTING SURVEY ─────────────────── */
+  .survey-section {
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .survey-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .survey-question {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .survey-hint { font-size: 0.75rem; color: var(--ink-light); margin-bottom: 10px; }
+
+  .survey-options { display: flex; flex-direction: column; gap: 8px; }
+
+  .survey-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--warm);
+  }
+
+  .survey-option:hover { border-color: var(--teal); background: rgba(42,127,127,0.06); }
+  .survey-option.selected { border-color: var(--teal); background: rgba(42,127,127,0.1); }
+  .survey-option input[type="radio"], .survey-option input[type="checkbox"] { accent-color: var(--teal); width: 15px; height: 15px; flex-shrink: 0; }
+  .survey-option-text { font-size: 0.85rem; color: var(--ink); }
+
+  .rating-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .rating-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: var(--ink-light);
+    margin-top: 6px;
+  }
+
+  .survey-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .survey-progress-bar {
+    flex: 1;
+    height: 5px;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .survey-progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+  }
+
+  .survey-progress-text {
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .survey-success {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .survey-success-icon {
+    font-size: 48px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .survey-success h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .survey-success p {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  /* ─── TOASTS ─────────────────────────────── */
   .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 300; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
 
   .toast {
@@ -1285,9 +1635,9 @@
     .settings-grid { grid-template-columns: 1fr; }
     .login-art { display: none; }
     .login-form-wrap { width: 100%; }
+    .testing-banner { flex-direction: column; align-items: flex-start; }
   }
 
-  /* ─── SCROLL ──────────────────────────────── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -1340,7 +1690,6 @@
 <!-- ─── APP SHELL ──────────────────────────────────── -->
 <div id="app-shell" class="hidden">
 
-  <!-- Sidebar -->
   <nav class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo">🎓</div>
@@ -1376,7 +1725,6 @@
     </div>
   </nav>
 
-  <!-- Main -->
   <div class="main-content">
     <header class="topbar">
       <div class="topbar-title" id="page-title">Dashboard</div>
@@ -1397,31 +1745,54 @@
             <p>You have 3 assignments due this week. Keep pushing forward!</p>
           </div>
           <div class="welcome-date">
-            <div class="big-date" id="day-num">16</div>
-            <div class="month" id="month-str">May 2026 · Friday</div>
+            <div class="big-date" id="day-num">30</div>
+            <div class="month" id="month-str">May 2026 · Saturday</div>
           </div>
         </div>
 
-        <div class="stats-grid">
-          <div class="stat-card gold">
+        <!-- ── DASHBOARD CUSTOMIZATION TOOLBAR ── -->
+        <div class="dashboard-toolbar">
+          <div class="dashboard-toolbar-left">
+            <button class="customize-btn" id="customize-toggle-btn" onclick="toggleCustomizePanel()">
+              🎨 Customize Dashboard
+            </button>
+          </div>
+          <div id="widget-toggles" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+        </div>
+
+        <!-- Customization Panel -->
+        <div class="customize-panel hidden" id="customize-panel">
+          <div class="customize-panel-title">🎨 Dashboard Customization</div>
+          <div class="customize-options" id="customize-options-grid"></div>
+          <div class="layout-selector">
+            <span class="layout-label">Layout:</span>
+            <button class="layout-btn active" id="layout-default" onclick="setDashboardLayout('default', this)">◩ Default</button>
+            <button class="layout-btn" id="layout-wide" onclick="setDashboardLayout('wide', this)">⬜ Wide</button>
+            <button class="layout-btn" id="layout-equal" onclick="setDashboardLayout('equal', this)">▦ Equal Columns</button>
+            <button class="layout-btn" id="layout-compact" onclick="setDashboardLayout('compact', this)">≡ Compact Stats</button>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="stats-grid">
+          <div class="stat-card gold" id="widget-stat-assignments">
             <div class="stat-icon">📚</div>
             <div class="stat-value">12</div>
             <div class="stat-label">Active Assignments</div>
             <div class="stat-change">↑ 3 added this week</div>
           </div>
-          <div class="stat-card teal">
+          <div class="stat-card teal" id="widget-stat-completed">
             <div class="stat-icon">✅</div>
             <div class="stat-value">8</div>
             <div class="stat-label">Completed</div>
             <div class="stat-change">↑ 2 this week</div>
           </div>
-          <div class="stat-card rose">
+          <div class="stat-card rose" id="widget-stat-due">
             <div class="stat-icon">⏰</div>
             <div class="stat-value">3</div>
             <div class="stat-label">Due Soon</div>
             <div class="stat-change neg">⚠ 1 overdue</div>
           </div>
-          <div class="stat-card ink">
+          <div class="stat-card ink" id="widget-stat-gpa">
             <div class="stat-icon">🎯</div>
             <div class="stat-value">3.7</div>
             <div class="stat-label">Current GPA</div>
@@ -1429,9 +1800,8 @@
           </div>
         </div>
 
-        <div class="dashboard-grid">
-          <!-- Subject Progress -->
-          <div class="card">
+        <div class="dashboard-grid" id="dashboard-grid">
+          <div class="card" id="widget-course-progress">
             <div class="card-header">
               <div class="card-title">Course Progress</div>
               <a class="card-action" onclick="navigate('grades', document.querySelector('.nav-item:nth-child(4)'))">View Grades →</a>
@@ -1441,10 +1811,8 @@
             </div>
           </div>
 
-          <!-- Right column -->
           <div style="display:flex;flex-direction:column;gap:22px;">
-            <!-- Upcoming Assignments -->
-            <div class="card">
+            <div class="card" id="widget-due-soon">
               <div class="card-header">
                 <div class="card-title">Due Soon</div>
                 <a class="card-action" onclick="navigate('assignments', document.querySelector('.nav-item:nth-child(3)'))">All →</a>
@@ -1454,8 +1822,7 @@
               </div>
             </div>
 
-            <!-- Announcements -->
-            <div class="card">
+            <div class="card" id="widget-announcements">
               <div class="card-header">
                 <div class="card-title">Announcements</div>
               </div>
@@ -1484,6 +1851,22 @@
 
       <!-- ── ASSIGNMENTS ── -->
       <div class="page" id="page-assignments">
+
+        <!-- User Testing Banner -->
+        <div class="testing-banner" id="testing-banner">
+          <div class="testing-banner-left">
+            <div class="testing-icon">🧪</div>
+            <div class="testing-text">
+              <h4>Help us improve the Assignment Tracker</h4>
+              <p>Share your experience — your feedback shapes ScholarStep's next update.</p>
+            </div>
+          </div>
+          <div class="testing-actions">
+            <button class="btn-test-primary" onclick="openTestingModal()">Take Quick Survey</button>
+            <button class="btn-test-dismiss" onclick="dismissTestingBanner()">Not now</button>
+          </div>
+        </div>
+
         <div class="assign-toolbar">
           <div class="search-box">
             <input type="text" placeholder="Search assignments..." id="assign-search" oninput="filterAssignments()" />
@@ -1623,15 +2006,17 @@
         </div>
       </div>
 
-    </div><!-- /page-content -->
-  </div><!-- /main-content -->
-</div><!-- /app-shell -->
+    </div>
+  </div>
+</div>
 
-<!-- ─── MODAL ────────────────────────────────── -->
+<!-- ─── ADD ASSIGNMENT MODAL ──────────────────── -->
 <div class="modal-overlay hidden" id="modal-overlay" onclick="closeModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-header">
-      <div class="modal-title">Add Assignment</div>
+      <div>
+        <div class="modal-title">Add Assignment</div>
+      </div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
@@ -1685,7 +2070,26 @@
   </div>
 </div>
 
-<!-- ─── TOASTS ───────────────────────────────── -->
+<!-- ─── USER TESTING MODAL ────────────────────── -->
+<div class="modal-overlay hidden" id="testing-modal-overlay" onclick="closeTestingModal(event)">
+  <div class="modal modal-wide" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Assignment Tracker — User Testing</div>
+        <div class="modal-subtitle">Your feedback helps us build a better experience for every student</div>
+      </div>
+      <button class="modal-close" onclick="closeTestingModal()">✕</button>
+    </div>
+    <div class="modal-body" id="survey-body">
+      <!-- Dynamically rendered by JS -->
+    </div>
+    <div class="modal-footer" id="survey-footer">
+      <button class="btn-sec" onclick="surveyBack()" id="survey-back-btn" style="display:none">← Back</button>
+      <button class="btn-submit" id="survey-next-btn" onclick="surveyNext()">Next →</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast-container" id="toast-container"></div>
 
 <script>
@@ -1711,317 +2115,8 @@ const gradeData = [
   { course: 'Database Systems', assigns: '9/10', midterm: '91%', attend: '95%', grade: 'A-', letter: 'A' },
   { course: 'Web Development',  assigns: '6/10', midterm: '70%', attend: '80%', grade: 'C+', letter: 'C' },
   { course: 'Discrete Math',    assigns: '5/10', midterm: '62%', attend: '75%', grade: 'C',  letter: 'C' },
-  { course: 'Networks',         assigns: '10/10','midterm': '95%', attend: '98%', grade: 'A', letter: 'A' },
+  { course: 'Networks',         assigns: '10/10', midterm: '95%', attend: '98%', grade: 'A', letter: 'A' },
 ];
 
 let assignments = [
-  { id:1, title:'Binary Search Tree Implementation', subject:'Data Structures', priority:'high',   status:'todo',        due:'2026-05-17', progress:0 },
-  { id:2, title:'Sorting Algorithms Analysis',       subject:'Algorithms',       priority:'high',   status:'todo',        due:'2026-05-18', progress:0 },
-  { id:3, title:'ER Diagram Design',                 subject:'Database Systems', priority:'medium', status:'todo',        due:'2026-05-20', progress:0 },
-  { id:4, title:'REST API Documentation',            subject:'Web Development',  priority:'medium', status:'in-progress', due:'2026-05-22', progress:40 },
-  { id:5, title:'Graph Theory Problem Set',          subject:'Discrete Math',    priority:'low',    status:'in-progress', due:'2026-05-25', progress:25 },
-  { id:6, title:'Network Topology Lab Report',       subject:'Networks',         priority:'medium', status:'in-progress', due:'2026-05-24', progress:70 },
-  { id:7, title:'SQL Query Optimization',            subject:'Database Systems', priority:'low',    status:'done',        due:'2026-05-12', progress:100 },
-  { id:8, title:'HTML/CSS Portfolio Page',           subject:'Web Development',  priority:'medium', status:'done',        due:'2026-05-10', progress:100 },
-  { id:9, title:'Stack & Queue Exercises',           subject:'Data Structures',  priority:'high',   status:'done',        due:'2026-05-09', progress:100 },
-];
-
-let currentFilter = 'all';
-let nextId = 10;
-
-const scheduleData = {
-  '08:00': { mon: null, tue: {n:'Data Structures',c:'CS201',r:'Room 3A',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'}, wed: null, thu: {n:'Data Structures',c:'CS201',r:'Room 3A',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'}, fri: null },
-  '09:00': { mon: null, tue: null, wed: {n:'Algorithms',c:'CS301',r:'Room 1B',bg:'rgba(42,127,127,0.15)',col:'var(--teal)'}, thu: null, fri: {n:'Algorithms',c:'CS301',r:'Room 1B',bg:'rgba(42,127,127,0.15)',col:'var(--teal)'} },
-  '10:00': { mon: {n:'Database Systems',c:'CS305',r:'Lab 2',bg:'rgba(192,70,74,0.12)',col:'var(--rose)'}, tue: null, wed: {n:'Database Systems',c:'CS305',r:'Lab 2',bg:'rgba(192,70,74,0.12)',col:'var(--rose)'}, thu: null, fri: null },
-  '11:00': { mon: null, tue: {n:'Web Development',c:'CS401',r:'Room 5C',bg:'rgba(91,141,239,0.15)',col:'#3a6fe0'}, wed: null, thu: {n:'Web Development',c:'CS401',r:'Room 5C',bg:'rgba(91,141,239,0.15)',col:'#3a6fe0'}, fri: null },
-  '12:00': { mon: null, tue: null, wed: null, thu: null, fri: null },
-  '13:00': { mon: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'}, tue: null, wed: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'}, thu: null, fri: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'} },
-  '14:00': { mon: null, tue: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, wed: null, thu: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, fri: null },
-  '15:00': { mon: null, tue: null, wed: null, thu: null, fri: {n:'Lab Session',c:'CS-LAB',r:'Lab 1',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'} },
-};
-
-// ─── AUTH ────────────────────────────────────────────
-function doLogin() {
-  const u = document.getElementById('username-input').value.trim().toLowerCase().replace('@university.edu','').replace(/\..*$/,'');
-  const p = document.getElementById('password-input').value;
-  const errEl = document.getElementById('login-error');
-
-  const match = Object.entries(USERS).find(([key,val]) => (key === u || u.startsWith(key.split('.')[0])) && val.pass === p);
-  if (match || (u && p === 'scholar2026')) {
-    const user = match ? match[1] : { name: 'Student User', initials: 'SU' };
-    loginSuccess(user);
-  } else {
-    errEl.textContent = 'Invalid credentials. Try "student" / "demo"';
-    document.getElementById('password-input').style.borderColor = 'var(--rose)';
-    setTimeout(() => { errEl.textContent=''; document.getElementById('password-input').style.borderColor=''; }, 3000);
-  }
-}
-
-function quickLogin(type) {
-  const u = USERS[type] || USERS.student;
-  loginSuccess(u);
-}
-
-function loginSuccess(user) {
-  document.getElementById('login-page').classList.add('hidden');
-  document.getElementById('app-shell').classList.remove('hidden');
-  document.getElementById('user-name-display').textContent = user.name;
-  document.getElementById('user-avatar').textContent = user.initials;
-  const first = user.name.split(' ')[0];
-  document.getElementById('first-name').textContent = first;
-  initDate();
-  renderAll();
-  showToast(`Welcome back, ${first}! 👋`, 'success');
-}
-
-function doLogout() {
-  document.getElementById('app-shell').classList.add('hidden');
-  document.getElementById('login-page').classList.remove('hidden');
-  document.getElementById('username-input').value = '';
-  document.getElementById('password-input').value = '';
-}
-
-document.getElementById('password-input').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-document.getElementById('username-input').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('password-input').focus(); });
-
-// ─── NAVIGATION ──────────────────────────────────────
-function navigate(page, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
-  if (btn) btn.classList.add('active');
-  const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades & Reports', schedule:'Class Schedule', settings:'Settings' };
-  document.getElementById('page-title').textContent = titles[page] || page;
-}
-
-// ─── DATE ────────────────────────────────────────────
-function initDate() {
-  const now = new Date();
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('day-num').textContent = now.getDate();
-  document.getElementById('month-str').textContent = `${months[now.getMonth()]} ${now.getFullYear()} · ${days[now.getDay()]}`;
-}
-
-// ─── RENDER ──────────────────────────────────────────
-function renderAll() {
-  renderSubjectProgress();
-  renderMiniAssignments();
-  renderKanban();
-  renderGrades();
-  renderSchedule();
-}
-
-function renderSubjectProgress() {
-  const el = document.getElementById('subject-progress-list');
-  el.innerHTML = subjects.map(s => `
-    <div class="subject-item">
-      <div class="subject-meta">
-        <span class="subject-name">${s.name}</span>
-        <span class="subject-pct">${s.pct}%</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width:0%;background:${s.color};" data-target="${s.pct}"></div>
-      </div>
-    </div>
-  `).join('');
-  setTimeout(() => {
-    document.querySelectorAll('.progress-fill[data-target]').forEach(el => {
-      el.style.width = el.dataset.target + '%';
-    });
-  }, 100);
-}
-
-function duePillClass(due) {
-  const d = new Date(due), now = new Date();
-  const diff = Math.ceil((d - now) / 86400000);
-  if (diff < 0)  return ['due-urgent', '⚠ Overdue'];
-  if (diff === 0) return ['due-urgent', 'Today'];
-  if (diff === 1) return ['due-soon', 'Tomorrow'];
-  if (diff <= 3) return ['due-soon', `${diff}d`];
-  return ['due-later', `${diff}d`];
-}
-
-function renderMiniAssignments() {
-  const pending = assignments.filter(a => a.status !== 'done').sort((a,b) => new Date(a.due)-new Date(b.due)).slice(0,4);
-  const el = document.getElementById('mini-assign-list');
-  const colors = { high:'#c0464a', medium:'#c9a84c', low:'#2a7f7f' };
-  el.innerHTML = pending.map(a => {
-    const [cls, label] = duePillClass(a.due);
-    return `
-      <div class="mini-assign" onclick="navigate('assignments', document.querySelectorAll('.nav-item')[1])">
-        <div class="mini-assign-dot" style="background:${colors[a.priority]}"></div>
-        <div class="mini-assign-info">
-          <div class="mini-assign-name">${a.title}</div>
-          <div class="mini-assign-sub">${a.subject}</div>
-        </div>
-        <span class="mini-assign-due ${cls}">${label}</span>
-      </div>
-    `;
-  }).join('');
-  const pendingCount = assignments.filter(a=>a.status==='todo').length;
-  document.getElementById('pending-badge').textContent = pendingCount;
-}
-
-function renderKanban() {
-  const cols = [
-    { key:'todo',        label:'To Do',      color:'var(--rose)',   bg:'rgba(192,70,74,0.1)' },
-    { key:'in-progress', label:'In Progress', color:'var(--gold)',   bg:'rgba(201,168,76,0.12)' },
-    { key:'done',        label:'Done',        color:'var(--teal)',   bg:'rgba(42,127,127,0.1)' },
-  ];
-  const search = (document.getElementById('assign-search')?.value || '').toLowerCase();
-  const el = document.getElementById('assign-kanban');
-  el.innerHTML = cols.map(col => {
-    let items = assignments.filter(a => {
-      const matchStatus = currentFilter === 'all' || a.status === currentFilter;
-      const matchSearch = !search || a.title.toLowerCase().includes(search) || a.subject.toLowerCase().includes(search);
-      return a.status === col.key && matchStatus && matchSearch;
-    });
-    const cards = items.map(a => {
-      const [dcls, dlabel] = duePillClass(a.due);
-      const overdue = dcls==='due-urgent' && new Date(a.due)<new Date() ? 'overdue' : (dcls==='due-urgent'?'today':'');
-      return `
-        <div class="assign-card" onclick="toggleDone(${a.id})">
-          <div class="assign-card-top">
-            <div class="assign-card-name">${a.title}</div>
-            <span class="assign-card-priority priority-${a.priority}">${a.priority}</span>
-          </div>
-          <div class="assign-card-subject">📚 ${a.subject}</div>
-          <div class="assign-card-footer">
-            <div class="assign-card-due ${overdue}">📅 ${a.due}</div>
-            <div class="assign-progress-mini">
-              <div class="assign-progress-bar-mini"><div class="assign-progress-fill-mini" style="width:${a.progress}%"></div></div>
-              <span class="assign-pct-mini">${a.progress}%</span>
-            </div>
-          </div>
-        </div>
-      `;
-    }).join('') || `<div style="text-align:center;color:var(--ink-light);font-size:0.82rem;padding:30px 10px;">No items here</div>`;
-
-    return `
-      <div class="kanban-col">
-        <div class="kanban-col-header">
-          <div class="kanban-col-title">${col.label}</div>
-          <span class="kanban-count" style="background:${col.bg};color:${col.color}">${items.length}</span>
-        </div>
-        <div class="kanban-col-body">${cards}</div>
-      </div>
-    `;
-  }).join('');
-}
-
-function toggleDone(id) {
-  const a = assignments.find(x=>x.id===id);
-  if (!a) return;
-  if (a.status === 'todo') { a.status = 'in-progress'; a.progress = 10; }
-  else if (a.status === 'in-progress') { a.status = 'done'; a.progress = 100; }
-  else { a.status = 'todo'; a.progress = 0; }
-  renderKanban();
-  renderMiniAssignments();
-  showToast(`"${a.title}" moved to ${a.status.replace('-',' ')}`, 'success');
-}
-
-function setFilter(f, btn) {
-  currentFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderKanban();
-}
-
-function filterAssignments() { renderKanban(); }
-
-function renderGrades() {
-  const tbody = document.getElementById('grades-tbody');
-  tbody.innerHTML = gradeData.map(g => `
-    <tr>
-      <td><strong>${g.course}</strong></td>
-      <td>${g.assigns}</td>
-      <td>${g.midterm}</td>
-      <td>${g.attend}</td>
-      <td><div class="grade-badge grade-${g.letter}">${g.grade}</div></td>
-      <td><span style="font-size:0.78rem;color:${g.letter==='C'?'var(--rose)':'var(--teal)'};font-weight:600;">${g.letter==='C'?'⚠ Needs attention':'✓ On track'}</span></td>
-    </tr>
-  `).join('');
-}
-
-function renderSchedule() {
-  const days = ['mon','tue','wed','thu','fri'];
-  const body = document.getElementById('schedule-body');
-  body.innerHTML = Object.entries(scheduleData).map(([time, row]) => `
-    <div class="schedule-row">
-      <div class="schedule-time">${time}</div>
-      ${days.map(d => {
-        const cls = row[d];
-        return `<div class="schedule-slot">${cls ? `
-          <div class="schedule-class" style="background:${cls.bg};color:${cls.col};">
-            <div class="schedule-class-name">${cls.n}</div>
-            <div class="schedule-class-room">${cls.r}</div>
-          </div>` : ''}</div>`;
-      }).join('')}
-    </div>
-  `).join('');
-}
-
-// ─── MODAL ───────────────────────────────────────────
-function openAddModal() {
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('modal-due').value = today;
-  document.getElementById('modal-title').value = '';
-  document.getElementById('modal-notes').value = '';
-  document.getElementById('modal-overlay').classList.remove('hidden');
-  setTimeout(()=>document.getElementById('modal-title').focus(), 100);
-}
-
-function closeModal(e) {
-  if (!e || e.target === document.getElementById('modal-overlay')) {
-    document.getElementById('modal-overlay').classList.add('hidden');
-  }
-}
-
-function addAssignment() {
-  const title = document.getElementById('modal-title').value.trim();
-  if (!title) { showToast('Please enter a title', 'error'); return; }
-  const a = {
-    id: nextId++,
-    title,
-    subject:  document.getElementById('modal-subject').value,
-    priority: document.getElementById('modal-priority').value,
-    status:   document.getElementById('modal-status').value,
-    due:      document.getElementById('modal-due').value || new Date().toISOString().split('T')[0],
-    progress: document.getElementById('modal-status').value === 'in-progress' ? 10 : 0,
-  };
-  assignments.unshift(a);
-  closeModal();
-  renderKanban();
-  renderMiniAssignments();
-  showToast(`"${title}" added!`, 'success');
-}
-
-// ─── SETTINGS ────────────────────────────────────────
-function settingsTab(tab, btn) {
-  ['profile','notifications','appearance','privacy'].forEach(t => {
-    const el = document.getElementById('settings-' + t);
-    if (el) el.classList.toggle('hidden', t !== tab);
-  });
-  document.querySelectorAll('.settings-nav-item').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-// ─── TOAST ───────────────────────────────────────────
-function showToast(msg, type) {
-  const container = document.getElementById('toast-container');
-  const toast = document.createElement('div');
-  toast.className = 'toast ' + (type||'');
-  const icons = { success:'✅', error:'❌', '':'ℹ️' };
-  toast.innerHTML = `<span>${icons[type]||'ℹ️'}</span> ${msg}`;
-  container.appendChild(toast);
-  setTimeout(() => { toast.style.opacity='0'; toast.style.transform='translateX(20px)'; toast.style.transition='all 0.3s'; setTimeout(()=>toast.remove(), 300); }, 3000);
-}
-
-// ─── KEYBOARD ────────────────────────────────────────
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
-</script>
-</body>
-</html>
+  { id:1, title:'Binary Search Tree Implementation', subject:'Data Structures', pr
