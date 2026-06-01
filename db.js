@@ -1,4 +1,3 @@
-Set-Content -Path "C:\Users\Joel Ndiba Mwaura\GitHub\CS160\ScholarStep\backend\db\index.js" -Value @"
 const { Pool } = require('pg');
 require('dotenv').config();
 const pool = new Pool({
