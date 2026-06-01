@@ -10,5 +10,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "gitdoc.enabled": false
 }
