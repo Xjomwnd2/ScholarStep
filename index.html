@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ScholarStep - Academic Evolution</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:       #1a1a2e;
+    --ink-light: #3d3d5c;
+    --cream:     #faf8f3;
+    --warm:      #f5f0e8;
+    --gold:      #c9a84c;
+    --gold-light:#f0d98a;
+    --teal:      #2a7f7f;
+    --teal-light:#3db3b3;
+    --rose:      #c0464a;
+    --rose-light:#e07a7d;
+    --surface:   #ffffff;
+    --border:    #e8e2d6;
+    --shadow:    0 4px 24px rgba(26,26,46,0.09);
+    --shadow-lg: 0 12px 48px rgba(26,26,46,0.15);
+    --radius:    14px;
+    --sidebar-w: 250px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── ACCESSIBILITY (Skip Link) ─────────────────────────────── */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--ink);
+    color: #fff;
+    padding: 8px 16px;
+    z-index: 9999;
+    transition: top 0.3s;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .skip-link:focus { top: 0; }
+
+  /* ─── UTILITY ─────────────────────────────── */
+  .hidden { display: none !important; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  /* ─── LOADING OVERLAY (Backend Simulation) ───────────────────── */
+  #global-loader {
+    position: fixed; inset: 0; background: rgba(250,248,243,0.9);
+    z-index: 2000; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    transition: opacity 0.3s;
+  }
+  .loader-spinner {
+    width: 48px; height: 48px;
+    border: 4px solid var(--border);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  .loader-text { margin-top: 16px; color: var(--ink-light); font-size: 0.9rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ─── LOGIN PAGE (Enhanced Auth) ──────────────────────────── */
+  #login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .login-art {
+    flex: 1;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .login-art::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--gold) 0%, transparent 65%);
+    opacity: 0.12;
+    top: -150px; left: -150px;
+    border-radius: 50%;
+  }
+
+  .login-brand { position: relative; z-index: 1; text-align: center; }
+  .login-brand .logo-icon {
+    width: 72px; height: 72px;
+    background: var(--gold);
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 32px;
+    transform: rotate(-6deg);
+    box-shadow: 0 8px 32px rgba(201,168,76,0.4);
+  }
+  .login-brand h1 { font-family: 'DM Serif Display', serif; font-size: 3rem; color: #fff; letter-spacing: -0.5px; line-height: 1.1; }
+  .login-brand h1 span { color: var(--gold); }
+  .login-brand p { color: rgba(255,255,255,0.55); margin-top: 14px; font-size: 1rem; max-width: 300px; }
+
+  .login-form-wrap {
+    width: 480px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 48px; background: var(--surface);
+  }
+
+  .login-form { width: 100%; animation: slideUp 0.5s ease; }
+
+  @keyframes slideUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+  .login-form h2 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--ink); margin-bottom: 6px; }
+  .login-form .sub { color: var(--ink-light); font-size: 0.9rem; margin-bottom: 40px; }
+
+  .form-group { margin-bottom: 22px; }
+  .form-group label {
+    display: block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-light); margin-bottom: 8px;
+  }
+  .form-group input {
+    width: 100%; padding: 14px 18px; border: 1.5px solid var(--border); border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--ink);
+    background: var(--cream); transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+  }
+  .form-group input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.15); background: #fff; }
+
+  .btn-primary {
+    width: 100%; padding: 15px; background: var(--ink); color: #fff; border: none; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    letter-spacing: 0.03em; transition: background 0.2s, transform 0.1s; position: relative;
+  }
+  .btn-primary:hover { background: var(--teal); transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
+
+  .login-divider { text-align: center; margin: 24px 0; position: relative; color: var(--ink-light); font-size: 0.8rem; }
+  .login-divider::before, .login-divider::after {
+    content: ''; position: absolute; top: 50%; width: 42%; height: 1px; background: var(--border);
+  }
+  .login-divider::before { left: 0; }
+  .login-divider::after  { right: 0; }
+
+  .error-msg { color: var(--rose); font-size: 0.82rem; margin-top: 12px; text-align: center; min-height: 18px; }
+
+  /* ─── APP SHELL ───────────────────────────── */
+  #app-shell { display: flex; min-height: 100vh; }
+
+  /* ─── SIDEBAR ─────────────────────────────── */
+  .sidebar {
+    width: var(--sidebar-w); background: var(--ink); display: flex; flex-direction: column;
+    position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; transition: transform 0.3s ease;
+  }
+  .sidebar-header { padding: 28px 22px 20px; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; gap: 12px; }
+  .sidebar-logo { width: 38px; height: 38px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; transform: rotate(-4deg); }
+  .sidebar-title { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: #fff; line-height: 1; }
+  .sidebar-title span { color: var(--gold); }
+
+  .sidebar-nav { flex: 1; padding: 20px 12px; overflow-y: auto; }
+  .nav-section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 0 10px; margin: 18px 0 8px; }
+  .nav-item {
+    display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; cursor: pointer;
+    color: rgba(255,255,255,0.6); font-size: 0.9rem; font-weight: 500; transition: background 0.15s, color 0.15s;
+    margin-bottom: 3px; border: none; background: none; width: 100%; text-align: left; position: relative;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
+  .nav-item.active { background: rgba(201,168,76,0.18); color: var(--gold-light); }
+  .nav-item.active::before {
+    content: ''; position: absolute; left: 0; top: 20%; height: 60%; width: 3px;
+    border-radius: 0 3px 3px 0; background: var(--gold);
+  }
+  .nav-icon { font-size: 17px; flex-shrink: 0; width: 20px; text-align: center; }
+  .nav-badge { margin-left: auto; background: var(--rose); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
+
+  .sidebar-user { padding: 16px 18px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; gap: 12px; }
+  .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--gold)); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .user-info { flex: 1; min-width: 0; }
+  .user-name { font-size: 0.85rem; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .user-role { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+  .logout-btn { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.3); font-size: 16px; padding: 4px; }
+  .logout-btn:hover { color: var(--rose-light); }
+
+  /* ─── MAIN CONTENT ────────────────────────── */
+  .main-content { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+
+  .topbar {
+    height: 64px; background: var(--surface); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 32px; gap: 16px;
+    position: sticky; top: 0; z-index: 50;
+  }
+  .topbar-title { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--ink); flex: 1; }
+  .topbar-actions { display: flex; align-items: center; gap: 12px; position: relative; }
+
+  .topbar-btn {
+    width: 38px; height: 38px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--warm);
+    cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px;
+    transition: background 0.2s, border-color 0.2s; position: relative;
+  }
+  .topbar-btn:hover { background: var(--gold-light); border-color: var(--gold); }
+  .topbar-btn.active { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+  
+  .topbar-notif::after {
+    content: ''; position: absolute; top: 6px; right: 6px; width: 8px; height: 8px;
+    background: var(--rose); border-radius: 50%; border: 2px solid var(--surface);
+  }
+
+  /* Notification Dropdown */
+  .notif-dropdown {
+    position: absolute; top: 50px; right: 0; width: 320px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow-lg); z-index: 60; display: none; flex-direction: column;
+    animation: slideDown 0.2s ease;
+  }
+  .notif-dropdown.open { display: flex; }
+  @keyframes slideDown { from { opacity:0; transform: translateY(-10px); } to { opacity:1; transform: translateY(0); } }
+  
+  .notif-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .notif-header h4 { font-size: 0.9rem; font-weight: 600; }
+  .notif-list { max-height: 300px; overflow-y: auto; }
+  .notif-item { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 0.85rem; cursor: pointer; transition: background 0.2s; }
+  .notif-item:hover { background: var(--warm); }
+  .notif-item:last-child { border-bottom: none; }
+  .notif-item strong { display: block; margin-bottom: 2px; color: var(--ink); }
+  .notif-item span { color: var(--ink-light); font-size: 0.75rem; }
+
+  .page-content { flex: 1; padding: 32px; }
+
+  /* ─── PAGES ───────────────────────────────── */
+  .page { display: none; animation: fadeIn 0.3s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+
+  /* ─── DASHBOARD ───────────────────────────── */
+  .welcome-banner {
+    background: linear-gradient(135deg, var(--ink) 0%, #2a2a4a 100%); border-radius: var(--radius);
+    padding: 32px 36px; color: #fff; display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 28px; position: relative; overflow: hidden;
+  }
+  .welcome-text h2 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; line-height: 1.2; margin-bottom: 8px; }
+  .welcome-text p { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+  .ai-fab {
+    background: linear-gradient(135deg, var(--gold), var(--teal)); color: #fff;
+    padding: 8px 16px; border-radius: 30px; font-weight: 600; font-size: 0.85rem;
+    border: none; cursor: pointer; display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 4px 12px rgba(42,127,127,0.4); transition: transform 0.2s;
+  }
+  .ai-fab:hover { transform: scale(1.05); }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 28px; }
+  .stat-card {
+    background: var(--surface); border-radius: var(--radius); padding: 22px 24px;
+    border: 1px solid var(--border); box-shadow: var(--shadow); position: relative; overflow: hidden;
+  }
+  .stat-icon { font-size: 24px; margin-bottom: 14px; }
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--ink); line-height: 1; }
+  .stat-label { font-size: 0.8rem; color: var(--ink-light); margin-top: 4px; }
+  .stat-change { font-size: 0.75rem; margin-top: 8px; font-weight: 500; }
+  .stat-change.neg { color: var(--rose); }
+  
+  .dashboard-grid { display: grid; grid-template-columns: 1fr 340px; gap: 22px; }
+  .card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
+  .card-header { padding: 20px 24px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .card-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--ink); }
+  .card-action { font-size: 0.8rem; color: var(--teal); cursor: pointer; font-weight: 500; }
+  .card-body { padding: 20px 24px; }
+
+  /* ─── ASSIGNMENTS ───────────────────────────── */
+  .assign-toolbar { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
+  .search-box { flex: 1; min-width: 200px; position: relative; }
+  .search-box input {
+    width: 100%; padding: 10px 14px 10px 38px; border: 1.5px solid var(--border); border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--ink); background: var(--surface); outline: none;
+  }
+  .search-box input:focus { border-color: var(--gold); }
+  .search-box::before { content: '🔍'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; }
+  
+  .add-btn {
+    padding: 10px 20px; background: var(--gold); border: none; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--ink);
+    cursor: pointer; display: flex; align-items: center; gap: 6px;
+  }
+
+  .assign-kanban { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .kanban-col { background: var(--warm); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+  .kanban-col-header { padding: 14px 18px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .kanban-col-body { padding: 14px; display: flex; flex-direction: column; gap: 12px; min-height: 200px; }
+
+  .assign-card {
+    background: var(--surface); border-radius: 10px; padding: 16px; border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(26,26,46,0.06); cursor: pointer; transition: transform 0.15s;
+  }
+  .assign-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+  .assign-card-name { font-size: 0.88rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .assign-card-meta { font-size: 0.75rem; color: var(--ink-light); display: flex; justify-content: space-between; margin-top: 8px; }
+
+  /* ─── GRADES ───────────────────────────────── */
+  .grade-table-wrap { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+  .grade-table { width: 100%; border-collapse: collapse; }
+  .grade-table th { background: var(--warm); padding: 14px 20px; text-align: left; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--ink-light); border-bottom: 1px solid var(--border); }
+  .grade-table td { padding: 16px 20px; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--ink); }
+  .grade-badge { display: inline-block; font-family: 'DM Serif Display', serif; font-size: 1.1rem; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+  .grade-A { background: rgba(42,127,127,0.12); color: var(--teal); }
+  .grade-B { background: rgba(201,168,76,0.15); color: #9a7a22; }
+  .grade-C { background: rgba(192,70,74,0.12); color: var(--rose); }
+
+  /* ─── STUDY GROUPS (New) ───────────────────── */
+  .group-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .group-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px; display: flex; flex-direction: column; gap: 12px; position: relative;
+  }
+  .group-header { display: flex; justify-content: space-between; align-items: start; }
+  .group-avatar-stack { display: flex; margin-top: 8px; }
+  .group-avatar-stack img { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--surface); margin-left: -10px; }
+  .group-avatar-stack img:first-child { margin-left: 0; }
+  .btn-join { margin-top: auto; padding: 8px; background: var(--ink); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+  .btn-join:hover { background: var(--teal); }
+
+  /* ─── AI MODAL (New) ───────────────────────── */
+  .ai-modal-body { display: flex; flex-direction: column; height: 400px; }
+  .ai-chat-area { flex: 1; background: var(--warm); border-radius: 8px; padding: 16px; overflow-y: auto; margin-bottom: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px; }
+  .ai-msg { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 0.9rem; line-height: 1.4; }
+  .ai-msg.bot { background: var(--surface); border: 1px solid var(--border); color: var(--ink); align-self: flex-start; border-bottom-left-radius: 2px; }
+  .ai-msg.user { background: var(--teal); color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
+  .ai-input-wrap { display: flex; gap: 10px; }
+  .ai-input { flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 8px; outline: none; }
+  .ai-send { background: var(--ink); color: #fff; border: none; padding: 0 16px; border-radius: 8px; cursor: pointer; }
+
+  /* ─── NOTIFICATION TOAST ───────────────────── */
+  .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 300; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+  .toast {
+    background: var(--ink); color: #fff; padding: 14px 18px; border-radius: 12px; font-size: 0.85rem;
+    box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 10px; min-width: 260px;
+    animation: toastIn 0.3s ease; pointer-events: auto; border-left: 4px solid var(--gold);
+  }
+  @keyframes toastIn { from { opacity:0; transform: translateX(20px); } to { opacity:1; transform: translateX(0); } }
+
+  /* ─── GENERIC MODAL ───────────────────────── */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(26,26,46,0.5); backdrop-filter: blur(4px); z-index: 200;
+    display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: auto; }
+  .modal {
+    background: var(--surface); border-radius: var(--radius); width: 100%; max-width: 500px;
+    box-shadow: var(--shadow-lg); transform: translateY(20px); transition: transform 0.2s;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-header { padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .modal-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; }
+  .modal-body { padding: 24px; }
+  .modal-footer { padding: 16px 24px; background: var(--warm); display: flex; justify-content: flex-end; gap: 10px; }
+
+  /* ─── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 1100px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .assign-kanban { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    :root { --sidebar-w: 0px; }
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); width: 260px; }
+    .main-content { margin-left: 0; }
+    .login-art { display: none; }
+    .login-form-wrap { width: 100%; }
+    .assign-kanban { grid-template-columns: 1fr; }
+    .notif-dropdown { width: 280px; right: -10px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ─── LOADER (Backend Sim) ───────────────────────────── -->
+<div id="global-loader" class="hidden">
+  <div class="loader-spinner"></div>
+  <div class="loader-text" id="loader-msg">Syncing with ScholarStep Cloud...</div>
+</div>
+
+<!-- ─── LOGIN PAGE ─────────────────────────────────────── -->
+<div id="login-page">
+  <div class="login-art">
+    <div class="login-brand">
+      <div class="logo-icon">🎓</div>
+      <h1>Scholar<span>Step</span></h1>
+      <p>Evolved for the modern student. AI-driven insights, real-time collaboration, and seamless tracking.</p>
+    </div>
+  </div>
+  <div class="login-form-wrap">
+    <div class="login-form">
+      <h2>Welcome back</h2>
+      <p class="sub">Sign in to access your dashboard</p>
+      <div class="form-group">
+        <label for="username-input">Email</label>
+        <input type="email" id="username-input" placeholder="student@university.edu" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label for="password-input">Password</label>
+        <input type="password" id="password-input" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+      <button class="btn-primary" id="login-btn" onclick="handleLogin()">Sign In</button>
+      <div class="error-msg" id="login-error"></div>
+      <div class="login-divider">New to ScholarStep?</div>
+      <button class="btn-sec" style="width:100%; padding:12px; border:1px solid var(--border); border-radius:10px; background:var(--cream); cursor:pointer;" onclick="showToast('Registration is currently closed for semester setup.', 'info')">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── APP SHELL ──────────────────────────────────── -->
+<div id="app-shell" class="hidden">
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">🎓</div>
+      <div class="sidebar-title">Scholar<span>Step</span></div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-section-label">Academic</div>
+      <button class="nav-item active" onclick="navigate('dashboard', this)" aria-label="Dashboard">
+        <span class="nav-icon">🏠</span> Dashboard
+      </button>
+      <button class="nav-item" onclick="navigate('assignments', this)" aria-label="Assignments">
+        <span class="nav-icon">📋</span> Assignments
+        <span class="nav-badge" id="pending-badge">0</span>
+      </button>
+      <button class="nav-item" onclick="navigate('grades', this)" aria-label="Grades">
+        <span class="nav-icon">📊</span> Grades
+      </button>
+      <button class="nav-item" onclick="navigate('groups', this)" aria-label="Study Groups">
+        <span class="nav-icon">👥</span> Study Groups
+      </button>
+      <div class="nav-section-label">System</div>
+      <button class="nav-item" onclick="navigate('settings', this)" aria-label="Settings">
+        <span class="nav-icon">⚙️</span> Settings
+      </button>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="user-avatar">JM</div>
+      <div class="user-info">
+        <div class="user-name" id="user-name-display">Joel Mwaura</div>
+        <div class="user-role">Computer Science</div>
+      </div>
+      <button class="logout-btn" title="Logout" onclick="doLogout()" aria-label="Logout">⏻</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content" id="main-content">
+    <header class="topbar">
+      <div class="topbar-title" id="page-title">Dashboard</div>
+      <div class="topbar-actions">
+        <!-- Real-time Notification Trigger -->
+        <div style="position:relative;">
+            <button class="topbar-btn topbar-notif" id="notif-btn" title="Notifications" aria-label="Notifications" onclick="toggleNotifDropdown()">
+                🔔
+            </button>
+            <div class="notif-dropdown" id="notif-dropdown">
+                <div class="notif-header">
+                    <h4>Notifications</h4>
+                    <span style="font-size:0.7rem; color:var(--teal); cursor:pointer;" onclick="markAllRead()">Mark all read</span>
+                </div>
+                <div class="notif-list" id="notif-list">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+        <button class="topbar-btn" title="Help" aria-label="Help">❓</button>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- ── DASHBOARD ── -->
+      <div class="page active" id="page-dashboard">
+        <div class="welcome-banner">
+          <div class="welcome-text">
+            <h2>Hello, <span id="first-name">Student</span> 👋</h2>
+            <p>You have <strong id="dash-todo-count">0</strong> tasks pending. Your GPA trend is positive.</p>
+          </div>
+          <!-- AI Feature Access -->
+          <button class="ai-fab" onclick="openAIModal()">
+            ✨ Ask AI Advisor
+          </button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card" style="border-bottom: 3px solid var(--gold);">
+            <div class="stat-icon">📚</div>
+            <div class="stat-value" id="stat-assign">0</div>
+            <div class="stat-label">Active Assignments</div>
+          </div>
+          <div class="stat-card" style="border-bottom: 3px solid var(--teal);">
+            <div class="stat-icon">✅</div>
+            <div class="stat-value" id="stat-gpa">3.7</div>
+            <div class="stat-label">Current GPA</div>
+          </div>
+          <div class="stat-card" style="border-bottom: 3px solid var(--rose);">
+            <div class="stat-icon">⏰</div>
+            <div class="stat-value" id="stat-due">0</div>
+            <div class="stat-label">Due in 24h</div>
+          </div>
+          <div class="stat-card" style="border-bottom: 3px solid var(--ink);">
+            <div class="stat-icon">🤖</div>
+            <div class="stat-value">Active</div>
+            <div class="stat-label">AI Study Status</div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <!-- Recent Activity -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Recent Assignments</div>
+              <div class="card-action" onclick="navigate('assignments', document.querySelectorAll('.nav-item')[2])">View All</div>
+            </div>
+            <div class="card-body" id="mini-assign-list">
+                <!-- Populated JS -->
+            </div>
+          </div>
+          
+          <!-- AI Suggestion Widget -->
+          <div class="card" style="background: linear-gradient(to bottom right, #fff, #f0f9ff); border-color: var(--teal-light);">
+            <div class="card-header">
+              <div class="card-title" style="color:var(--teal);">✨ AI Insight</div>
+            </div>
+            <div class="card-body" style="font-size:0.9rem; color:var(--ink-light); line-height:1.5;">
+              <p id="ai-quick-tip">Analyzing your performance...</p>
+              <button onclick="openAIModal()" style="margin-top:12px; background:var(--teal); color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.8rem;">Deep Dive</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ASSIGNMENTS ── -->
+      <div class="page" id="page-assignments">
+        <div class="assign-toolbar">
+          <div class="search-box">
+            <input type="text" placeholder="Search tasks..." id="assign-search" aria-label="Search Assignments" oninput="renderAssignments()" />
+          </div>
+          <button class="add-btn" onclick="showToast('Create feature is streamlined this sprint', 'info')">＋ New Task</button>
+        </div>
+        <div class="assign-kanban" id="assign-kanban">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- ── GRADES ── -->
+      <div class="page" id="page-grades">
+        <div class="grade-table-wrap">
+          <table class="grade-table">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Credits</th>
+                <th>Grade</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="grades-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── STUDY GROUPS (New Feature) ── -->
+      <div class="page" id="page-groups">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+            <h2 style="font-family:'DM Serif Display'; font-size:1.5rem;">Study Groups</h2>
+            <button class="add-btn" onclick="showToast('Group creation is pending admin approval.', 'info')">Create Group</button>
+        </div>
+        <div class="group-grid" id="groups-grid">
+            <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- ── SETTINGS ── -->
+      <div class="page" id="page-settings">
+        <div class="card">
+            <div class="card-header"><div class="card-title">Application Settings</div></div>
+            <div class="card-body">
+                <div style="display:flex; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--border);">
+                    <div>
+                        <div style="font-weight:600;">Accessibility Mode</div>
+                        <div style="font-size:0.8rem; color:var(--ink-light);">High contrast and reduced motion</div>
+                    </div>
+                    <label class="toggle"><input type="checkbox" onchange="toggleA11y(this)" /><span class="toggle-slider" style="width:40px; height:22px; background:var(--border); border-radius:20px; position:relative; display:block; transition:0.2s;"></span></label>
+                </div>
+                <div style="display:flex; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--border);">
+                    <div>
+                        <div style="font-weight:600;">Real-time Notifications</div>
+                        <div style="font-size:0.8rem; color:var(--ink-light);">Receive push updates for deadlines</div>
+                    </div>
+                    <label class="toggle"><input type="checkbox" checked onchange="toggleRealtime(this)" /><span class="toggle-slider" style="width:40px; height:22px; background:var(--border); border-radius:20px; position:relative; display:block; transition:0.2s;"></span></label>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ─── MODALS ────────────────────────────────────────── -->
+
+<!-- AI Advisor Modal -->
+<div class="modal-overlay" id="ai-modal-overlay" onclick="closeModal('ai-modal-overlay')">
+  <div class="modal" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="ai-modal-title">
+    <div class="modal-header">
+      <div class="modal-title" id="ai-modal-title">🤖 ScholarStep AI Advisor</div>
+      <button onclick="closeModal('ai-modal-overlay')" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">&times;</button>
+    </div>
+    <div class="modal-body ai-modal-body">
+      <div class="ai-chat-area" id="ai-chat-area">
+        <div class="ai-msg bot">Hello! I've analyzed your current grades and assignment deadlines. How can I help you study smarter today?</div>
+      </div>
+      <div class="ai-input-wrap">
+        <input type="text" class="ai-input" id="ai-input" placeholder="Ask about study tips, grades, or schedule..." onkeypress="if(event.key==='Enter') sendAIMessage()" />
+        <button class="ai-send" onclick="sendAIMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container" role="alert" aria-live="polite"></div>
+
+<script>
+  // ─── DATA & STATE ───────────────────────────────────────
+  const state = {
+    user: { name: 'Guest', email: '' },
+    assignments: [
+      { id: 1, title: 'Data Structures Quiz', subject: 'CS201', status: 'todo', due: '2023-11-15', priority: 'high' },
+      { id: 2, title: 'Essay Draft', subject: 'ENG101', status: 'in-progress', due: '2023-11-18', priority: 'medium' },
+      { id: 3, title: 'Lab Report 3', subject: 'PHY204', status: 'done', due: '2023-11-10', priority: 'low' },
+      { id: 4, title: 'Algorithm Analysis', subject: 'CS301', status: 'todo', due: '2023-11-20', priority: 'high' },
+    ],
+    grades: [
+      { course: 'Data Structures', code: 'CS201', grade: 'A-', status: 'On Track' },
+      { course: 'Calculus II', code: 'MATH202', grade: 'B+', status: 'On Track' },
+      { course: 'English Comp', code: 'ENG101', grade: 'A', status: 'Excellent' },
+      { course: 'Physics II', code: 'PHY204', grade: 'C', status: 'Needs Attention' },
+    ],
+    groups: [
+      { id: 1, name: 'CS201 Study Squad', members: 4, topic: 'Binary Trees' },
+      { id: 2, name: 'Physics Help', members: 12, topic: 'Electromagnetism' },
+      { id: 3, name: 'History Review', members: 6, topic: 'WWII Notes' }
+    ],
+    notifications: [
+      { id: 1, text: 'New grade posted for Physics II', time: '2m ago', read: false },
+      { id: 2, text: 'CS201 Assignment due tomorrow', time: '1h ago', read: false }
+    ],
+    realtimeEnabled: true,
+    realtimeInterval: null
+  };
+
+  // ─── BACKEND SIMULATION (Async/Await) ──────────────────
+  async function mockApiCall(action, payload) {
+    // Simulate network latency (500ms - 1500ms)
+    const delay = Math.floor(Math.random() * 1000) + 500;
+    showLoader(true, `Syncing ${action}...`);
+    
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        showLoader(false);
+        resolve({ status: 'success', data: payload });
+      }, delay);
+    });
+  }
+
+  function showLoader(show, msg = 'Loading...') {
+    const loader = document.getElementById('global-loader');
+    document.getElementById('loader-msg').textContent = msg;
+    if (show) loader.classList.remove('hidden');
+    else loader.classList.add('hidden');
+  }
+
+  // ─── AUTHENTICATION ────────────────────────────────────
+  async function handleLogin() {
+    const email = document.getElementById('username-input').value;
+    const pass = document.getElementById('password-input').value;
+    const btn = document.getElementById('login-btn');
+    const err = document.getElementById('login-error');
+
+    if (!email || !pass) {
+      err.textContent = 'Please enter email and password.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Authenticating...';
+
+    // Simulate backend auth check
+    await mockApiCall('Authentication');
+
+    // Mock logic
+    if (pass.length < 4) {
+      err.textContent = 'Invalid password (try length > 4).';
+      btn.disabled = false;
+      btn.textContent = 'Sign In';
+    } else {
+      // Success
+      state.user.name = email.split('@')[0];
+      state.user.email = email;
+      
+      document.getElementById('login-page').classList.add('hidden');
+      document.getElementById('app-shell').classList.remove('hidden');
+      
+      updateProfileUI();
+      await initDashboard(); // Load dashboard data
+      startRealtimeNotifications(); // Start simulated push
+      showToast(`Welcome back, ${state.user.name}!`, 'success');
+    }
+  }
+
+  function doLogout() {
+    stopRealtimeNotifications();
+    document.getElementById('app-shell').classList.add('hidden');
+    document.getElementById('login-page').classList.remove('hidden');
+    document.getElementById('password-input').value = '';
+    const btn = document.getElementById('login-btn');
+    btn.disabled = false;
+    btn.textContent = 'Sign In';
+  }
+
+  // ─── DASHBOARD LOGIC ───────────────────────────────────
+  async function initDashboard() {
+    await mockApiCall('Dashboard Data');
+    renderStats();
+    renderMiniAssignments();
+    renderNotifications();
+    generateAIQuickTip();
+  }
+
+  function updateProfileUI() {
+    document.getElementById('user-name-display').textContent = state.user.name;
+    document.getElementById('first-name').textContent = state.user.name;
+    const initials = state.user.name.substring(0,2).toUpperCase();
+    document.getElementById('user-avatar').textContent = initials;
+  }
+
+  function renderStats() {
+    const todoCount = state.assignments.filter(a => a.status === 'todo').length;
+    const dueSoon = state.assignments.filter(a => a.status !== 'done').length; // Simplified logic
+    
+    document.getElementById('stat-assign').textContent = state.assignments.length;
+    document.getElementById('dash-todo-count').textContent = todoCount;
+    document.getElementById('pending-badge').textContent = todoCount;
+    document.getElementById('stat-due').textContent = dueSoon;
+  }
+
+  function renderMiniAssignments() {
+    const container = document.getElementById('mini-assign-list');
+    const pending = state.assignments.filter(a => a.status !== 'done').slice(0, 3);
+    
+    container.innerHTML = pending.map(a => `
+      <div class="assign-card" onclick="navigate('assignments', null)">
+        <div class="assign-card-name">${a.title}</div>
+        <div class="assign-card-meta">
+          <span>${a.subject}</span>
+          <span>${a.due}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderAssignments() {
+    const search = document.getElementById('assign-search').value.toLowerCase();
+    const container = document.getElementById('assign-kanban');
+    
+    const cols = { todo: [], 'in-progress': [], done: [] };
+    
+    state.assignments.forEach(a => {
+      if (a.title.toLowerCase().includes(search) || a.subject.toLowerCase().includes(search)) {
+        cols[a.status].push(a);
+      }
+    });
+
+    container.innerHTML = Object.keys(cols).map(status => `
+      <div class="kanban-col">
+        <div class="kanban-col-header">
+          <div style="font-weight:600; text-transform:uppercase; font-size:0.8rem; color:var(--ink-light);">${status.replace('-', ' ')}</div>
+          <div style="background:var(--warm); width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem;">${cols[status].length}</div>
+        </div>
+        <div class="kanban-col-body">
+          ${cols[status].map(a => `
+            <div class="assign-card">
+              <div class="assign-card-name">${a.title}</div>
+              <div class="assign-card-meta">
+                <span>${a.subject}</span>
+                <span style="color:var(--rose);">${a.due}</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderGrades() {
+    const tbody = document.getElementById('grades-tbody');
+    tbody.innerHTML = state.grades.map(g => `
+      <tr>
+        <td><strong>${g.course}</strong><br><span style="font-size:0.75rem; color:var(--ink-light);">${g.code}</span></td>
+        <td>4.0</td>
+        <td><span class="grade-badge ${g.grade.startsWith('A')?'grade-A':(g.grade.startsWith('B')?'grade-B':'grade-C')}">${g.grade}</span></td>
+        <td><span style="font-size:0.8rem; padding:2px 8px; background:${g.status==='Excellent'?'rgba(42,127,127,0.1)':'rgba(201,168,76,0.1)'}; border-radius:4px; color:${g.status==='Excellent'?'var(--teal)':'var(--gold)'};">${g.status}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  function renderGroups() {
+    const grid = document.getElementById('groups-grid');
+    grid.innerHTML = state.groups.map(g => `
+      <div class="group-card">
+        <div class="group-header">
+            <div style="font-weight:600;">${g.name}</div>
+            <div style="font-size:0.8rem; background:var(--teal-light); color:var(--ink); padding:2px 8px; border-radius:10px;">${g.members} Members</div>
+        </div>
+        <div style="font-size:0.85rem; color:var(--ink-light); margin-top:4px;">Topic: ${g.topic}</div>
+        <div class="group-avatar-stack">
+            <img src="https://picsum.photos/seed/${g.id}1/30/30" alt="Member 1">
+            <img src="https://picsum.photos/seed/${g.id}2/30/30" alt="Member 2">
+            <img src="https://picsum.photos/seed/${g.id}3/30/30" alt="Member 3">
+        </div>
+        <button class="btn-join" onclick="showToast('Joined ${g.name}!', 'success')">Join Group</button>
+      </div>
+    `).join('');
+  }
+
+  // ─── NAVIGATION ────────────────────────────────────────
+  function navigate(pageId, btn) {
+    // Update sidebar active state
+    if (btn) {
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      btn.classList.add('active');
+    } else {
+      // Find btn by pageId if not passed
+      const index = ['dashboard','assignments','grades','groups','settings'].indexOf(pageId);
+      if(index > -1) {
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        document.querySelectorAll('.nav-item')[index].classList.add('active');
+      }
+    }
+
+    // Switch Page
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(`page-${pageId}`).classList.add('active');
+    
+    // Set Title
+    const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades', groups:'Study Groups', settings:'Settings' };
+    document.getElementById('page-title').textContent = titles[pageId];
+
+    // Render specific page data
+    if (pageId === 'assignments') renderAssignments();
+    if (pageId === 'grades') renderGrades();
+    if (pageId === 'groups') renderGroups();
+  }
+
+  // ─── REAL-TIME NOTIFICATIONS (Simulated) ───────────────
+  function renderNotifications() {
+    const list = document.getElementById('notif-list');
+    if (state.notifications.length === 0) {
+      list.innerHTML = '<div style="padding:16px; text-align:center; color:var(--ink-light);">No new notifications</div>';
+      return;
+    }
+    list.innerHTML = state.notifications.map(n => `
+      <div class="notif-item" onclick="showToast('Opening: ${n.text}', 'info')">
+        <strong>${n.text}</strong>
+        <span>${n.time}</span>
+      </div>
+    `).join('');
+  }
+
+  function toggleNotifDropdown() {
+    const dd = document.getElementById('notif-dropdown');
+    const btn = document.getElementById('notif-btn');
+    dd.classList.toggle('open');
+    btn.classList.toggle('active');
+    
+    if (dd.classList.contains('open')) {
+      markAllRead();
+    }
+  }
+
+  function markAllRead() {
+    state.notifications.forEach(n => n.read = true);
+    const btn = document.getElementById('notif-btn');
+    btn.classList.remove('topbar-notif'); // Remove red dot visual
+  }
+
+  function startRealtimeNotifications() {
+    if (!state.realtimeEnabled) return;
+    
+    // Simulate receiving a notification every 20-40 seconds
+    state.realtimeInterval = setInterval(() => {
+      if (!state.realtimeEnabled) return;
+      
+      const events = [
+        'New announcement from Dean',
+        'Study Group "CS201" has a new message',
+        'Assignment "Calculus" was updated',
+        'Grade posted for History'
+      ];
+      
+      const randomEvent = events[Math.floor(Math.random() * events.length)];
+      
+      // Add to state
+      state.notifications.unshift({
+        id: Date.now(),
+        text: randomEvent,
+        time: 'Just now',
+        read: false
+      });
+
+      // Show visual feedback
+      showToast(`🔔 ${randomEvent}`, 'success');
+      
+      // Redraw list if dropdown is open (or just update badge)
+      const badge = document.getElementById('pending-badge');
+      const btn = document.getElementById('notif-btn');
+      
+      // Re-add red dot if missing
+      if (!btn.classList.contains('topbar-notif')) {
+        btn.classList.add('topbar-notif');
+      }
+      
+      renderNotifications();
+      
+    }, 25000); // 25 seconds
+  }
+
+  function stopRealtimeNotifications() {
+    if (state.realtimeInterval) clearInterval(state.realtimeInterval);
+  }
+
+  function toggleRealtime(checkbox) {
+    state.realtimeEnabled = checkbox.checked;
+    if (state.realtimeEnabled) startRealtimeNotifications();
+    else stopRealtimeNotifications();
+  }
+
+  // ─── AI ADVISOR LOGIC ───────────────────────────────────
+  function openAIModal() {
+    document.getElementById('ai-modal-overlay').classList.add('open');
+    setTimeout(() => document.getElementById('ai-input').focus(), 100);
+  }
+
+  function generateAIQuickTip() {
+    const el = document.getElementById('ai-quick-tip');
+    // Simple heuristic logic
+    const lowGrade = state.grades.find(g => g.grade.startsWith('C'));
+    if (lowGrade) {
+      el.innerHTML = `I noticed your <strong>${lowGrade.course}</strong> grade is struggling. I recommend joining the <a href="#" onclick="navigate('groups',null); return false;" style="color:var(--teal);">Study Group</a> for this subject.`;
+    } else {
+      el.innerHTML = `Your performance is strong! Keep up the momentum. Focus on upcoming <strong>${state.assignments.filter(a=>a.status==='todo').length}</strong> assignments.`;
+    }
+  }
+
+  function sendAIMessage() {
+    const input = document.getElementById('ai-input');
+    const txt = input.value.trim();
+    if (!txt) return;
+
+    const chat = document.getElementById('ai-chat-area');
+    
+    // User msg
+    chat.innerHTML += `<div class="ai-msg user">${txt}</div>`;
+    input.value = '';
+    chat.scrollTop = chat.scrollHeight;
+
+    // Simulate AI typing
+    setTimeout(() => {
+      let response = "I can help you organize your schedule or analyze your grades. Could you be more specific?";
+      const lower = txt.toLowerCase();
+      
+      if (lower.includes('grade') || lower.includes('gpa')) {
+        response = "Your current GPA is 3.7. Physics II seems to be the challenge. I've created a focused study plan for you in the background.";
+      } else if (lower.includes('study') || lower.includes('help')) {
+        response = "I found 3 active study groups matching your courses. Check the 'Study Groups' tab to collaborate with peers.";
+      } else if (lower.includes('due') || lower.includes('deadline')) {
+        response = `You have ${state.assignments.filter(a=>a.status==='todo').length} pending tasks. The 'Data Structures Quiz' is due tomorrow.`;
+      }
+
+      chat.innerHTML += `<div class="ai-msg bot">${response}</div>`;
+      chat.scrollTop = chat.scrollHeight;
+    }, 1000);
+  }
+
+  // ─── ACCESSIBILITY ─────────────────────────────────────
+  function toggleA11y(checkbox) {
+    const root = document.documentElement;
+    if (checkbox.checked) {
+      root.style.setProperty('--ink-light', '#000');
+      root.style.setProperty('--border', '#000');
+      document.body.style.fontWeight = '500';
+      showToast('High contrast mode enabled', 'success');
+    } else {
+      root.style.setProperty('--ink-light', '#3d3d5c');
+      root.style.setProperty('--border', '#e8e2d6');
+      document.body.style.fontWeight = '400';
+    }
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+
+  // ─── UTILS ─────────────────────────────────────────────
+  function showToast(msg, type) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.style.borderLeftColor = type === 'success' ? 'var(--teal)' : (type === 'error' ? 'var(--rose)' : 'var(--gold)');
+    toast.innerHTML = `<span>${msg}</span>`;
+    
+    container.appendChild(toast);
+    
+    // Remove after 3s
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(20px)';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
+  // Close dropdown when clicking outside
+  window.addEventListener('click', (e) => {
+    const dd = document.getElementById('notif-dropdown');
+    const btn = document.getElementById('notif-btn');
+    if (!dd.contains(e.target) && !btn.contains(e.target)) {
+      dd.classList.remove('open');
+      btn.classList.remove('active');
+    }
+  });
+</script>
+</body>
+</html>
+```
