@@ -2,7 +2,7 @@ Set-Content -Path "C:\Users\Joel Ndiba Mwaura\GitHub\CS160\ScholarStep\backend\r
 const router  = require('express').Router();
 const bcrypt  = require('bcryptjs');
 const jwt     = require('jsonwebtoken');
-const pool    = require('../db');
+const db = require('../db/index');
 
 router.post('/register', async (req, res) => {
   const { name, email, password, program, year } = req.body;
