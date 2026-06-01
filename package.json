@@ -16,7 +16,5 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
-  },
-  "email": "joel@scholarstep.com",
-  "password": "password123"
+  }
 }
