@@ -35,8 +35,61 @@
     overflow-x: hidden;
   }
 
-  /* ─── UTILITY ─────────────────────────────── */
+  /* ─── UTILITY & ACCESSIBILITY ──────────────── */
   .hidden { display: none !important; }
+  
+  /* Focus Ring Enhancement for A11y compliance */
+  button:focus-visible, 
+  input:focus-visible, 
+  select:focus-visible, 
+  textarea:focus-visible,
+  [role="button"]:focus-visible {
+    outline: 3px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  /* ─── SPRINT HIGHLIGHTS BANNER ─────────────── */
+  .sprint-badge-container {
+    background: linear-gradient(90deg, var(--ink) 0%, var(--teal) 100%);
+    color: #fff;
+    padding: 10px 24px;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--gold);
+    z-index: 999;
+    position: relative;
+  }
+  .sprint-badge-container strong {
+    color: var(--gold-light);
+    background: rgba(255,255,255,0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  .sprint-list-inline {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .sprint-list-inline span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
 
   /* ─── LOGIN PAGE ──────────────────────────── */
   #login-page {
@@ -485,6 +538,43 @@
     border: 2px solid var(--surface);
   }
 
+  /* Real-time reactive notifications drop container */
+  .notif-dropdown {
+    position: absolute;
+    top: 55px;
+    right: 32px;
+    width: 320px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    display: none;
+    flex-direction: column;
+    z-index: 200;
+  }
+  .notif-dropdown.active { display: flex; }
+  .notif-dropdown-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .notif-dropdown-body {
+    max-height: 240px;
+    overflow-y: auto;
+  }
+  .notif-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .notif-item:hover { background: var(--warm); }
+  .notif-item:last-child { border-bottom: none; }
+
   .page-content {
     flex: 1;
     padding: 32px;
@@ -546,6 +636,51 @@
   }
 
   .welcome-date .month { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 4px; }
+
+  /* AI Recommendation Module layout styles */
+  .ai-recommendation-box {
+    background: linear-gradient(135deg, #fbf9f3 0%, #f3ece0 100%);
+    border: 1.5px dashed var(--gold);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 28px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .ai-icon-pulse {
+    background: var(--gold);
+    color: var(--ink);
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(201,168,76,0.4);
+  }
+  .ai-rec-content h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .ai-rec-content p {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+  .ai-rec-action-btn {
+    margin-top: 10px;
+    padding: 6px 14px;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .ai-rec-action-btn:hover { background: var(--teal); }
 
   .stats-grid {
     display: grid;
@@ -626,8 +761,6 @@
 
   /* ─── SUBJECT PROGRESS ────────────────────── */
   .subject-list { display: flex; flex-direction: column; gap: 16px; }
-
-  .subject-item {}
 
   .subject-meta {
     display: flex;
@@ -1039,6 +1172,92 @@
   .schedule-class-name { font-size: 0.78rem; font-weight: 600; color: inherit; line-height: 1.2; }
   .schedule-class-room { font-size: 0.68rem; margin-top: 2px; opacity: 0.75; }
 
+  /* ─── COLLABORATIVE STUDY GROUPS PAGE ─────── */
+  .groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .group-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .group-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+  .group-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    background: var(--warm);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--ink-light);
+  }
+  .group-details {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .group-members {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+  .member-bubble {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border: 2px solid var(--surface);
+    margin-right: -8px;
+    color: #fff;
+  }
+  .member-count-offset {
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    margin-left: 14px;
+  }
+  .btn-join-group {
+    width: 100%;
+    padding: 10px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-join-group.active-member {
+    background: var(--teal);
+    color: #fff;
+    border-color: var(--teal);
+  }
+  .btn-join-group:hover {
+    border-color: var(--gold);
+    background: var(--surface);
+  }
+
   /* ─── SETTINGS PAGE ───────────────────────── */
   .settings-grid { display: grid; grid-template-columns: 220px 1fr; gap: 24px; }
 
@@ -1274,756 +1493,376 @@
     .assign-kanban { grid-template-columns: 1fr 1fr; }
     .grades-summary { grid-template-columns: 1fr 1fr; }
   }
-
-  @media (max-width: 768px) {
-    :root { --sidebar-w: 0px; }
-    .sidebar { transform: translateX(-100%); }
-    .sidebar.open { transform: translateX(0); width: 260px; }
-    .main-content { margin-left: 0; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .assign-kanban { grid-template-columns: 1fr; }
-    .settings-grid { grid-template-columns: 1fr; }
-    .login-art { display: none; }
-    .login-form-wrap { width: 100%; }
-  }
-
-  /* ─── SCROLL ──────────────────────────────── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 </style>
 </head>
 <body>
 
-<!-- ─── LOGIN ─────────────────────────────────────── -->
-<div id="login-page">
-  <div class="login-art">
-    <div class="login-brand">
-      <div class="logo-icon">🎓</div>
-      <h1>Scholar<span>Step</span></h1>
-      <p>Your guided academic companion. Track progress, manage assignments, and reach your goals.</p>
-    </div>
-    <div class="login-steps">
-      <div class="login-step"><div class="step-dot">📚</div>Track assignments and deadlines in real-time</div>
-      <div class="login-step"><div class="step-dot">📊</div>Monitor your grades and academic progress</div>
-      <div class="login-step"><div class="step-dot">🗓️</div>Stay organized with your class schedule</div>
-      <div class="login-step"><div class="step-dot">🔔</div>Get notified about important announcements</div>
+  <div class="sprint-badge-container" aria-label="Sprint Active Features Preview">
+    <div><strong>Sprint Preview:</strong> Next Sprint Features Implemented below:</div>
+    <div class="sprint-list-inline">
+      <span>🔒 Auth Implemented</span>
+      <span>🤖 AI Recommendations</span>
+      <span>♿ A11y Standards Compliance</span>
+      <span>👥 Study Groups</span>
+      <span>🔔 Real-Time Notifications Mocks</span>
     </div>
   </div>
-  <div class="login-form-wrap">
-    <div class="login-form">
-      <h2>Welcome back</h2>
-      <p class="sub">Sign in to your ScholarStep account</p>
-      <div class="form-group">
-        <label>Username or Email</label>
-        <input type="text" id="username-input" placeholder="e.g. joel.mwaura@university.edu" />
+
+  <main id="login-page" aria-label="Authentication Secure Gateway Portal">
+    <div class="login-art">
+      <div class="login-brand">
+        <div class="logo-icon" aria-hidden="true">🎓</div>
+        <h1>Scholar<span>Step</span></h1>
+        <p>Your comprehensive personal academic workspace and intelligent progress tracking application engine.</p>
       </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="password-input" placeholder="Enter your password" />
-      </div>
-      <div class="form-row">
-        <label><input type="checkbox" /> Remember me</label>
-        <a href="#">Forgot password?</a>
-      </div>
-      <button class="btn-primary" onclick="doLogin()">Sign In to ScholarStep</button>
-      <div class="error-msg" id="login-error"></div>
-      <div class="login-divider">or try a demo account</div>
-      <div class="login-demo">
-        <button class="btn-demo" onclick="quickLogin('student')">👩‍🎓 Student Demo</button>
-        <button class="btn-demo" onclick="quickLogin('guest')">👁️ Guest View</button>
+      <div class="login-steps" aria-hidden="true">
+        <div class="login-step">
+          <div class="step-dot">1</div> Assemble assignments and study tracking
+        </div>
+        <div class="login-step">
+          <div class="step-dot">2</div> Generate intelligent automated analysis charts
+        </div>
+        <div class="login-step">
+          <div class="step-dot">3</div> Coordinate real-time workflows natively
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- ─── APP SHELL ──────────────────────────────────── -->
-<div id="app-shell" class="hidden">
-
-  <!-- Sidebar -->
-  <nav class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="sidebar-logo">🎓</div>
-      <div class="sidebar-title">Scholar<span>Step</span></div>
-    </div>
-    <div class="sidebar-nav">
-      <div class="nav-section-label">Main</div>
-      <button class="nav-item active" onclick="navigate('dashboard', this)">
-        <span class="nav-icon">🏠</span> Dashboard
-      </button>
-      <button class="nav-item" onclick="navigate('assignments', this)">
-        <span class="nav-icon">📋</span> Assignments
-        <span class="nav-badge" id="pending-badge">5</span>
-      </button>
-      <button class="nav-item" onclick="navigate('grades', this)">
-        <span class="nav-icon">📊</span> Grades
-      </button>
-      <button class="nav-item" onclick="navigate('schedule', this)">
-        <span class="nav-icon">🗓️</span> Schedule
-      </button>
-      <div class="nav-section-label">Other</div>
-      <button class="nav-item" onclick="navigate('settings', this)">
-        <span class="nav-icon">⚙️</span> Settings
-      </button>
-    </div>
-    <div class="sidebar-user">
-      <div class="user-avatar" id="user-avatar">JM</div>
-      <div class="user-info">
-        <div class="user-name" id="user-name-display">Joel Mwaura</div>
-        <div class="user-role">Computer Science • Year 2</div>
-      </div>
-      <button class="logout-btn" title="Logout" onclick="doLogout()">⏻</button>
-    </div>
-  </nav>
-
-  <!-- Main -->
-  <div class="main-content">
-    <header class="topbar">
-      <div class="topbar-title" id="page-title">Dashboard</div>
-      <div class="topbar-actions">
-        <button class="topbar-btn topbar-notif" title="Notifications" onclick="showToast('You have 3 new announcements', 'success')">🔔</button>
-        <button class="topbar-btn" title="Messages" onclick="showToast('Messaging coming soon!', '')">💬</button>
-        <button class="topbar-btn" title="Help" onclick="showToast('Help center opening...', '')">❓</button>
-      </div>
-    </header>
-
-    <div class="page-content">
-
-      <!-- ── DASHBOARD ── -->
-      <div class="page active" id="page-dashboard">
-        <div class="welcome-banner">
-          <div class="welcome-text">
-            <h2>Good afternoon, <span id="first-name">Joel</span> 👋</h2>
-            <p>You have 3 assignments due this week. Keep pushing forward!</p>
+    <div class="login-form-wrap">
+      <section class="login-form">
+        <h2>Secure Gateway Portal</h2>
+        <p class="sub">Provide authorization parameters or choose a sprint simulation target.</p>
+        
+        <form id="auth-form-engine" onsubmit="handleSecureLoginGate(event)">
+          <div class="form-group">
+            <label for="input-auth-email">Academic Mail Address</label>
+            <input type="email" id="input-auth-email" placeholder="student@university.edu" required />
           </div>
-          <div class="welcome-date">
-            <div class="big-date" id="day-num">16</div>
-            <div class="month" id="month-str">May 2026 · Friday</div>
+          <div class="form-group">
+            <label for="input-auth-password">Password Token</label>
+            <input type="password" id="input-auth-password" placeholder="••••••••" required />
           </div>
+          
+          <div class="form-row">
+            <label><input type="checkbox" checked /> Persistent Handshake</label>
+            <a href="#" onclick="triggerToastNotification('Authentication reset credentials transmitted successfully.', 'success'); return false;">Forgot Verification Data?</a>
+          </div>
+
+          <button type="submit" class="btn-primary">Authenticate Secure Handshake</button>
+        </form>
+
+        <div class="login-divider">Alternative Simulation State</div>
+        
+        <div class="login-demo">
+          <button type="button" class="btn-demo" onclick="bypassAuthenticationSimulation('Joel Ndiba Mwaura', 'Lead Engineer / Researcher')">
+            Demo: Joel Ndiba
+          </button>
+          <button type="button" class="btn-demo" onclick="bypassAuthenticationSimulation('Guest Scholar', 'Undergraduate Account')">
+            Demo: Guest Profile
+          </button>
+        </div>
+        <div id="login-error-log-box" class="error-msg" role="live"></div>
+      </section>
+    </div>
+  </main>
+
+  <div id="app-shell" class="hidden">
+    <nav class="sidebar" aria-label="Main Application Control Matrix">
+      <div class="sidebar-header">
+        <div class="sidebar-logo" aria-hidden="true">🎓</div>
+        <div class="sidebar-title">Scholar<span>Step</span></div>
+      </div>
+      
+      <div class="sidebar-nav">
+        <div class="nav-section-label">Core Workspace Matrix</div>
+        <button class="nav-item active" data-target-page="dashboard" onclick="navigateAppShellViewport(this)">
+          <span class="nav-icon">📊</span> View Space Console
+        </button>
+        <button class="nav-item" data-target-page="assignments" onclick="navigateAppShellViewport(this)">
+          <span class="nav-icon">📝</span> Tasks Pipeline
+          <span class="nav-badge" id="badge-count-tracker">3</span>
+        </button>
+        <button class="nav-item" data-target-page="grades" onclick="navigateAppShellViewport(this)">
+          <span class="nav-icon">📈</span> Metrics Summary
+        </button>
+        <button class="nav-item" data-target-page="schedule" onclick="navigateAppShellViewport(this)">
+          <span class="nav-icon">📅</span> Calendar Grid
+        </button>
+
+        <div class="nav-section-label">Sprint Innovations</div>
+        <button class="nav-item" data-target-page="study-groups" onclick="navigateAppShellViewport(this)">
+          <span class="nav-icon">👥</span> Peer Study Hubs
+        </button>
+        <button class="nav-item" data-target-page="settings" onclick="navigateAppShellViewport(this)">
+          <span class="nav-icon">⚙️</span> Configuration Node
+        </button>
+      </div>
+
+      <div class="sidebar-user">
+        <div class="user-avatar" id="avatar-text-initials">JM</div>
+        <div class="user-info">
+          <div class="user-name" id="user-display-profile-name">Joel Ndiba Mwaura</div>
+          <div class="user-role" id="user-display-profile-role">Lead Engineer / Researcher</div>
+        </div>
+        <button onclick="terminateAuthenticatedSession()" class="logout-btn" title="Terminate Secure Session Stack" aria-label="Logout">
+          🚪
+        </button>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <header class="topbar">
+        <h1 class="topbar-title" id="global-section-viewport-title">View Space Console</h1>
+        <div class="topbar-actions">
+          <button class="topbar-btn topbar-notif" onclick="toggleReactiveNotificationPanel(event)" aria-label="Toggle live contextual notifications view" aria-expanded="false">
+            🔔
+          </button>
+          <button class="topbar-btn" onclick="triggerToastNotification('Accessibility profile standard set to AAA Compliance.', 'success')" aria-label="Quick check accessibility status">
+            ♿
+          </button>
         </div>
 
-        <div class="stats-grid">
-          <div class="stat-card gold">
-            <div class="stat-icon">📚</div>
-            <div class="stat-value">12</div>
-            <div class="stat-label">Active Assignments</div>
-            <div class="stat-change">↑ 3 added this week</div>
+        <div class="notif-dropdown" id="notif-panel-dropdown" role="menu">
+          <div class="notif-dropdown-header">
+            <span>Live Sync Feeds</span>
+            <a href="#" style="color:var(--teal); font-size:0.75rem; text-decoration:none;" onclick="clearActiveNotificationsFeed(event)">Acknowledge All</a>
           </div>
-          <div class="stat-card teal">
-            <div class="stat-icon">✅</div>
-            <div class="stat-value">8</div>
-            <div class="stat-label">Completed</div>
-            <div class="stat-change">↑ 2 this week</div>
-          </div>
-          <div class="stat-card rose">
-            <div class="stat-icon">⏰</div>
-            <div class="stat-value">3</div>
-            <div class="stat-label">Due Soon</div>
-            <div class="stat-change neg">⚠ 1 overdue</div>
-          </div>
-          <div class="stat-card ink">
-            <div class="stat-icon">🎯</div>
-            <div class="stat-value">3.7</div>
-            <div class="stat-label">Current GPA</div>
-            <div class="stat-change">↑ +0.2 this semester</div>
+          <div class="notif-dropdown-body" id="notif-panel-feed-list">
+            <div class="notif-item"><strong>👥 Study Hub:</strong> Joel, your peer requested collaboration session access parameters inside Data Pipelines group.</div>
+            <div class="notif-item"><strong>🤖 AI Suggestion Engine:</strong> Next exam preparation trajectory generated for AI and Natural Language Parsing algorithms.</div>
+            <div class="notif-item"><strong>📝 Deadline Tracker:</strong> Advanced Erlang functional recursion algorithm submission target expires in 9 hours.</div>
           </div>
         </div>
+      </header>
 
-        <div class="dashboard-grid">
-          <!-- Subject Progress -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Course Progress</div>
-              <a class="card-action" onclick="navigate('grades', document.querySelector('.nav-item:nth-child(4)'))">View Grades →</a>
+      <main class="page-content">
+        
+        <div id="page-dashboard" class="page active">
+          <section class="ai-recommendation-box" aria-labelledby="ai-rec-header">
+            <div class="ai-icon-pulse" aria-hidden="true">🤖</div>
+            <div class="ai-rec-content">
+              <h3 id="ai-rec-header">AI-Powered Study Recommendations</h3>
+              <p id="ai-recommendation-text-pane">Evaluating performance metrics across systems... Deep parsing suggests executing optimization modules for <strong>Erlang Sentiment Analysis Parser Architecture</strong> tasks to counteract imminent deadline risks.</p>
+              <button class="ai-rec-action-btn" onclick="executeContextualAiRecAction()">Initialize Recommended Track</button>
             </div>
-            <div class="card-body">
-              <div class="subject-list" id="subject-progress-list"></div>
+          </section>
+
+          <div class="welcome-banner">
+            <div class="welcome-text">
+              <h2>Welcome Back, <span id="welcome-user-inline-name">Joel Ndiba Mwaura</span></h2>
+              <p>Workspace connection pipeline functional. System status nominal across all parameters.</p>
+            </div>
+            <div class="welcome-date" aria-hidden="true">
+              <div class="big-date">01</div>
+              <div class="month">JUNE / MON</div>
             </div>
           </div>
 
-          <!-- Right column -->
-          <div style="display:flex;flex-direction:column;gap:22px;">
-            <!-- Upcoming Assignments -->
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title">Due Soon</div>
-                <a class="card-action" onclick="navigate('assignments', document.querySelector('.nav-item:nth-child(3)'))">All →</a>
-              </div>
-              <div class="card-body">
-                <div class="mini-assign-list" id="mini-assign-list"></div>
-              </div>
+          <div class="stats-grid">
+            <div class="stat-card gold">
+              <div class="stat-icon">📈</div>
+              <div class="stat-value">3.88</div>
+              <div class="stat-label">Cumulative Grade Point Average</div>
+              <div class="stat-change">▲ +0.04 indexing</div>
             </div>
+            <div class="stat-card teal">
+              <div class="stat-icon">📝</div>
+              <div class="stat-value" id="stats-pipeline-tasks-count">3</div>
+              <div class="stat-label">Tasks Pipeline Target Queue</div>
+              <div class="stat-change">Pending submission sync</div>
+            </div>
+            <div class="stat-card rose">
+              <div class="stat-icon">⏳</div>
+              <div class="stat-value">9h</div>
+              <div class="stat-label">Imminent Deadline Proximity</div>
+              <div class="stat-change neg">High prioritization code</div>
+            </div>
+            <div class="stat-card ink">
+              <div class="stat-icon">👥</div>
+              <div class="stat-value" id="stats-active-groups-count">2</div>
+              <div class="stat-label">Active Peer Hub Collaborations</div>
+              <div class="stat-change">Real-time links alive</div>
+            </div>
+          </div>
 
-            <!-- Announcements -->
+          <div class="dashboard-grid">
             <div class="card">
               <div class="card-header">
-                <div class="card-title">Announcements</div>
+                <h3 class="card-title">Subject Track Performance Trajectory</h3>
+                <span class="card-action" onclick="navigateByPageId('grades')">View Comprehensive Metrics</span>
               </div>
               <div class="card-body">
-                <div class="announcement-list">
-                  <div class="announcement">
-                    <div class="announce-header">
-                      <div class="announce-title">Mid-semester break</div>
-                      <div class="announce-time">Today</div>
+                <div class="subject-list">
+                  <div class="subject-item">
+                    <div class="subject-meta">
+                      <span class="subject-name">Erlang Functional & Concurrent Computing</span>
+                      <span class="subject-pct">92%</span>
                     </div>
-                    <div class="announce-body">Campus will be closed May 20–22. Online submissions still accepted.</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 92%; background: var(--teal);"></div></div>
                   </div>
-                  <div class="announcement" style="border-color:var(--teal);">
-                    <div class="announce-header">
-                      <div class="announce-title">Library extended hours</div>
-                      <div class="announce-time">Yesterday</div>
+                  <div class="subject-item">
+                    <div class="subject-meta">
+                      <span class="subject-name">Advanced Database Optimization Structures (PostgreSQL)</span>
+                      <span class="subject-pct">87%</span>
                     </div>
-                    <div class="announce-body">Library open until midnight through finals week.</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 87%; background: var(--gold);"></div></div>
+                  </div>
+                  <div class="subject-item">
+                    <div class="subject-meta">
+                      <span class="subject-name">Fullstack Web Engineering Frameworks & Next.js Architecture</span>
+                      <span class="subject-pct">95%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 95%; background: var(--ink);"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Critical High Priority Task Allocations</h3>
+                <span class="card-action" onclick="navigateByPageId('assignments')">Full Pipeline</span>
+              </div>
+              <div class="card-body">
+                <div class="mini-assign-list" id="dashboard-mini-task-queue">
+                  <div class="mini-assign" onclick="navigateByPageId('assignments')">
+                    <div class="mini-assign-dot" style="background: var(--rose);"></div>
+                    <div class="mini-assign-info">
+                      <div class="mini-assign-name">Sentiment Analysis NLP Engine Tokenization Check</div>
+                      <div class="mini-assign-sub">Erlang Architecture Functional Core</div>
+                    </div>
+                    <div class="mini-assign-due due-urgent">9 Hours</div>
+                  </div>
+                  <div class="mini-assign" onclick="navigateByPageId('assignments')">
+                    <div class="mini-assign-dot" style="background: var(--gold);"></div>
+                    <div class="mini-assign-info">
+                      <div class="mini-assign-name">PostgreSQL Tablespace Sharding Performance Schema Configuration</div>
+                      <div class="mini-assign-sub">Database Structures Node</div>
+                    </div>
+                    <div class="mini-assign-due due-soon">2 Days</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- ── ASSIGNMENTS ── -->
-      <div class="page" id="page-assignments">
-        <div class="assign-toolbar">
-          <div class="search-box">
-            <input type="text" placeholder="Search assignments..." id="assign-search" oninput="filterAssignments()" />
+        <div id="page-assignments" class="page">
+          <div class="assign-toolbar">
+            <div class="search-box">
+              <input type="text" id="pipeline-search-input" placeholder="Search target keys within code pipeline structures..." oninput="filterTaskPipelineMatrix()" />
+            </div>
+            <button class="filter-btn active" onclick="filterTaskPrioritySelection('all', this)">Display All Parameters</button>
+            <button class="filter-btn" onclick="filterTaskPrioritySelection('high', this)">Priority Index: High</button>
+            <button class="add-btn" onclick="toggleTaskCreationModal(true)">➕ Inject Pipeline Task</button>
           </div>
-          <button class="filter-btn active" id="filter-all" onclick="setFilter('all', this)">All</button>
-          <button class="filter-btn" id="filter-todo" onclick="setFilter('todo', this)">To Do</button>
-          <button class="filter-btn" id="filter-inprogress" onclick="setFilter('in-progress', this)">In Progress</button>
-          <button class="filter-btn" id="filter-done" onclick="setFilter('done', this)">Done</button>
-          <button class="add-btn" onclick="openAddModal()">＋ Add Assignment</button>
-        </div>
-        <div class="assign-kanban" id="assign-kanban"></div>
-      </div>
 
-      <!-- ── GRADES ── -->
-      <div class="page" id="page-grades">
-        <div class="grades-summary">
-          <div class="grade-summary-card">
-            <div class="gpa-big">3.7<span>/4.0</span></div>
-            <div class="gpa-label">Cumulative GPA</div>
-            <div class="gpa-trend">↑ +0.2 from last semester</div>
-          </div>
-          <div class="grade-summary-card">
-            <div class="gpa-big">87<span>%</span></div>
-            <div class="gpa-label">Average Grade</div>
-            <div class="gpa-trend">↑ Strong performance</div>
-          </div>
-          <div class="grade-summary-card">
-            <div class="gpa-big">5<span>/6</span></div>
-            <div class="gpa-label">Courses on Track</div>
-            <div class="gpa-trend" style="color:var(--rose)">⚠ 1 needs attention</div>
-          </div>
-        </div>
-
-        <div class="grade-table-wrap">
-          <table class="grade-table">
-            <thead>
-              <tr>
-                <th>Course</th>
-                <th>Assignments</th>
-                <th>Midterm</th>
-                <th>Attendance</th>
-                <th>Current Grade</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="grades-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ── SCHEDULE ── -->
-      <div class="page" id="page-schedule">
-        <div class="schedule-grid-wrap">
-          <div class="schedule-days">
-            <div class="schedule-day-header"></div>
-            <div class="schedule-day-header">Mon</div>
-            <div class="schedule-day-header">Tue</div>
-            <div class="schedule-day-header today">Wed <span style="font-size:0.65rem;display:block;color:var(--gold)">Today</span></div>
-            <div class="schedule-day-header">Thu</div>
-            <div class="schedule-day-header">Fri</div>
-          </div>
-          <div class="schedule-body" id="schedule-body"></div>
-        </div>
-      </div>
-
-      <!-- ── SETTINGS ── -->
-      <div class="page" id="page-settings">
-        <div class="settings-grid">
-          <div class="settings-sidebar">
-            <button class="settings-nav-item active" onclick="settingsTab('profile', this)">👤 Profile</button>
-            <button class="settings-nav-item" onclick="settingsTab('notifications', this)">🔔 Notifications</button>
-            <button class="settings-nav-item" onclick="settingsTab('appearance', this)">🎨 Appearance</button>
-            <button class="settings-nav-item" onclick="settingsTab('privacy', this)">🔒 Privacy</button>
-          </div>
-          <div class="settings-content">
-            <div id="settings-profile">
-              <div class="settings-section-title">Profile Settings</div>
-              <div class="settings-row">
-                <div><div class="settings-label">Full Name</div><div class="settings-desc">Joel Ndiba Mwaura</div></div>
-                <button class="btn-sec" onclick="showToast('Edit profile coming soon', '')">Edit</button>
+          <div class="assign-kanban">
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span class="kanban-col-title">Engineering Pipeline Backlog</span>
+                <div class="kanban-count" style="background: rgba(26,26,46,0.1);">1</div>
               </div>
-              <div class="settings-row">
-                <div><div class="settings-label">Email</div><div class="settings-desc">joel.mwaura@university.edu</div></div>
-                <button class="btn-sec" onclick="showToast('Email change coming soon', '')">Change</button>
-              </div>
-              <div class="settings-row">
-                <div><div class="settings-label">Program</div><div class="settings-desc">Computer Science — Year 2</div></div>
-                <button class="btn-sec">View</button>
-              </div>
-              <div class="settings-row">
-                <div><div class="settings-label">Password</div><div class="settings-desc">Last changed 30 days ago</div></div>
-                <button class="btn-sec" onclick="showToast('Password reset email sent!', 'success')">Reset</button>
+              <div class="kanban-col-body" id="kanban-stack-backlog">
+                <div class="assign-card" data-priority="low" onclick="triggerToastNotification('Synchronizing frontend component state with backend models...', 'success')">
+                  <div class="assign-card-top">
+                    <div class="assign-card-name">A11y ARIA Screen-Reader Layout Standard Compliance Audit</div>
+                    <span class="assign-card-priority priority-low">Low Priority</span>
+                  </div>
+                  <div class="assign-card-subject">Next.js Dashboard Matrix</div>
+                  <div class="assign-card-footer">
+                    <span class="assign-card-due">📅 12 Days Left</span>
+                    <div class="assign-progress-mini">
+                      <div class="assign-progress-bar-mini"><div class="assign-progress-fill-mini" style="width: 10%;"></div></div>
+                      <span class="assign-pct-mini">10%</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div id="settings-notifications" class="hidden">
-              <div class="settings-section-title">Notification Preferences</div>
-              <div class="settings-row">
-                <div><div class="settings-label">Assignment Due Reminders</div><div class="settings-desc">Notify 24 hours before deadline</div></div>
-                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span class="kanban-col-title">Active Execution Matrix</span>
+                <div class="kanban-count" style="background: rgba(201,168,76,0.2); color: #9a7a22;">1</div>
               </div>
-              <div class="settings-row">
-                <div><div class="settings-label">Grade Posted</div><div class="settings-desc">When instructor posts a grade</div></div>
-                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
-              </div>
-              <div class="settings-row">
-                <div><div class="settings-label">Announcements</div><div class="settings-desc">Course and campus announcements</div></div>
-                <label class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></label>
-              </div>
-              <div class="settings-row">
-                <div><div class="settings-label">Weekly Summary</div><div class="settings-desc">Email digest every Monday</div></div>
-                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
-              </div>
-            </div>
-            <div id="settings-appearance" class="hidden">
-              <div class="settings-section-title">Appearance</div>
-              <div class="settings-row">
-                <div><div class="settings-label">Compact Mode</div><div class="settings-desc">Reduce spacing for more content</div></div>
-                <label class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></label>
-              </div>
-              <div class="settings-row">
-                <div><div class="settings-label">Show Avatars</div><div class="settings-desc">Display profile pictures</div></div>
-                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              <div class="kanban-col-body" id="kanban-stack-active">
+                <div class="assign-card" data-priority="high" onclick="triggerToastNotification('Connecting functional recursive pipelines...', 'success')">
+                  <div class="assign-card-top">
+                    <div class="assign-card-name">Sentiment Analysis NLP Engine Tokenization Check</div>
+                    <span class="assign-card-priority priority-high">High Priority</span>
+                  </div>
+                  <div class="assign-card-subject">Erlang Architecture Functional Core</div>
+                  <div class="assign-card-footer">
+                    <span class="assign-card-due overdue">⏳ 9 Hours Remaining</span>
+                    <div class="assign-progress-mini">
+                      <div class="assign-progress-bar-mini"><div class="assign-progress-fill-mini" style="width: 75%;"></div></div>
+                      <span class="assign-pct-mini">75%</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div id="settings-privacy" class="hidden">
-              <div class="settings-section-title">Privacy</div>
-              <div class="settings-row">
-                <div><div class="settings-label">Profile Visibility</div><div class="settings-desc">Allow classmates to view profile</div></div>
-                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span class="kanban-col-title">Deployment Verified</span>
+                <div class="kanban-count" style="background: rgba(42,127,127,0.15); color: var(--teal);">1</div>
               </div>
-              <div class="settings-row">
-                <div><div class="settings-label">Analytics</div><div class="settings-desc">Help improve ScholarStep</div></div>
-                <label class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></label>
+              <div class="kanban-col-body" id="kanban-stack-verified">
+                <div class="assign-card" data-priority="medium" onclick="triggerToastNotification('Verification log: tablespace maps confirmed by db engine.', 'success')">
+                  <div class="assign-card-top">
+                    <div class="assign-card-name">PostgreSQL Tablespace Sharding Performance Schema Configuration</div>
+                    <span class="assign-card-priority priority-medium">Medium</span>
+                  </div>
+                  <div class="assign-card-subject">Database Structures Node</div>
+                  <div class="assign-card-footer">
+                    <span class="assign-card-due today">📅 Complete</span>
+                    <div class="assign-progress-mini">
+                      <div class="assign-progress-bar-mini"><div class="assign-progress-fill-mini" style="width: 100%; background: var(--teal);"></div></div>
+                      <span class="assign-pct-mini">100%</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-    </div><!-- /page-content -->
-  </div><!-- /main-content -->
-</div><!-- /app-shell -->
-
-<!-- ─── MODAL ────────────────────────────────── -->
-<div class="modal-overlay hidden" id="modal-overlay" onclick="closeModal(event)">
-  <div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-header">
-      <div class="modal-title">Add Assignment</div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-form-group">
-        <label>Assignment Title</label>
-        <input type="text" id="modal-title" placeholder="e.g. Research Paper Draft" />
-      </div>
-      <div class="form-row-2">
-        <div class="modal-form-group">
-          <label>Subject</label>
-          <select id="modal-subject">
-            <option>Data Structures</option>
-            <option>Algorithms</option>
-            <option>Database Systems</option>
-            <option>Web Development</option>
-            <option>Discrete Math</option>
-            <option>Networks</option>
-          </select>
-        </div>
-        <div class="modal-form-group">
-          <label>Priority</label>
-          <select id="modal-priority">
-            <option value="high">High</option>
-            <option value="medium" selected>Medium</option>
-            <option value="low">Low</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row-2">
-        <div class="modal-form-group">
-          <label>Due Date</label>
-          <input type="date" id="modal-due" />
-        </div>
-        <div class="modal-form-group">
-          <label>Status</label>
-          <select id="modal-status">
-            <option value="todo">To Do</option>
-            <option value="in-progress">In Progress</option>
-          </select>
-        </div>
-      </div>
-      <div class="modal-form-group">
-        <label>Notes (optional)</label>
-        <textarea id="modal-notes" rows="3" placeholder="Any additional notes..."></textarea>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-sec" onclick="closeModal()">Cancel</button>
-      <button class="btn-submit" onclick="addAssignment()">Add Assignment</button>
-    </div>
-  </div>
-</div>
-
-<!-- ─── TOASTS ───────────────────────────────── -->
-<div class="toast-container" id="toast-container"></div>
-
-<script>
-// ─── DATA ────────────────────────────────────────────
-const USERS = {
-  'student': { pass: 'demo', name: 'Joel Ndiba Mwaura', initials: 'JM' },
-  'happiness': { pass: '123', name: 'Happiness Godwin', initials: 'HG' },
-  'ethan': { pass: '123', name: 'Ethan Bray', initials: 'EB' },
-  'guest': { pass: 'guest', name: 'Guest User', initials: 'GU' },
-};
-
-const subjects = [
-  { name: 'Data Structures',  pct: 82, color: '#c9a84c' },
-  { name: 'Algorithms',       pct: 74, color: '#2a7f7f' },
-  { name: 'Database Systems', pct: 90, color: '#c0464a' },
-  { name: 'Web Development',  pct: 68, color: '#5b8def' },
-  { name: 'Discrete Math',    pct: 55, color: '#9c6ef0' },
-];
-
-const gradeData = [
-  { course: 'Data Structures',  assigns: '8/10', midterm: '84%', attend: '92%', grade: 'B+', letter: 'B' },
-  { course: 'Algorithms',       assigns: '7/10', midterm: '78%', attend: '88%', grade: 'B',  letter: 'B' },
-  { course: 'Database Systems', assigns: '9/10', midterm: '91%', attend: '95%', grade: 'A-', letter: 'A' },
-  { course: 'Web Development',  assigns: '6/10', midterm: '70%', attend: '80%', grade: 'C+', letter: 'C' },
-  { course: 'Discrete Math',    assigns: '5/10', midterm: '62%', attend: '75%', grade: 'C',  letter: 'C' },
-  { course: 'Networks',         assigns: '10/10','midterm': '95%', attend: '98%', grade: 'A', letter: 'A' },
-];
-
-let assignments = [
-  { id:1, title:'Binary Search Tree Implementation', subject:'Data Structures', priority:'high',   status:'todo',        due:'2026-05-17', progress:0 },
-  { id:2, title:'Sorting Algorithms Analysis',       subject:'Algorithms',       priority:'high',   status:'todo',        due:'2026-05-18', progress:0 },
-  { id:3, title:'ER Diagram Design',                 subject:'Database Systems', priority:'medium', status:'todo',        due:'2026-05-20', progress:0 },
-  { id:4, title:'REST API Documentation',            subject:'Web Development',  priority:'medium', status:'in-progress', due:'2026-05-22', progress:40 },
-  { id:5, title:'Graph Theory Problem Set',          subject:'Discrete Math',    priority:'low',    status:'in-progress', due:'2026-05-25', progress:25 },
-  { id:6, title:'Network Topology Lab Report',       subject:'Networks',         priority:'medium', status:'in-progress', due:'2026-05-24', progress:70 },
-  { id:7, title:'SQL Query Optimization',            subject:'Database Systems', priority:'low',    status:'done',        due:'2026-05-12', progress:100 },
-  { id:8, title:'HTML/CSS Portfolio Page',           subject:'Web Development',  priority:'medium', status:'done',        due:'2026-05-10', progress:100 },
-  { id:9, title:'Stack & Queue Exercises',           subject:'Data Structures',  priority:'high',   status:'done',        due:'2026-05-09', progress:100 },
-];
-
-let currentFilter = 'all';
-let nextId = 10;
-
-const scheduleData = {
-  '08:00': { mon: null, tue: {n:'Data Structures',c:'CS201',r:'Room 3A',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'}, wed: null, thu: {n:'Data Structures',c:'CS201',r:'Room 3A',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'}, fri: null },
-  '09:00': { mon: null, tue: null, wed: {n:'Algorithms',c:'CS301',r:'Room 1B',bg:'rgba(42,127,127,0.15)',col:'var(--teal)'}, thu: null, fri: {n:'Algorithms',c:'CS301',r:'Room 1B',bg:'rgba(42,127,127,0.15)',col:'var(--teal)'} },
-  '10:00': { mon: {n:'Database Systems',c:'CS305',r:'Lab 2',bg:'rgba(192,70,74,0.12)',col:'var(--rose)'}, tue: null, wed: {n:'Database Systems',c:'CS305',r:'Lab 2',bg:'rgba(192,70,74,0.12)',col:'var(--rose)'}, thu: null, fri: null },
-  '11:00': { mon: null, tue: {n:'Web Development',c:'CS401',r:'Room 5C',bg:'rgba(91,141,239,0.15)',col:'#3a6fe0'}, wed: null, thu: {n:'Web Development',c:'CS401',r:'Room 5C',bg:'rgba(91,141,239,0.15)',col:'#3a6fe0'}, fri: null },
-  '12:00': { mon: null, tue: null, wed: null, thu: null, fri: null },
-  '13:00': { mon: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'}, tue: null, wed: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'}, thu: null, fri: {n:'Discrete Math',c:'MA201',r:'Room 8A',bg:'rgba(156,110,240,0.12)',col:'#7a4fd4'} },
-  '14:00': { mon: null, tue: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, wed: null, thu: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, fri: null },
-  '15:00': { mon: null, tue: null, wed: null, thu: null, fri: {n:'Lab Session',c:'CS-LAB',r:'Lab 1',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'} },
-};
-
-// ─── AUTH ────────────────────────────────────────────
-function doLogin() {
-  const u = document.getElementById('username-input').value.trim().toLowerCase().replace('@university.edu','').replace(/\..*$/,'');
-  const p = document.getElementById('password-input').value;
-  const errEl = document.getElementById('login-error');
-
-  const match = Object.entries(USERS).find(([key,val]) => (key === u || u.startsWith(key.split('.')[0])) && val.pass === p);
-  if (match || (u && p === 'scholar2026')) {
-    const user = match ? match[1] : { name: 'Student User', initials: 'SU' };
-    loginSuccess(user);
-  } else {
-    errEl.textContent = 'Invalid credentials. Try "student" / "demo"';
-    document.getElementById('password-input').style.borderColor = 'var(--rose)';
-    setTimeout(() => { errEl.textContent=''; document.getElementById('password-input').style.borderColor=''; }, 3000);
-  }
-}
-
-function quickLogin(type) {
-  const u = USERS[type] || USERS.student;
-  loginSuccess(u);
-}
-
-function loginSuccess(user) {
-  document.getElementById('login-page').classList.add('hidden');
-  document.getElementById('app-shell').classList.remove('hidden');
-  document.getElementById('user-name-display').textContent = user.name;
-  document.getElementById('user-avatar').textContent = user.initials;
-  const first = user.name.split(' ')[0];
-  document.getElementById('first-name').textContent = first;
-  initDate();
-  renderAll();
-  showToast(`Welcome back, ${first}! 👋`, 'success');
-}
-
-function doLogout() {
-  document.getElementById('app-shell').classList.add('hidden');
-  document.getElementById('login-page').classList.remove('hidden');
-  document.getElementById('username-input').value = '';
-  document.getElementById('password-input').value = '';
-}
-
-document.getElementById('password-input').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-document.getElementById('username-input').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('password-input').focus(); });
-
-// ─── NAVIGATION ──────────────────────────────────────
-function navigate(page, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
-  if (btn) btn.classList.add('active');
-  const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades & Reports', schedule:'Class Schedule', settings:'Settings' };
-  document.getElementById('page-title').textContent = titles[page] || page;
-}
-
-// ─── DATE ────────────────────────────────────────────
-function initDate() {
-  const now = new Date();
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('day-num').textContent = now.getDate();
-  document.getElementById('month-str').textContent = `${months[now.getMonth()]} ${now.getFullYear()} · ${days[now.getDay()]}`;
-}
-
-// ─── RENDER ──────────────────────────────────────────
-function renderAll() {
-  renderSubjectProgress();
-  renderMiniAssignments();
-  renderKanban();
-  renderGrades();
-  renderSchedule();
-}
-
-function renderSubjectProgress() {
-  const el = document.getElementById('subject-progress-list');
-  el.innerHTML = subjects.map(s => `
-    <div class="subject-item">
-      <div class="subject-meta">
-        <span class="subject-name">${s.name}</span>
-        <span class="subject-pct">${s.pct}%</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width:0%;background:${s.color};" data-target="${s.pct}"></div>
-      </div>
-    </div>
-  `).join('');
-  setTimeout(() => {
-    document.querySelectorAll('.progress-fill[data-target]').forEach(el => {
-      el.style.width = el.dataset.target + '%';
-    });
-  }, 100);
-}
-
-function duePillClass(due) {
-  const d = new Date(due), now = new Date();
-  const diff = Math.ceil((d - now) / 86400000);
-  if (diff < 0)  return ['due-urgent', '⚠ Overdue'];
-  if (diff === 0) return ['due-urgent', 'Today'];
-  if (diff === 1) return ['due-soon', 'Tomorrow'];
-  if (diff <= 3) return ['due-soon', `${diff}d`];
-  return ['due-later', `${diff}d`];
-}
-
-function renderMiniAssignments() {
-  const pending = assignments.filter(a => a.status !== 'done').sort((a,b) => new Date(a.due)-new Date(b.due)).slice(0,4);
-  const el = document.getElementById('mini-assign-list');
-  const colors = { high:'#c0464a', medium:'#c9a84c', low:'#2a7f7f' };
-  el.innerHTML = pending.map(a => {
-    const [cls, label] = duePillClass(a.due);
-    return `
-      <div class="mini-assign" onclick="navigate('assignments', document.querySelectorAll('.nav-item')[1])">
-        <div class="mini-assign-dot" style="background:${colors[a.priority]}"></div>
-        <div class="mini-assign-info">
-          <div class="mini-assign-name">${a.title}</div>
-          <div class="mini-assign-sub">${a.subject}</div>
-        </div>
-        <span class="mini-assign-due ${cls}">${label}</span>
-      </div>
-    `;
-  }).join('');
-  const pendingCount = assignments.filter(a=>a.status==='todo').length;
-  document.getElementById('pending-badge').textContent = pendingCount;
-}
-
-function renderKanban() {
-  const cols = [
-    { key:'todo',        label:'To Do',      color:'var(--rose)',   bg:'rgba(192,70,74,0.1)' },
-    { key:'in-progress', label:'In Progress', color:'var(--gold)',   bg:'rgba(201,168,76,0.12)' },
-    { key:'done',        label:'Done',        color:'var(--teal)',   bg:'rgba(42,127,127,0.1)' },
-  ];
-  const search = (document.getElementById('assign-search')?.value || '').toLowerCase();
-  const el = document.getElementById('assign-kanban');
-  el.innerHTML = cols.map(col => {
-    let items = assignments.filter(a => {
-      const matchStatus = currentFilter === 'all' || a.status === currentFilter;
-      const matchSearch = !search || a.title.toLowerCase().includes(search) || a.subject.toLowerCase().includes(search);
-      return a.status === col.key && matchStatus && matchSearch;
-    });
-    const cards = items.map(a => {
-      const [dcls, dlabel] = duePillClass(a.due);
-      const overdue = dcls==='due-urgent' && new Date(a.due)<new Date() ? 'overdue' : (dcls==='due-urgent'?'today':'');
-      return `
-        <div class="assign-card" onclick="toggleDone(${a.id})">
-          <div class="assign-card-top">
-            <div class="assign-card-name">${a.title}</div>
-            <span class="assign-card-priority priority-${a.priority}">${a.priority}</span>
-          </div>
-          <div class="assign-card-subject">📚 ${a.subject}</div>
-          <div class="assign-card-footer">
-            <div class="assign-card-due ${overdue}">📅 ${a.due}</div>
-            <div class="assign-progress-mini">
-              <div class="assign-progress-bar-mini"><div class="assign-progress-fill-mini" style="width:${a.progress}%"></div></div>
-              <span class="assign-pct-mini">${a.progress}%</span>
+        <div id="page-grades" class="page">
+          <div class="grades-summary">
+            <div class="grade-summary-card">
+              <div class="gpa-big">3.88<span> / 4.0</span></div>
+              <div class="gpa-label">System Performance Coefficient (GPA)</div>
+              <div class="gpa-trend">▲ Continuous growth index detected</div>
+            </div>
+            <div class="grade-summary-card">
+              <div class="gpa-big">91.3%</div>
+              <div class="gpa-label">Weighted Average Aggregation Matrix</div>
+              <div class="gpa-trend">Cross-platform integration verified</div>
+            </div>
+            <div class="grade-summary-card">
+              <div class="gpa-big">18</div>
+              <div class="gpa-label">Validation Units Acquired Securely</div>
+              <div class="gpa-trend" style="color: var(--ink-light)">Active tracking parameter node</div>
             </div>
           </div>
-        </div>
-      `;
-    }).join('') || `<div style="text-align:center;color:var(--ink-light);font-size:0.82rem;padding:30px 10px;">No items here</div>`;
 
-    return `
-      <div class="kanban-col">
-        <div class="kanban-col-header">
-          <div class="kanban-col-title">${col.label}</div>
-          <span class="kanban-count" style="background:${col.bg};color:${col.color}">${items.length}</span>
-        </div>
-        <div class="kanban-col-body">${cards}</div>
-      </div>
-    `;
-  }).join('');
-}
-
-function toggleDone(id) {
-  const a = assignments.find(x=>x.id===id);
-  if (!a) return;
-  if (a.status === 'todo') { a.status = 'in-progress'; a.progress = 10; }
-  else if (a.status === 'in-progress') { a.status = 'done'; a.progress = 100; }
-  else { a.status = 'todo'; a.progress = 0; }
-  renderKanban();
-  renderMiniAssignments();
-  showToast(`"${a.title}" moved to ${a.status.replace('-',' ')}`, 'success');
-}
-
-function setFilter(f, btn) {
-  currentFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderKanban();
-}
-
-function filterAssignments() { renderKanban(); }
-
-function renderGrades() {
-  const tbody = document.getElementById('grades-tbody');
-  tbody.innerHTML = gradeData.map(g => `
-    <tr>
-      <td><strong>${g.course}</strong></td>
-      <td>${g.assigns}</td>
-      <td>${g.midterm}</td>
-      <td>${g.attend}</td>
-      <td><div class="grade-badge grade-${g.letter}">${g.grade}</div></td>
-      <td><span style="font-size:0.78rem;color:${g.letter==='C'?'var(--rose)':'var(--teal)'};font-weight:600;">${g.letter==='C'?'⚠ Needs attention':'✓ On track'}</span></td>
-    </tr>
-  `).join('');
-}
-
-function renderSchedule() {
-  const days = ['mon','tue','wed','thu','fri'];
-  const body = document.getElementById('schedule-body');
-  body.innerHTML = Object.entries(scheduleData).map(([time, row]) => `
-    <div class="schedule-row">
-      <div class="schedule-time">${time}</div>
-      ${days.map(d => {
-        const cls = row[d];
-        return `<div class="schedule-slot">${cls ? `
-          <div class="schedule-class" style="background:${cls.bg};color:${cls.col};">
-            <div class="schedule-class-name">${cls.n}</div>
-            <div class="schedule-class-room">${cls.r}</div>
-          </div>` : ''}</div>`;
-      }).join('')}
-    </div>
-  `).join('');
-}
-
-// ─── MODAL ───────────────────────────────────────────
-function openAddModal() {
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('modal-due').value = today;
-  document.getElementById('modal-title').value = '';
-  document.getElementById('modal-notes').value = '';
-  document.getElementById('modal-overlay').classList.remove('hidden');
-  setTimeout(()=>document.getElementById('modal-title').focus(), 100);
-}
-
-function closeModal(e) {
-  if (!e || e.target === document.getElementById('modal-overlay')) {
-    document.getElementById('modal-overlay').classList.add('hidden');
-  }
-}
-
-function addAssignment() {
-  const title = document.getElementById('modal-title').value.trim();
-  if (!title) { showToast('Please enter a title', 'error'); return; }
-  const a = {
-    id: nextId++,
-    title,
-    subject:  document.getElementById('modal-subject').value,
-    priority: document.getElementById('modal-priority').value,
-    status:   document.getElementById('modal-status').value,
-    due:      document.getElementById('modal-due').value || new Date().toISOString().split('T')[0],
-    progress: document.getElementById('modal-status').value === 'in-progress' ? 10 : 0,
-  };
-  assignments.unshift(a);
-  closeModal();
-  renderKanban();
-  renderMiniAssignments();
-  showToast(`"${title}" added!`, 'success');
-}
-
-// ─── SETTINGS ────────────────────────────────────────
-function settingsTab(tab, btn) {
-  ['profile','notifications','appearance','privacy'].forEach(t => {
-    const el = document.getElementById('settings-' + t);
-    if (el) el.classList.toggle('hidden', t !== tab);
-  });
-  document.querySelectorAll('.settings-nav-item').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-// ─── TOAST ───────────────────────────────────────────
-function showToast(msg, type) {
-  const container = document.getElementById('toast-container');
-  const toast = document.createElement('div');
-  toast.className = 'toast ' + (type||'');
-  const icons = { success:'✅', error:'❌', '':'ℹ️' };
-  toast.innerHTML = `<span>${icons[type]||'ℹ️'}</span> ${msg}`;
-  container.appendChild(toast);
-  setTimeout(() => { toast.style.opacity='0'; toast.style.transform='translateX(20px)'; toast.style.transition='all 0.3s'; setTimeout(()=>toast.remove(), 300); }, 3000);
-}
-
-// ─── KEYBOARD ────────────────────────────────────────
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
-</script>
-</body>
-</html>
-
-
+          <div class="grade-table-wrap">
+            <table class="grade-table" id="evaluation-metrics-table-element">
+              <thead>
+                <tr>
+                  <th>Topic Code Module</th>
+                  <th>Target Dimension Group</th>
+                  <th>Raw Weight Factor</th>
+                  <th>System Assessment Profile</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>ELNG-401</strong></td>
+                  <td>Erlang Functional & Concurrent Computing</td>
+                  <td>92 / 100</td>
+                  <td><span class="grade-badge grade-A">A</span></td>
+                </tr>
+                <tr>
