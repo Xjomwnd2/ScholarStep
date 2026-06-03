@@ -13,4 +13,4 @@ router.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
 
     // check if user exists
-    const user
+    const user}
