@@ -11,6 +11,9 @@ app.use(express.json());
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
+const scholarshipRoutes = require('./routes/scholarships');
+app.use('/api/scholarships', scholarshipRoutes);
+
 app.get('/', (req, res) => {
   res.json({ message: 'ScholarStep API running' });
 });
