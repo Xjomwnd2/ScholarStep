@@ -1,6 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+// After dotenv line — add:
+const authRoutes = require('./routes/auth');
+
+// Before app.listen — add:
+app.use('/api/auth', authRoutes);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
