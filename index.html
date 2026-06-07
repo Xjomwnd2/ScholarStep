@@ -1915,7 +1915,7 @@ function navigate(page, btn) {
   document.getElementById('page-' + page).classList.add('active');
   if (page === 'scholarships') filterScholarships();
   if (btn) btn.classList.add('active');
-  const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades & Reports', schedule:'Class Schedule', settings:'Settings' };
+  const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades & Reports', schedule:'Class Schedule', scholarships:'Scholarships', settings:'Settings' };
   document.getElementById('page-title').textContent = titles[page] || page;
 }
 
