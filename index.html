@@ -1913,6 +1913,7 @@ function navigate(page, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
+  if (page === 'scholarships') filterScholarships();
   if (btn) btn.classList.add('active');
   const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades & Reports', schedule:'Class Schedule', settings:'Settings' };
   document.getElementById('page-title').textContent = titles[page] || page;
