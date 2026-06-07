@@ -1554,7 +1554,31 @@
           <div class="schedule-body" id="schedule-body"></div>
         </div>
       </div>
-
+<!-- ── SCHOLARSHIPS ── -->
+      <div class="page" id="page-scholarships">
+        <div class="assign-toolbar">
+          <div class="search-box">
+            <input type="text" id="scholar-search" placeholder="Search scholarships..." oninput="filterScholarships()" />
+          </div>
+          <select class="filter-btn" id="scholar-cat" onchange="filterScholarships()" style="cursor:pointer;">
+            <option value="all">All Categories</option>
+            <option value="stem">STEM</option>
+            <option value="arts">Arts</option>
+            <option value="business">Business</option>
+            <option value="medicine">Medicine</option>
+            <option value="law">Law</option>
+            <option value="sports">Sports</option>
+          </select>
+          <select class="filter-btn" id="scholar-deadline" onchange="filterScholarships()" style="cursor:pointer;">
+            <option value="all">Any Deadline</option>
+            <option value="7">Next 7 days</option>
+            <option value="30">Next 30 days</option>
+            <option value="90">Next 3 months</option>
+          </select>
+        </div>
+        <div style="font-size:0.82rem;color:var(--ink-light);margin-bottom:16px;" id="scholar-meta"></div>
+        <div id="scholar-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;"></div>
+      </div>
       <!-- ── SETTINGS ── -->
       <div class="page" id="page-settings">
         <div class="settings-grid">
