@@ -1797,7 +1797,73 @@ const scheduleData = {
   '14:00': { mon: null, tue: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, wed: null, thu: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, fri: null },
   '15:00': { mon: null, tue: null, wed: null, thu: null, fri: {n:'Lab Session',c:'CS-LAB',r:'Lab 1',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'} },
 };
+// ─── SCHOLARSHIPS DATA ───────────────────────────────
+const SCHOLARSHIPS = [
+  { id:1,  title:'Gates Millennium Scholars',      org:'Bill & Melinda Gates Foundation', desc:'Supports outstanding minority students with demonstrated leadership and academic excellence in any field.',          category:'stem',     icon:'🔬', amount:'Full Tuition', deadlineDays:18,  isNew:false },
+  { id:2,  title:'Fulbright U.S. Student Program', org:'U.S. Department of State',        desc:'Grants for graduate students and young professionals to study, research, or teach abroad in over 140 countries.', category:'arts',     icon:'🌍', amount:'$35,000/yr',  deadlineDays:45,  isNew:false },
+  { id:3,  title:'Regeneron Science Talent Search',org:'Society for Science',             desc:'The nation\'s oldest and most prestigious science competition for high school seniors doing original research.',   category:'stem',     icon:'⚗️', amount:'$250,000',    deadlineDays:6,   isNew:true  },
+  { id:4,  title:'Jack Kent Cooke Scholarship',    org:'Jack Kent Cooke Foundation',      desc:'Awarded to high-achieving students with financial need from 8th grade through graduate school.',                  category:'business', icon:'🏛️', amount:'$55,000/yr',  deadlineDays:72,  isNew:false },
+  { id:5,  title:'AMA Foundation Scholarships',    org:'American Medical Association',    desc:'Supports medical students with outstanding academic achievement committed to improving healthcare access.',        category:'medicine', icon:'🩺', amount:'$10,000',     deadlineDays:14,  isNew:true  },
+  { id:6,  title:'Truman Scholarship',             org:'Harry S. Truman Foundation',      desc:'For college juniors with exceptional leadership potential committed to careers in public service.',               category:'law',      icon:'⚖️', amount:'$30,000',     deadlineDays:33,  isNew:false },
+  { id:7,  title:'NCAA Postgraduate Scholarship',  org:'National Collegiate Athletic Assoc.', desc:'Awarded to outstanding student-athletes who excel academically and intend to pursue postgraduate education.', category:'sports',   icon:'🏆', amount:'$10,000',     deadlineDays:25,  isNew:true  },
+  { id:8,  title:'Paul & Daisy Soros Fellowship',  org:'P&D Soros Foundation',            desc:'For New Americans — immigrants and children of immigrants — pursuing graduate education.',                        category:'arts',     icon:'🗽', amount:'$90,000',     deadlineDays:110, isNew:false },
+];
 
+function daysLabel(d) {
+  if (d <= 0)  return 'Closing today!';
+  if (d === 1) return '1 day left';
+  if (d < 7)   return d + ' days left';
+  if (d < 30)  return Math.ceil(d/7) + ' weeks left';
+  return Math.ceil(d/30) + ' months left';
+}
+
+function renderScholarshipCard(s) {
+  const isNear = s.deadlineDays <= 14;
+  return `
+    <div class="scholar-card">
+      <div class="scholar-card-top">
+        <div class="scholar-icon">${s.icon}</div>
+        <div class="scholar-badges">
+          <span class="scholar-badge badge-cat">${s.category}</span>
+          ${s.isNew  ? '<span class="scholar-badge badge-new">New</span>'  : ''}
+          ${isNear   ? '<span class="scholar-badge badge-hot">Closing soon</span>' : ''}
+        </div>
+      </div>
+      <div>
+        <div class="scholar-title">${s.title}</div>
+        <div class="scholar-org">${s.org}</div>
+      </div>
+      <div class="scholar-desc">${s.desc}</div>
+      <div class="scholar-meta-row">
+        <div class="scholar-meta-item ${isNear ? 'deadline-near' : ''}">📅 ${daysLabel(s.deadlineDays)}</div>
+        <div class="scholar-meta-item">🎓 ${s.category}</div>
+      </div>
+      <div class="scholar-footer">
+        <div class="scholar-amount">${s.amount}<small>Award value</small></div>
+        <button class="btn-submit" style="padding:8px 18px;font-size:0.82rem;" onclick="showToast('Opening application for ${s.title}...', 'success')">Apply →</button>
+      </div>
+    </div>
+  `;
+}
+
+function filterScholarships() {
+  const q    = (document.getElementById('scholar-search')?.value  || '').toLowerCase().trim();
+  const cat  =  document.getElementById('scholar-cat')?.value     || 'all';
+  const days =  document.getElementById('scholar-deadline')?.value || 'all';
+
+  const results = SCHOLARSHIPS.filter(s => {
+    if (cat  !== 'all' && s.category !== cat) return false;
+    if (days !== 'all' && s.deadlineDays > parseInt(days)) return false;
+    if (q && !s.title.toLowerCase().includes(q) && !s.org.toLowerCase().includes(q) && !s.desc.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  document.getElementById('scholar-grid').innerHTML = results.length
+    ? results.map(renderScholarshipCard).join('')
+    : '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--ink-light);">🔍 No scholarships match your filters.</div>';
+
+  document.getElementById('scholar-meta').textContent = `Showing ${results.length} of ${SCHOLARSHIPS.length} scholarships`;
+}
 // ─── AUTH ────────────────────────────────────────────
 function doLogin() {
   const u = document.getElementById('username-input').value.trim().toLowerCase().replace('@university.edu','').replace(/\..*$/,'');
