@@ -1551,7 +1551,44 @@
           <div class="schedule-body" id="schedule-body"></div>
         </div>
       </div>
+<!-- ── APPLICATION TRACKER ── -->
+      <div class="page" id="page-tracker">
+        <div class="assign-toolbar">
+          <div class="search-box">
+            <input type="text" id="tracker-search" placeholder="Search applications..." oninput="filterTracker()" />
+          </div>
+          <button class="filter-btn active" onclick="setTrackerFilter('all', this)">All</button>
+          <button class="filter-btn" onclick="setTrackerFilter('draft', this)">Draft</button>
+          <button class="filter-btn" onclick="setTrackerFilter('submitted', this)">Submitted</button>
+          <button class="filter-btn" onclick="setTrackerFilter('interview', this)">Interview</button>
+          <button class="filter-btn" onclick="setTrackerFilter('awarded', this)">Awarded</button>
+          <button class="filter-btn" onclick="setTrackerFilter('rejected', this)">Rejected</button>
+          <button class="add-btn" onclick="openTrackerModal()">＋ Add Application</button>
+        </div>
+        <div style="font-size:0.82rem;color:var(--ink-light);margin-bottom:16px;" id="tracker-meta"></div>
 
+        <!-- Summary Stats -->
+        <div class="stats-grid" style="margin-bottom:24px;" id="tracker-stats"></div>
+
+        <!-- Applications Table -->
+        <div class="card">
+          <div class="card-body" style="padding:0;">
+            <table class="grade-table" id="tracker-table">
+              <thead>
+                <tr>
+                  <th>Scholarship</th>
+                  <th>Organization</th>
+                  <th>Amount</th>
+                  <th>Deadline</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tracker-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
       <!-- ── SETTINGS ── -->
       <div class="page" id="page-settings">
         <div class="settings-grid">
