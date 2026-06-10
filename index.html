@@ -1267,6 +1267,35 @@
   .toast.success { border-color: var(--teal); }
   .toast.error   { border-color: var(--rose); }
 
+/* ─── APPLICATION TRACKER ────────────────── */
+  .tracker-status {
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: inline-block;
+  }
+  .status-draft     { background: rgba(160,160,160,0.15); color: #666; }
+  .status-submitted { background: rgba(91,141,239,0.15);  color: #3a6fe0; }
+  .status-interview { background: rgba(201,168,76,0.15);  color: #9a7a22; }
+  .status-awarded   { background: rgba(42,127,127,0.15);  color: var(--teal); }
+  .status-rejected  { background: rgba(192,70,74,0.12);   color: var(--rose); }
+  .tracker-action-btn {
+    padding: 5px 12px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--warm);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+  }
+  .tracker-action-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .tracker-action-btn.danger:hover { background: var(--rose); border-color: var(--rose); color: #fff; }
   /* ─── RESPONSIVE ──────────────────────────── */
   @media (max-width: 1100px) {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
