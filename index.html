@@ -1859,10 +1859,11 @@ function navigate(page, btn) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
   if (btn) btn.classList.add('active');
-  const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades & Reports', schedule:'Class Schedule', settings:'Settings' };
+  const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades & Reports', schedule:'Class Schedule', tracker:'Application Tracker', scholarships:'Scholarships', settings:'Settings' };
   document.getElementById('page-title').textContent = titles[page] || page;
+  if (page === 'tracker') renderTracker();
+  if (page === 'scholarships') filterScholarships();
 }
-
 // ─── DATE ────────────────────────────────────────────
 function initDate() {
   const now = new Date();
