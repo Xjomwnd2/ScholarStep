@@ -2087,7 +2087,113 @@ function showToast(msg, type) {
   container.appendChild(toast);
   setTimeout(() => { toast.style.opacity='0'; toast.style.transform='translateX(20px)'; toast.style.transition='all 0.3s'; setTimeout(()=>toast.remove(), 300); }, 3000);
 }
+// ─── APPLICATION TRACKER ─────────────────────────────
+let trackerFilter = 'all';
+let trackerNextId = 10;
 
+let applications = [
+  { id:1, title:'Gates Millennium Scholars',      org:'Bill & Melinda Gates Foundation', amount:'Full Tuition', deadline:'2026-06-28', status:'submitted' },
+  { id:2, title:'Fulbright U.S. Student Program', org:'U.S. Department of State',        amount:'$35,000/yr',  deadline:'2026-07-25', status:'draft'     },
+  { id:3, title:'Truman Scholarship',             org:'Harry S. Truman Foundation',      amount:'$30,000',     deadline:'2026-07-13', status:'interview' },
+  { id:4, title:'NCAA Postgraduate Scholarship',  org:'NCAA',                            amount:'$10,000',     deadline:'2026-07-05', status:'awarded'   },
+  { id:5, title:'AMA Foundation Scholarship',     org:'American Medical Association',    amount:'$10,000',     deadline:'2026-06-24', status:'rejected'  },
+];
+
+const STATUS_CYCLE = ['draft','submitted','interview','awarded','rejected'];
+
+function renderTracker() {
+  const q      = (document.getElementById('tracker-search')?.value || '').toLowerCase();
+  const results = applications.filter(a => {
+    if (trackerFilter !== 'all' && a.status !== trackerFilter) return false;
+    if (q && !a.title.toLowerCase().includes(q) && !a.org.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  // Stats
+  const counts = { draft:0, submitted:0, interview:0, awarded:0, rejected:0 };
+  applications.forEach(a => counts[a.status]++);
+  document.getElementById('tracker-stats').innerHTML = `
+    <div class="stat-card gold"><div class="stat-icon">📝</div><div class="stat-value">${counts.draft}</div><div class="stat-label">Draft</div></div>
+    <div class="stat-card teal"><div class="stat-icon">📤</div><div class="stat-value">${counts.submitted}</div><div class="stat-label">Submitted</div></div>
+    <div class="stat-card ink"><div class="stat-icon">🎤</div><div class="stat-value">${counts.interview}</div><div class="stat-label">Interview</div></div>
+    <div class="stat-card teal"><div class="stat-icon">🏆</div><div class="stat-value">${counts.awarded}</div><div class="stat-label">Awarded</div></div>
+    <div class="stat-card rose"><div class="stat-icon">❌</div><div class="stat-value">${counts.rejected}</div><div class="stat-label">Rejected</div></div>
+  `;
+
+  // Meta
+  document.getElementById('tracker-meta').textContent =
+    `Showing ${results.length} of ${applications.length} applications`;
+
+  // Table
+  document.getElementById('tracker-tbody').innerHTML = results.length
+    ? results.map(a => {
+        const [dcls, dlabel] = duePillClass(a.deadline);
+        const next = STATUS_CYCLE[(STATUS_CYCLE.indexOf(a.status) + 1) % STATUS_CYCLE.length];
+        return `
+          <tr>
+            <td><strong>${a.title}</strong></td>
+            <td>${a.org}</td>
+            <td style="color:var(--teal);font-weight:600;">${a.amount}</td>
+            <td><span class="${dcls}" style="font-size:0.78rem;font-weight:600;">${a.deadline}</span></td>
+            <td><span class="tracker-status status-${a.status}">${a.status}</span></td>
+            <td style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button class="tracker-action-btn" onclick="advanceStatus(${a.id})">→ ${next}</button>
+              <button class="tracker-action-btn danger" onclick="deleteApplication(${a.id})">🗑</button>
+            </td>
+          </tr>
+        `;
+      }).join('')
+    : `<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--ink-light);">No applications found</td></tr>`;
+}
+
+function advanceStatus(id) {
+  const a = applications.find(x => x.id === id);
+  if (!a) return;
+  const idx = STATUS_CYCLE.indexOf(a.status);
+  a.status  = STATUS_CYCLE[(idx + 1) % STATUS_CYCLE.length];
+  renderTracker();
+  showToast(`"${a.title}" → ${a.status}`, 'success');
+}
+
+function deleteApplication(id) {
+  const a = applications.find(x => x.id === id);
+  if (!a) return;
+  applications = applications.filter(x => x.id !== id);
+  renderTracker();
+  showToast(`"${a.title}" removed`, '');
+}
+
+function setTrackerFilter(f, btn) {
+  trackerFilter = f;
+  document.querySelectorAll('#page-tracker .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTracker();
+}
+
+function filterTracker() { renderTracker(); }
+
+function openTrackerModal() {
+  document.getElementById('modal-overlay').classList.remove('hidden');
+  document.querySelector('.modal-title').textContent = 'Track New Application';
+  document.getElementById('modal-title').placeholder  = 'e.g. Gates Millennium Scholars';
+  document.querySelector('.btn-submit').onclick = addTrackerApplication;
+}
+
+function addTrackerApplication() {
+  const title = document.getElementById('modal-title').value.trim();
+  if (!title) { showToast('Please enter a scholarship name', 'error'); return; }
+  applications.unshift({
+    id:       trackerNextId++,
+    title,
+    org:      document.getElementById('modal-subject').value || 'Unknown',
+    amount:   'TBD',
+    deadline: document.getElementById('modal-due').value || '2026-12-31',
+    status:   'draft',
+  });
+  closeModal();
+  renderTracker();
+  showToast(`"${title}" added to tracker!`, 'success');
+}
 // ─── KEYBOARD ────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
