@@ -427,3 +427,12 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+
+PORT=5000
+JWT_SECRET=scholarstep_secret_change_in_production
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=scholarstep
+DB_USER=postgres
+DB_PASSWORD=yourpassword

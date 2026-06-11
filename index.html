@@ -346,7 +346,7 @@
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(160, 74, 74, 0.3);
+    color: rgba(255,255,255,0.3);
     padding: 0 10px;
     margin: 18px 0 8px;
   }
@@ -1266,35 +1266,36 @@
 
   .toast.success { border-color: var(--teal); }
   .toast.error   { border-color: var(--rose); }
-/* ─── SCHOLARSHIP CARDS ───────────────────── */
-  .scholar-card {
-    background: var(--surface);
-    border-radius: var(--radius);
-    border: 1.5px solid var(--border);
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    cursor: pointer;
-    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+
+/* ─── APPLICATION TRACKER ────────────────── */
+  .tracker-status {
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: inline-block;
   }
-  .scholar-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); border-color: var(--teal); }
-  .scholar-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-  .scholar-icon { font-size: 28px; }
-  .scholar-badges { display: flex; gap: 6px; flex-wrap: wrap; }
-  .scholar-badge { padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
-  .badge-cat  { background: rgba(42,127,127,0.12); color: var(--teal); }
-  .badge-new  { background: rgba(201,168,76,0.15); color: #9a7a22; }
-  .badge-hot  { background: rgba(192,70,74,0.12);  color: var(--rose); }
-  .scholar-title { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--ink); line-height: 1.3; }
-  .scholar-org   { font-size: 0.78rem; color: var(--ink-light); margin-top: 2px; }
-  .scholar-desc  { font-size: 0.83rem; color: var(--ink-light); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .scholar-meta-row { display: flex; gap: 14px; flex-wrap: wrap; }
-  .scholar-meta-item { font-size: 0.78rem; color: var(--ink-light); display: flex; align-items: center; gap: 4px; }
-  .scholar-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--border); margin-top: auto; }
-  .scholar-amount { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--teal); }
-  .scholar-amount small { font-size: 0.72rem; color: var(--ink-light); font-family: 'DM Sans', sans-serif; display: block; }
-  .deadline-near { color: var(--rose) !important; font-weight: 600; }commit
+  .status-draft     { background: rgba(160,160,160,0.15); color: #666; }
+  .status-submitted { background: rgba(91,141,239,0.15);  color: #3a6fe0; }
+  .status-interview { background: rgba(201,168,76,0.15);  color: #9a7a22; }
+  .status-awarded   { background: rgba(42,127,127,0.15);  color: var(--teal); }
+  .status-rejected  { background: rgba(192,70,74,0.12);   color: var(--rose); }
+  .tracker-action-btn {
+    padding: 5px 12px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--warm);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+  }
+  .tracker-action-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .tracker-action-btn.danger:hover { background: var(--rose); border-color: var(--rose); color: #fff; }
   /* ─── RESPONSIVE ──────────────────────────── */
   @media (max-width: 1100px) {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1389,13 +1390,10 @@
       <button class="nav-item" onclick="navigate('schedule', this)">
         <span class="nav-icon">🗓️</span> Schedule
       </button>
-      <div class="nav-section-label">
-        <button class="nav-item" onclick="navigate('scholarships', this)">
-        <span class="nav-icon">🏆</span> Scholarships
+      <button class="nav-item" onclick="navigate('tracker', this)">
+        <span class="nav-icon">📋</span> App Tracker
       </button>
       <div class="nav-section-label">Other</div>
-      <button class="nav-item" onclick="navigate('settings', this)">
-        Other</div>
       <button class="nav-item" onclick="navigate('settings', this)">
         <span class="nav-icon">⚙️</span> Settings
       </button>
@@ -1582,30 +1580,43 @@
           <div class="schedule-body" id="schedule-body"></div>
         </div>
       </div>
-<!-- ── SCHOLARSHIPS ── -->
-      <div class="page" id="page-scholarships">
+<!-- ── APPLICATION TRACKER ── -->
+      <div class="page" id="page-tracker">
         <div class="assign-toolbar">
           <div class="search-box">
-            <input type="text" id="scholar-search" placeholder="Search scholarships..." oninput="filterScholarships()" />
+            <input type="text" id="tracker-search" placeholder="Search applications..." oninput="filterTracker()" />
           </div>
-          <select class="filter-btn" id="scholar-cat" onchange="filterScholarships()" style="cursor:pointer;">
-            <option value="all">All Categories</option>
-            <option value="stem">STEM</option>
-            <option value="arts">Arts</option>
-            <option value="business">Business</option>
-            <option value="medicine">Medicine</option>
-            <option value="law">Law</option>
-            <option value="sports">Sports</option>
-          </select>
-          <select class="filter-btn" id="scholar-deadline" onchange="filterScholarships()" style="cursor:pointer;">
-            <option value="all">Any Deadline</option>
-            <option value="7">Next 7 days</option>
-            <option value="30">Next 30 days</option>
-            <option value="90">Next 3 months</option>
-          </select>
+          <button class="filter-btn active" onclick="setTrackerFilter('all', this)">All</button>
+          <button class="filter-btn" onclick="setTrackerFilter('draft', this)">Draft</button>
+          <button class="filter-btn" onclick="setTrackerFilter('submitted', this)">Submitted</button>
+          <button class="filter-btn" onclick="setTrackerFilter('interview', this)">Interview</button>
+          <button class="filter-btn" onclick="setTrackerFilter('awarded', this)">Awarded</button>
+          <button class="filter-btn" onclick="setTrackerFilter('rejected', this)">Rejected</button>
+          <button class="add-btn" onclick="openTrackerModal()">＋ Add Application</button>
         </div>
-        <div style="font-size:0.82rem;color:var(--ink-light);margin-bottom:16px;" id="scholar-meta"></div>
-        <div id="scholar-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;"></div>
+        <div style="font-size:0.82rem;color:var(--ink-light);margin-bottom:16px;" id="tracker-meta"></div>
+
+        <!-- Summary Stats -->
+        <div class="stats-grid" style="margin-bottom:24px;" id="tracker-stats"></div>
+
+        <!-- Applications Table -->
+        <div class="card">
+          <div class="card-body" style="padding:0;">
+            <table class="grade-table" id="tracker-table">
+              <thead>
+                <tr>
+                  <th>Scholarship</th>
+                  <th>Organization</th>
+                  <th>Amount</th>
+                  <th>Deadline</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tracker-tbody"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
       <!-- ── SETTINGS ── -->
       <div class="page" id="page-settings">
@@ -1797,73 +1808,7 @@ const scheduleData = {
   '14:00': { mon: null, tue: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, wed: null, thu: {n:'Networks',c:'CS410',r:'Lab 4',bg:'rgba(26,26,46,0.08)',col:'var(--ink)'}, fri: null },
   '15:00': { mon: null, tue: null, wed: null, thu: null, fri: {n:'Lab Session',c:'CS-LAB',r:'Lab 1',bg:'rgba(201,168,76,0.15)',col:'#9a7a22'} },
 };
-// ─── SCHOLARSHIPS DATA ───────────────────────────────
-const SCHOLARSHIPS = [
-  { id:1,  title:'Gates Millennium Scholars',      org:'Bill & Melinda Gates Foundation', desc:'Supports outstanding minority students with demonstrated leadership and academic excellence in any field.',          category:'stem',     icon:'🔬', amount:'Full Tuition', deadlineDays:18,  isNew:false },
-  { id:2,  title:'Fulbright U.S. Student Program', org:'U.S. Department of State',        desc:'Grants for graduate students and young professionals to study, research, or teach abroad in over 140 countries.', category:'arts',     icon:'🌍', amount:'$35,000/yr',  deadlineDays:45,  isNew:false },
-  { id:3,  title:'Regeneron Science Talent Search',org:'Society for Science',             desc:'The nation\'s oldest and most prestigious science competition for high school seniors doing original research.',   category:'stem',     icon:'⚗️', amount:'$250,000',    deadlineDays:6,   isNew:true  },
-  { id:4,  title:'Jack Kent Cooke Scholarship',    org:'Jack Kent Cooke Foundation',      desc:'Awarded to high-achieving students with financial need from 8th grade through graduate school.',                  category:'business', icon:'🏛️', amount:'$55,000/yr',  deadlineDays:72,  isNew:false },
-  { id:5,  title:'AMA Foundation Scholarships',    org:'American Medical Association',    desc:'Supports medical students with outstanding academic achievement committed to improving healthcare access.',        category:'medicine', icon:'🩺', amount:'$10,000',     deadlineDays:14,  isNew:true  },
-  { id:6,  title:'Truman Scholarship',             org:'Harry S. Truman Foundation',      desc:'For college juniors with exceptional leadership potential committed to careers in public service.',               category:'law',      icon:'⚖️', amount:'$30,000',     deadlineDays:33,  isNew:false },
-  { id:7,  title:'NCAA Postgraduate Scholarship',  org:'National Collegiate Athletic Assoc.', desc:'Awarded to outstanding student-athletes who excel academically and intend to pursue postgraduate education.', category:'sports',   icon:'🏆', amount:'$10,000',     deadlineDays:25,  isNew:true  },
-  { id:8,  title:'Paul & Daisy Soros Fellowship',  org:'P&D Soros Foundation',            desc:'For New Americans — immigrants and children of immigrants — pursuing graduate education.',                        category:'arts',     icon:'🗽', amount:'$90,000',     deadlineDays:110, isNew:false },
-];
 
-function daysLabel(d) {
-  if (d <= 0)  return 'Closing today!';
-  if (d === 1) return '1 day left';
-  if (d < 7)   return d + ' days left';
-  if (d < 30)  return Math.ceil(d/7) + ' weeks left';
-  return Math.ceil(d/30) + ' months left';
-}
-
-function renderScholarshipCard(s) {
-  const isNear = s.deadlineDays <= 14;
-  return `
-    <div class="scholar-card">
-      <div class="scholar-card-top">
-        <div class="scholar-icon">${s.icon}</div>
-        <div class="scholar-badges">
-          <span class="scholar-badge badge-cat">${s.category}</span>
-          ${s.isNew  ? '<span class="scholar-badge badge-new">New</span>'  : ''}
-          ${isNear   ? '<span class="scholar-badge badge-hot">Closing soon</span>' : ''}
-        </div>
-      </div>
-      <div>
-        <div class="scholar-title">${s.title}</div>
-        <div class="scholar-org">${s.org}</div>
-      </div>
-      <div class="scholar-desc">${s.desc}</div>
-      <div class="scholar-meta-row">
-        <div class="scholar-meta-item ${isNear ? 'deadline-near' : ''}">📅 ${daysLabel(s.deadlineDays)}</div>
-        <div class="scholar-meta-item">🎓 ${s.category}</div>
-      </div>
-      <div class="scholar-footer">
-        <div class="scholar-amount">${s.amount}<small>Award value</small></div>
-        <button class="btn-submit" style="padding:8px 18px;font-size:0.82rem;" onclick="showToast('Opening application for ${s.title}...', 'success')">Apply →</button>
-      </div>
-    </div>
-  `;
-}
-
-function filterScholarships() {
-  const q    = (document.getElementById('scholar-search')?.value  || '').toLowerCase().trim();
-  const cat  =  document.getElementById('scholar-cat')?.value     || 'all';
-  const days =  document.getElementById('scholar-deadline')?.value || 'all';
-
-  const results = SCHOLARSHIPS.filter(s => {
-    if (cat  !== 'all' && s.category !== cat) return false;
-    if (days !== 'all' && s.deadlineDays > parseInt(days)) return false;
-    if (q && !s.title.toLowerCase().includes(q) && !s.org.toLowerCase().includes(q) && !s.desc.toLowerCase().includes(q)) return false;
-    return true;
-  });
-
-  document.getElementById('scholar-grid').innerHTML = results.length
-    ? results.map(renderScholarshipCard).join('')
-    : '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--ink-light);">🔍 No scholarships match your filters.</div>';
-
-  document.getElementById('scholar-meta').textContent = `Showing ${results.length} of ${SCHOLARSHIPS.length} scholarships`;
-}
 // ─── AUTH ────────────────────────────────────────────
 function doLogin() {
   const u = document.getElementById('username-input').value.trim().toLowerCase().replace('@university.edu','').replace(/\..*$/,'');
@@ -1913,12 +1858,12 @@ function navigate(page, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
-  if (page === 'scholarships') filterScholarships();
   if (btn) btn.classList.add('active');
-  const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades & Reports', schedule:'Class Schedule', scholarships:'Scholarships', settings:'Settings' };
+  const titles = { dashboard:'Dashboard', assignments:'Assignments', grades:'Grades & Reports', schedule:'Class Schedule', tracker:'Application Tracker', scholarships:'Scholarships', settings:'Settings' };
   document.getElementById('page-title').textContent = titles[page] || page;
+  if (page === 'tracker') renderTracker();
+  if (page === 'scholarships') filterScholarships();
 }
-
 // ─── DATE ────────────────────────────────────────────
 function initDate() {
   const now = new Date();
@@ -2142,7 +2087,113 @@ function showToast(msg, type) {
   container.appendChild(toast);
   setTimeout(() => { toast.style.opacity='0'; toast.style.transform='translateX(20px)'; toast.style.transition='all 0.3s'; setTimeout(()=>toast.remove(), 300); }, 3000);
 }
+// ─── APPLICATION TRACKER ─────────────────────────────
+let trackerFilter = 'all';
+let trackerNextId = 10;
 
+let applications = [
+  { id:1, title:'Gates Millennium Scholars',      org:'Bill & Melinda Gates Foundation', amount:'Full Tuition', deadline:'2026-06-28', status:'submitted' },
+  { id:2, title:'Fulbright U.S. Student Program', org:'U.S. Department of State',        amount:'$35,000/yr',  deadline:'2026-07-25', status:'draft'     },
+  { id:3, title:'Truman Scholarship',             org:'Harry S. Truman Foundation',      amount:'$30,000',     deadline:'2026-07-13', status:'interview' },
+  { id:4, title:'NCAA Postgraduate Scholarship',  org:'NCAA',                            amount:'$10,000',     deadline:'2026-07-05', status:'awarded'   },
+  { id:5, title:'AMA Foundation Scholarship',     org:'American Medical Association',    amount:'$10,000',     deadline:'2026-06-24', status:'rejected'  },
+];
+
+const STATUS_CYCLE = ['draft','submitted','interview','awarded','rejected'];
+
+function renderTracker() {
+  const q      = (document.getElementById('tracker-search')?.value || '').toLowerCase();
+  const results = applications.filter(a => {
+    if (trackerFilter !== 'all' && a.status !== trackerFilter) return false;
+    if (q && !a.title.toLowerCase().includes(q) && !a.org.toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  // Stats
+  const counts = { draft:0, submitted:0, interview:0, awarded:0, rejected:0 };
+  applications.forEach(a => counts[a.status]++);
+  document.getElementById('tracker-stats').innerHTML = `
+    <div class="stat-card gold"><div class="stat-icon">📝</div><div class="stat-value">${counts.draft}</div><div class="stat-label">Draft</div></div>
+    <div class="stat-card teal"><div class="stat-icon">📤</div><div class="stat-value">${counts.submitted}</div><div class="stat-label">Submitted</div></div>
+    <div class="stat-card ink"><div class="stat-icon">🎤</div><div class="stat-value">${counts.interview}</div><div class="stat-label">Interview</div></div>
+    <div class="stat-card teal"><div class="stat-icon">🏆</div><div class="stat-value">${counts.awarded}</div><div class="stat-label">Awarded</div></div>
+    <div class="stat-card rose"><div class="stat-icon">❌</div><div class="stat-value">${counts.rejected}</div><div class="stat-label">Rejected</div></div>
+  `;
+
+  // Meta
+  document.getElementById('tracker-meta').textContent =
+    `Showing ${results.length} of ${applications.length} applications`;
+
+  // Table
+  document.getElementById('tracker-tbody').innerHTML = results.length
+    ? results.map(a => {
+        const [dcls, dlabel] = duePillClass(a.deadline);
+        const next = STATUS_CYCLE[(STATUS_CYCLE.indexOf(a.status) + 1) % STATUS_CYCLE.length];
+        return `
+          <tr>
+            <td><strong>${a.title}</strong></td>
+            <td>${a.org}</td>
+            <td style="color:var(--teal);font-weight:600;">${a.amount}</td>
+            <td><span class="${dcls}" style="font-size:0.78rem;font-weight:600;">${a.deadline}</span></td>
+            <td><span class="tracker-status status-${a.status}">${a.status}</span></td>
+            <td style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button class="tracker-action-btn" onclick="advanceStatus(${a.id})">→ ${next}</button>
+              <button class="tracker-action-btn danger" onclick="deleteApplication(${a.id})">🗑</button>
+            </td>
+          </tr>
+        `;
+      }).join('')
+    : `<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--ink-light);">No applications found</td></tr>`;
+}
+
+function advanceStatus(id) {
+  const a = applications.find(x => x.id === id);
+  if (!a) return;
+  const idx = STATUS_CYCLE.indexOf(a.status);
+  a.status  = STATUS_CYCLE[(idx + 1) % STATUS_CYCLE.length];
+  renderTracker();
+  showToast(`"${a.title}" → ${a.status}`, 'success');
+}
+
+function deleteApplication(id) {
+  const a = applications.find(x => x.id === id);
+  if (!a) return;
+  applications = applications.filter(x => x.id !== id);
+  renderTracker();
+  showToast(`"${a.title}" removed`, '');
+}
+
+function setTrackerFilter(f, btn) {
+  trackerFilter = f;
+  document.querySelectorAll('#page-tracker .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTracker();
+}
+
+function filterTracker() { renderTracker(); }
+
+function openTrackerModal() {
+  document.getElementById('modal-overlay').classList.remove('hidden');
+  document.querySelector('.modal-title').textContent = 'Track New Application';
+  document.getElementById('modal-title').placeholder  = 'e.g. Gates Millennium Scholars';
+  document.querySelector('.btn-submit').onclick = addTrackerApplication;
+}
+
+function addTrackerApplication() {
+  const title = document.getElementById('modal-title').value.trim();
+  if (!title) { showToast('Please enter a scholarship name', 'error'); return; }
+  applications.unshift({
+    id:       trackerNextId++,
+    title,
+    org:      document.getElementById('modal-subject').value || 'Unknown',
+    amount:   'TBD',
+    deadline: document.getElementById('modal-due').value || '2026-12-31',
+    status:   'draft',
+  });
+  closeModal();
+  renderTracker();
+  showToast(`"${title}" added to tracker!`, 'success');
+}
 // ─── KEYBOARD ────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
